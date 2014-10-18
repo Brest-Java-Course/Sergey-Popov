@@ -5,27 +5,27 @@ public class User {
 	private String login;
 	private String name;
 
-	public Long getUserId() {
-		return userId;	
-	}
+    public Long getUserId() {
+        return userId;
+    }
 
-	public void setUserId(Long userID) {
-		this.userId = userId;	
-	}
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-	public getLogin() {
-		return login;	
-	}
+    public String getLogin() {
+        return login;
+    }
 
-	public setLogin(String login) {
-		this.login = login;
-	}
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
-	public getName() {
-		return name;	
-	}
+    public String getName() {
+        return name;
+    }
 
-	public setName(String name) {
-		this.name = name;	
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 }

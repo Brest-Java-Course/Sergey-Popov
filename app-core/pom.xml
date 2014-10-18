@@ -7,19 +7,19 @@
 		<parent>
 			<groupId>com.epam.brest.courses</groupId>
 			<artifactId>sampleusermanagement</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.0-SNAPSHOT</version>
 		</parent>
 
 		<properties>
 			<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		</properties>
 
-		<dependecies>
+		<dependencies>
 			<dependency>
-				<groupId>junit</groupdId>
+				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 			</dependency>
-		</dependencies>
+        </dependencies>
 
 		<build>
 			<testSourceDirectory>src/main/test</testSourceDirectory>
