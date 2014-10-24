@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 /**
- * Created by beast on 23.10.14.
+ * Created by beast on 23.10.14. At 14.20
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/testApplicationContextSpring.xml" })
@@ -42,5 +42,47 @@ public class UserDaoImplTest {
 
         users = userDao.getUsers();
         assertEquals(sizeBefore, users.size() - 1);
+    }
+
+    @Test
+    public void getUserById() {
+        User user = new User();
+        user.setUserId(4L);
+        user.setLogin("userLogin4");
+        user.setName("userName4");
+
+        userDao.addUser(user);
+
+        User user2 = userDao.getUserById(4L);
+        assertEquals(user.getUserId(), user2.getUserId());
+        assertEquals(user.getLogin(), user2.getLogin());
+        assertEquals(user.getName(), user2.getName());
+    }
+
+    @Test
+    public void getUserByLogin() {
+        User user = new User();
+        user.setUserId(5L);
+        user.setLogin("userLogin5");
+        user.setName("userName5");
+
+        userDao.addUser(user);
+
+        User user2 = userDao.getUserByLogin("userLogin5");
+        assertEquals(user.getUserId(), user2.getUserId());
+        assertEquals(user.getLogin(), user2.getLogin());
+        assertEquals(user.getName(), user2.getName());
+    }
+
+    @Test
+    public void removeUser() {
+        List<User> users = userDao.getUsers();
+        int sizeBefore = users.size();
+
+        userDao.removeUser((long)(users.size() - 1));
+
+        users = userDao.getUsers();
+        int sizeAfter = users.size();
+        assertEquals(sizeBefore - 1, sizeAfter);
     }
 }
