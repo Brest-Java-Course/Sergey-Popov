@@ -18,4 +18,6 @@ public interface UserDao {
     public List<User> getUsers();
 
     public void removeUser(Long userId);
+
+    public void updateUser(User user);
 }
