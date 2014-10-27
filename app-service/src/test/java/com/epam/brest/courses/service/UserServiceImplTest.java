@@ -11,6 +11,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+
 
 /**
  * Created by beast on 27.10.14. At 11.29
@@ -22,6 +28,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImplTest {
 
     public static final String ADMIN = "admin";
+
+    public static final String NOOB = "noob";
+
+    public static final String TEST_USER = "testUser";
 
     @Autowired
     private UserService userService;
@@ -59,4 +69,49 @@ public class UserServiceImplTest {
         Assert.assertEquals(ADMIN, user.getLogin());
     }
 
+    @Test
+    public void testGetUsers() throws Exception {
+        List<User> users = userService.getUsers();
+        assertNotNull(users);
+        assertFalse(users.isEmpty());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testRemoveAdminUser() throws Exception {
+        userService.addUser(new User(null, ADMIN, ADMIN));
+        User user = userService.getUserByLogin(ADMIN);
+        userService.removeUser(user.getUserId());
+    }
+
+    @Test
+    public void testRemoveUser() throws Exception {
+        userService.addUser(new User(null, TEST_USER, TEST_USER));
+        List<User> users = userService.getUsers();
+        int sizeBefore = users.size();
+
+        userService.removeUser((long)(users.size() - 1));
+
+        users = userService.getUsers();
+        int sizeAfter = users.size();
+        assertEquals(sizeBefore - 1, sizeAfter);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateAdminUser() throws Exception {
+        userService.addUser(new User(null, ADMIN, ADMIN));
+        User existingUser = userService.getUserByLogin(ADMIN);
+        User updateUser = new User(existingUser.getUserId(), NOOB, NOOB);
+        userService.updateUser(updateUser);
+    }
+
+    @Test
+    public void testUpdateUser() throws Exception {
+        userService.addUser(new User(null, TEST_USER, TEST_USER));
+        User existingUser = userService.getUserByLogin(TEST_USER);
+        User beforeUpdateUser = new User(existingUser.getUserId(),NOOB, NOOB);
+        userService.updateUser(beforeUpdateUser);
+        User afterUpdateUser = userService.getUserById(existingUser.getUserId());
+        assertEquals(beforeUpdateUser.getLogin(), afterUpdateUser.getLogin());
+        assertEquals(beforeUpdateUser.getName(), afterUpdateUser.getName());
+    }
 }
