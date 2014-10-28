@@ -21,13 +21,9 @@ public class UserDaoImplTest {
     @Autowired
     private UserDao userDao;
 
-    @Test
-    public void getUsers() {
-        List<User> users = userDao.getUsers();
-        assertNotNull(users);
-        assertFalse(users.isEmpty());
-    }
-
+    /*
+    * ADD USER TESTS
+    */
     @Test
     public void addUser() {
         List<User> users = userDao.getUsers();
@@ -42,6 +38,16 @@ public class UserDaoImplTest {
 
         users = userDao.getUsers();
         assertEquals(sizeBefore, users.size() - 1);
+    }
+
+    /*
+    * GET USER TESTS
+    */
+    @Test
+    public void getUsers() {
+        List<User> users = userDao.getUsers();
+        assertNotNull(users);
+        assertFalse(users.isEmpty());
     }
 
     @Test
@@ -73,7 +79,9 @@ public class UserDaoImplTest {
         assertEquals(user.getLogin(), user2.getLogin());
         assertEquals(user.getName(), user2.getName());
     }
-
+    /*
+    * REMOVE USER TESTS
+    */
     @Test
     public void removeUser() {
         List<User> users = userDao.getUsers();

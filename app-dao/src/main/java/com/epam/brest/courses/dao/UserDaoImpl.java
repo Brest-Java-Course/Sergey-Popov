@@ -21,13 +21,13 @@ public class UserDaoImpl implements UserDao {
 
     public static final String ADD_NEW_USER_SQL = "insert into USER (userid, login, name) values (:userid, :login, :name)";
 
-    public static final String DELETE_USER_SQL = "delete from USER where userid = ?";
+    public static final String SELECT_ALL_USERS_SQL = "select userid, login, name from USER";
+    public static final String SELECT_USER_BY_ID_SQL = "select userid, login, name from USER where userid = ?";
+    public static final String SELECT_USER_BY_LOGIN_SQL = "select userid, login, name from USER where LCASE(login) = ?";
 
     public static final String UPDATE_USER_SQL = "update user set name = :name, login = :login where userid = :userid";
 
-    public static final String SELECT_USER_BY_LOGIN_SQL = "select userid, login, name from USER where LCASE(login) = ?";
-    public static final String SELECT_ALL_USERS_SQL = "select userid, login, name from USER";
-    public static final String SELECT_USER_BY_ID_SQL = "select userid, login, name from USER where userid = ?";
+    public static final String DELETE_USER_SQL = "delete from USER where userid = ?";
 
     public static final String USER_ID = "userid";
     public static final String LOGIN = "login";
@@ -56,6 +56,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public List<User> getUsers() {
+        LOGGER.debug("get users()");
+
+        return jdbcTemplate.query(SELECT_ALL_USERS_SQL, new UserMapper());
+    }
+
+    @Override
     public User getUserById(Long userId) {
         LOGGER.debug("getUserById(userId={})", userId);
 
@@ -70,20 +77,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> getUsers() {
-        LOGGER.debug("get users()");
-
-        return jdbcTemplate.query(SELECT_ALL_USERS_SQL, new UserMapper());
-    }
-
-    @Override
-    public void removeUser(Long userId) {
-        LOGGER.debug("removeUser(userId={})", userId);
-
-        jdbcTemplate.update(DELETE_USER_SQL, userId);
-    }
-
-    @Override
     public void updateUser(User user) {
         LOGGER.debug("updateUser({}).. ", user);
 
@@ -93,6 +86,13 @@ public class UserDaoImpl implements UserDao {
         parameters.put(USER_ID, user.getUserId());
 
         namedJdbcTemplate.update(UPDATE_USER_SQL, parameters);
+    }
+
+    @Override
+    public void removeUser(Long userId) {
+        LOGGER.debug("removeUser(userId={})", userId);
+
+        jdbcTemplate.update(DELETE_USER_SQL, userId);
     }
 
     private class UserMapper implements RowMapper<User> {
@@ -105,5 +105,6 @@ public class UserDaoImpl implements UserDao {
             user.setName(resultSet.getString("name"));
             return user;
         }
+
     }
 }

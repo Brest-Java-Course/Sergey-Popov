@@ -41,6 +41,9 @@ public class UserServiceImplTest {
 
     }
 
+    /*
+    * ADD USER TESTS
+    */
     @Test(expected = IllegalArgumentException.class)
     public void testAddNullUser() throws Exception {
         userService.addUser(null);
@@ -69,6 +72,9 @@ public class UserServiceImplTest {
         Assert.assertEquals(ADMIN, user.getLogin());
     }
 
+    /*
+    * GET USER TESTS
+    */
     @Test
     public void testGetUsers() throws Exception {
         List<User> users = userService.getUsers();
@@ -76,26 +82,10 @@ public class UserServiceImplTest {
         assertFalse(users.isEmpty());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testRemoveAdminUser() throws Exception {
-        userService.addUser(new User(null, ADMIN, ADMIN));
-        User user = userService.getUserByLogin(ADMIN);
-        userService.removeUser(user.getUserId());
-    }
 
-    @Test
-    public void testRemoveUser() throws Exception {
-        userService.addUser(new User(null, TEST_USER, TEST_USER));
-        List<User> users = userService.getUsers();
-        int sizeBefore = users.size();
-
-        userService.removeUser((long)(users.size() - 1));
-
-        users = userService.getUsers();
-        int sizeAfter = users.size();
-        assertEquals(sizeBefore - 1, sizeAfter);
-    }
-
+    /*
+    * UPDATE USER TESTS
+    */
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateAdminUser() throws Exception {
         userService.addUser(new User(null, ADMIN, ADMIN));
@@ -108,10 +98,39 @@ public class UserServiceImplTest {
     public void testUpdateUser() throws Exception {
         userService.addUser(new User(null, TEST_USER, TEST_USER));
         User existingUser = userService.getUserByLogin(TEST_USER);
-        User beforeUpdateUser = new User(existingUser.getUserId(),NOOB, NOOB);
+        User beforeUpdateUser = new User(existingUser.getUserId(), NOOB, NOOB);
         userService.updateUser(beforeUpdateUser);
         User afterUpdateUser = userService.getUserById(existingUser.getUserId());
         assertEquals(beforeUpdateUser.getLogin(), afterUpdateUser.getLogin());
         assertEquals(beforeUpdateUser.getName(), afterUpdateUser.getName());
     }
+
+    /*
+    * REMOVE USER TESTS
+    */
+    @Test(expected = IllegalArgumentException.class)
+    public void testRemoveAdminUser() throws Exception {
+        userService.addUser(new User(null, ADMIN, ADMIN));
+        User user = userService.getUserByLogin(ADMIN);
+        userService.removeUser(user.getUserId());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testRemoveUserNullId() throws Exception {
+        userService.removeUser(null);
+    }
+
+    @Test
+    public void testRemoveUser() throws Exception {
+        userService.addUser(new User(null, TEST_USER, TEST_USER));
+        List<User> users = userService.getUsers();
+        int sizeBefore = users.size();
+
+        userService.removeUser((long) (users.size() - 1));
+
+        users = userService.getUsers();
+        int sizeAfter = users.size();
+        assertEquals(sizeBefore - 1, sizeAfter);
+    }
+
 }

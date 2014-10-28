@@ -11,13 +11,14 @@ public interface UserDao {
 
     public void addUser(User user);
 
+    public List<User> getUsers();
+
     public User getUserById(Long userId);
 
     public User getUserByLogin(String login);
 
-    public List<User> getUsers();
+    public void updateUser(User user);
 
     public void removeUser(Long userId);
 
-    public void updateUser(User user);
 }
