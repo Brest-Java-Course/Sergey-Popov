@@ -81,6 +81,24 @@ public class UserDaoImplTest {
     }
 
     /*
+    * UPDATE USER TESTS
+    */
+    @Test
+    public void updateUser() {
+        User user = new User(6L, "userLogin6", "userName6");
+
+        userDao.addUser(user);
+
+        User user2 = new User(6L, "noob6", "noob6");
+
+        userDao.updateUser(user2);
+        User currentUser = userDao.getUserById(user2.getUserId());
+        assertEquals(user2.getUserId(), currentUser.getUserId());
+        assertEquals(user2.getLogin(), currentUser.getLogin());
+        assertEquals(user2.getName(), currentUser.getName());
+    }
+
+    /*
     * REMOVE USER TESTS
     */
     @Test
@@ -88,7 +106,7 @@ public class UserDaoImplTest {
         List<User> users = userDao.getUsers();
         int sizeBefore = users.size();
 
-        userDao.removeUser((long)(users.size() - 1));
+        userDao.removeUser(users.get(users.size()-1).getUserId());
 
         users = userDao.getUsers();
         int sizeAfter = users.size();
