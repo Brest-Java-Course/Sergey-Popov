@@ -1,6 +1,7 @@
 package com.epam.brest.courses.domain;
 
 public class User {
+
     private Long userId;
     private String login;
     private String name;
@@ -46,4 +47,5 @@ public class User {
                 ", name='" + name + '\'' +
                 '}';
     }
+
 }
