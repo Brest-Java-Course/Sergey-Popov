@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
         try {
             user = userDao.getUserById(userId);
         } catch (EmptyResultDataAccessException e) {
-            LOGGER.debug("getUserByLogin(login={}) ", userId);
+            LOGGER.error("getUserByLogin(login={}) ", userId);
         }
         return user;
     }

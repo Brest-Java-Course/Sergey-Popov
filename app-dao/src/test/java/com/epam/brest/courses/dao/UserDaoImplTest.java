@@ -79,6 +79,7 @@ public class UserDaoImplTest {
         assertEquals(user.getLogin(), user2.getLogin());
         assertEquals(user.getName(), user2.getName());
     }
+
     /*
     * REMOVE USER TESTS
     */

@@ -45,6 +45,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
+
         LOGGER.debug("addUser({})", user);
 
         Map<String, Object> parameters = new HashMap<>(3);
@@ -53,10 +54,12 @@ public class UserDaoImpl implements UserDao {
         parameters.put(USER_ID, user.getUserId());
 
         namedJdbcTemplate.update(ADD_NEW_USER_SQL, parameters);
+
     }
 
     @Override
     public List<User> getUsers() {
+
         LOGGER.debug("get users()");
 
         return jdbcTemplate.query(SELECT_ALL_USERS_SQL, new UserMapper());
@@ -64,6 +67,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserById(Long userId) {
+
         LOGGER.debug("getUserById(userId={})", userId);
 
         return jdbcTemplate.queryForObject(SELECT_USER_BY_ID_SQL, new UserMapper(), userId);
@@ -71,6 +75,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserByLogin(String login) {
+
         LOGGER.debug("getUserByLogin(login={})", login);
 
         return jdbcTemplate.queryForObject(SELECT_USER_BY_LOGIN_SQL, new String[]{login.toLowerCase()}, new UserMapper());
@@ -78,6 +83,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(User user) {
+
         LOGGER.debug("updateUser({}).. ", user);
 
         Map<String, Object> parameters = new HashMap<>(3);
@@ -86,13 +92,16 @@ public class UserDaoImpl implements UserDao {
         parameters.put(USER_ID, user.getUserId());
 
         namedJdbcTemplate.update(UPDATE_USER_SQL, parameters);
+
     }
 
     @Override
     public void removeUser(Long userId) {
+
         LOGGER.debug("removeUser(userId={})", userId);
 
         jdbcTemplate.update(DELETE_USER_SQL, userId);
+
     }
 
     private class UserMapper implements RowMapper<User> {
