@@ -2,12 +2,21 @@
 <Configuration status="WARN">
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <PatternLayout pattern="%highlight{%d{HH:mm:ss.SSS} [%-5p] [%23c{3}] [%-4.4t] - %m%n}"/>
         </Console>
+        <RollingRandomAccessFile name="File" fileName="/tmp/SampleUserManagement/app-dao/app-dao.log"
+                                 filePattern="/tmp/SampleUserManagement/app-dao/$${date:yyyy-MM}/app-dao-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="%d [%-5p] [%23c{3}] [%-4.4t] - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+        </RollingRandomAccessFile>
     </Appenders>
     <Loggers>
         <Logger name="com.epam.brest.courses" level="trace">
             <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
         </Logger>
         <Root level="error">
             <AppenderRef ref="Console"/>
