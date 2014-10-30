@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
  * Created by beast on 23.10.14. At 14.20
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:/spring-dao-test.xml" })
+@ContextConfiguration(locations = {"classpath:/spring-dao-test.xml"})
 public class UserDaoImplTest {
 
     @Autowired
@@ -30,7 +30,7 @@ public class UserDaoImplTest {
         int sizeBefore = users.size();
 
         User user = new User();
-        user.setUserId(3L);
+        //user.setUserId(3L);
         user.setLogin("userLogin3");
         user.setName("userName3");
 
@@ -53,14 +53,14 @@ public class UserDaoImplTest {
     @Test
     public void getUserById() {
         User user = new User();
-        user.setUserId(4L);
+        //user.setUserId(4L);
         user.setLogin("userLogin4");
         user.setName("userName4");
 
         userDao.addUser(user);
 
-        User user2 = userDao.getUserById(4L);
-        assertEquals(user.getUserId(), user2.getUserId());
+        User user2 = userDao.getUserByLogin("userLogin4");
+        //assertEquals(user.getUserId(), user2.getUserId());
         assertEquals(user.getLogin(), user2.getLogin());
         assertEquals(user.getName(), user2.getName());
     }
@@ -68,14 +68,14 @@ public class UserDaoImplTest {
     @Test
     public void getUserByLogin() {
         User user = new User();
-        user.setUserId(5L);
+        //user.setUserId(5L);
         user.setLogin("userLogin5");
         user.setName("userName5");
 
         userDao.addUser(user);
 
         User user2 = userDao.getUserByLogin("userLogin5");
-        assertEquals(user.getUserId(), user2.getUserId());
+        //assertEquals(user.getUserId(), user2.getUserId());
         assertEquals(user.getLogin(), user2.getLogin());
         assertEquals(user.getName(), user2.getName());
     }
@@ -85,11 +85,12 @@ public class UserDaoImplTest {
     */
     @Test
     public void updateUser() {
-        User user = new User(6L, "userLogin6", "userName6");
+        User user = new User(null, "userLogin6", "userName6");
 
         userDao.addUser(user);
+        long id = userDao.getUserByLogin("userLogin6").getUserId();
 
-        User user2 = new User(6L, "noob6", "noob6");
+        User user2 = new User(id, "noob6", "noob6");
 
         userDao.updateUser(user2);
         User currentUser = userDao.getUserById(user2.getUserId());
