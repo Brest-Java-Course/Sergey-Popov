@@ -57,9 +57,9 @@ public class UserDaoImplTest {
         user.setLogin("userLogin4");
         user.setName("userName4");
 
-        userDao.addUser(user);
+        Long id = userDao.addUser(user);
 
-        User user2 = userDao.getUserByLogin("userLogin4");
+        User user2 = userDao.getUserById(id);
         //assertEquals(user.getUserId(), user2.getUserId());
         assertEquals(user.getLogin(), user2.getLogin());
         assertEquals(user.getName(), user2.getName());
@@ -87,8 +87,7 @@ public class UserDaoImplTest {
     public void updateUser() {
         User user = new User(null, "userLogin6", "userName6");
 
-        userDao.addUser(user);
-        long id = userDao.getUserByLogin("userLogin6").getUserId();
+        long id = userDao.addUser(user);
 
         User user2 = new User(id, "noob6", "noob6");
 

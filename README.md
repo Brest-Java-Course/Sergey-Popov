@@ -1,1 +1,1 @@
-SampleUserManagement by Beast
+SampleUserManagement by Sergey Popov

@@ -35,7 +35,7 @@ public class UserServiceImplMockTest {
         User user = UserDataFixture.getNewUser();
 
         userDao.addUser(user);
-        expectLastCall();
+        expectLastCall().andReturn(null);
 
         userDao.getUserByLogin(user.getLogin());
         expectLastCall().andReturn(null);
@@ -52,7 +52,7 @@ public class UserServiceImplMockTest {
         User user = UserDataFixture.getNewUser();
 
         userDao.addUser(user);
-        expectLastCall().times(2);
+        expectLastCall().andReturn(null).times(2);
 
         userDao.getUserByLogin(user.getLogin());
         expectLastCall().andReturn(null).times(2);

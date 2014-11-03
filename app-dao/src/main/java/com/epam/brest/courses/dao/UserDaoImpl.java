@@ -6,7 +6,10 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.util.Assert;
 
 import javax.sql.DataSource;
@@ -52,7 +55,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void addUser(User user) {
+    public Long addUser(User user) {
 
         LOGGER.debug("addUser({})", user);
 
@@ -61,12 +64,19 @@ public class UserDaoImpl implements UserDao {
         Assert.notNull(user.getLogin(), "User login should be specified.");
         Assert.notNull(user.getName(), "User name should be specified.");
 
-        Map<String, Object> parameters = new HashMap<>(3);
-        parameters.put(NAME, user.getName());
-        parameters.put(LOGIN, user.getLogin());
-        parameters.put(USER_ID, user.getUserId());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        namedJdbcTemplate.update(addNewUserSql, parameters);
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue(USER_ID, user.getUserId());
+        parameters.addValue(LOGIN, user.getLogin());
+        parameters.addValue(NAME, user.getName());
+
+        namedJdbcTemplate.update(addNewUserSql, parameters, keyHolder);
+
+        Long id = keyHolder.getKey().longValue();
+        LOGGER.debug("addUser() : id={}", id);
+
+        return id;
 
     }
 
@@ -98,6 +108,7 @@ public class UserDaoImpl implements UserDao {
     public void updateUser(User user) {
 
         LOGGER.debug("updateUser({}).. ", user);
+
 
         Map<String, Object> parameters = new HashMap<>(3);
         parameters.put(NAME, user.getName());
