@@ -1,5 +1,6 @@
 SampleUserManagement by Sergey Popov
 ====================================
+
 SampleUserManagement is a simple sql-based application. Contains list of modules:
 
   - A simple DAO interface to handle the database operation required to manipulate a User entity
