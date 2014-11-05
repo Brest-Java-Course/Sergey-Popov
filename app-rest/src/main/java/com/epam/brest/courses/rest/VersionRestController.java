@@ -1,5 +1,6 @@
 package com.epam.brest.courses.rest;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,10 +14,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class VersionRestController {
 
+
     @ResponseBody
-    @RequestMapping(value = "/version", method = RequestMethod.GET)
+    @RequestMapping(value = "/version", method = {RequestMethod.GET, RequestMethod.OPTIONS})
     public ResponseEntity<String> getVersion() {
-        return new ResponseEntity<>("1.0", HttpStatus.OK);
+
+        String version = "1.0";
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Allow","GET,OPTIONS");
+        responseHeaders.set("Access-Control-Allow-Origin", "*");
+        responseHeaders.set("Access-Control-Allow-Methods", "GET, OPTIONS");
+        responseHeaders.set("Access-Control-Allow-Headers", "Content-Type");
+        responseHeaders.set("Access-Control-Max-Age", "86400");
+        return new ResponseEntity<>(version, responseHeaders, HttpStatus.OK);
+
     }
 
 }
