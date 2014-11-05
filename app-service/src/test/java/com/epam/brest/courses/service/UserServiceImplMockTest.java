@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.easymock.EasyMock.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 /**
@@ -35,14 +36,15 @@ public class UserServiceImplMockTest {
         User user = UserDataFixture.getNewUser();
 
         userDao.addUser(user);
-        expectLastCall().andReturn(null);
+        expectLastCall().andReturn(Long.valueOf(1L));
 
         userDao.getUserByLogin(user.getLogin());
         expectLastCall().andReturn(null);
 
         replay(userDao);
 
-        userService.addUser(user);
+        Long id = userService.addUser(user);
+        assertEquals(id, Long.valueOf(1L));
 
         verify(userDao);
     }

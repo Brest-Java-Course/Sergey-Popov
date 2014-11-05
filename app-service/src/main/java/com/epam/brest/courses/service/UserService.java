@@ -15,7 +15,7 @@ public interface UserService {
      * Inserts the specified user to the database.
      * @param user user to be inserted to the database
      */
-    public void addUser(User user);
+    public Long addUser(User user);
 
     /**
      * Returns a list containing all of the users in the database.
