@@ -36,7 +36,7 @@ public class UserServiceImplMockTest {
         User user = UserDataFixture.getNewUser();
 
         userDao.addUser(user);
-        expectLastCall().andReturn(Long.valueOf(1L));
+        expectLastCall().andReturn(1L);
 
         userDao.getUserByLogin(user.getLogin());
         expectLastCall().andReturn(null);

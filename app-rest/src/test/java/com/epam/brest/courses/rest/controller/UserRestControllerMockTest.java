@@ -60,7 +60,7 @@ public class UserRestControllerMockTest {
     @Test
     public void addUserTest() throws Exception {
 
-        expect(userService.addUser(anyObject(User.class))).andReturn(Long.valueOf(1L));
+        expect(userService.addUser(anyObject(User.class))).andReturn(1L);
         replay(userService);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -163,7 +163,7 @@ public class UserRestControllerMockTest {
     @Test
     public void deleteUserTest() throws Exception {
 
-        userService.removeUser(Long.valueOf(1L));
+        userService.removeUser(1L);
         replay(userService);
 
         ResultActions result = this.mockMvc.perform(
@@ -209,7 +209,7 @@ public class UserRestControllerMockTest {
 
         public static List<User> getSampleUserList() {
 
-            List list = new ArrayList(3);
+            List<User> list = new ArrayList<>(3);
             list.add(UserDataFixture.getNewUser(1L));
             list.add(UserDataFixture.getNewUser(2L));
             list.add(UserDataFixture.getNewUser(3L));
