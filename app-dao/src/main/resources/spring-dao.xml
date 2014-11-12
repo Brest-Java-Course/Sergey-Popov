@@ -7,11 +7,10 @@
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:application.properties</value>
-                <value>classpath:sql-scripts.properties</value>
+                <value>classpath*:database.properties</value>
+                <value>classpath*:sql-scripts.properties</value>
             </list>
         </property>
-        <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
 
     <bean id="userDao" class="com.epam.brest.courses.dao.UserDaoImpl">
