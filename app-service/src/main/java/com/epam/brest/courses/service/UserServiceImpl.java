@@ -4,7 +4,9 @@ import com.epam.brest.courses.dao.UserDao;
 import com.epam.brest.courses.domain.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
@@ -13,15 +15,13 @@ import java.util.List;
 /**
  * Created by beast on 27.10.14. At 11.17
  */
+@Component
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private UserDao userDao;
 
     private static final Logger LOGGER = LogManager.getLogger();
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
 
     @Override
     @Transactional
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
         try {
             user = userDao.getUserById(userId);
         } catch (EmptyResultDataAccessException e) {
-            LOGGER.error("getUserByLogin(login={}) ", userId);
+            LOGGER.error("getUserById(id={}) this userId does not exist", userId);
         }
         return user;
     }
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
         try {
             user = userDao.getUserByLogin(login);
         } catch (EmptyResultDataAccessException e) {
-            LOGGER.error("getUserByLogin(login={}) ", login);
+            LOGGER.error("getUserByLogin(login={}), this login does not exist", login);
         }
         return user;
     }

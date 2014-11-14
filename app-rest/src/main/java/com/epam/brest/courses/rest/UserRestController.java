@@ -2,12 +2,12 @@ package com.epam.brest.courses.rest;
 
 import com.epam.brest.courses.domain.User;
 import com.epam.brest.courses.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,12 +17,8 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserRestController {
 
-    @Resource
+    @Autowired
     private UserService userService;
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>User Management</title>
+</head>
+<body>
+
+    <div class="searchById">
+        FindById <input type="text" id="searchId"/>
+        <button id="btnSearchById">Search</button>
+    </div>
+
+    <div class="header">
+        FindByLogin <input type="text" id="searchKey"/>
+        <button id="btnSearch">Search</button>
+    </div>
+
+    <div class="userListArea">
+        <ul id="userList"></ul>
+    </div>
+
+    <button id="btnAdd">New User</button>
+
+    <form id="userForm">
+
+        <div class="mainArea">
+
+            <label>Id:</label>
+            <input type="text" id="userId" name="id" disabled/>
+
+            <label>Login:</label>
+            <input type="text" id="login" name="login"/>
+
+            <label>Name:</label>
+            <input type="text" id="name" name="name" required/>
+
+            <button id="btnSave">Save</button>
+
+        </div>
+
+    </form>
+
+<script src="js/jquery-1.11.1.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

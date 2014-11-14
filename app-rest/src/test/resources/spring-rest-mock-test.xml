@@ -7,7 +7,11 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <context:component-scan base-package="com.epam.brest.courses"/>
+    <context:component-scan base-package="com.epam.brest.courses.rest"/>
+
+    <bean id="userDao" class="org.easymock.EasyMock" factory-method="createMock">
+        <constructor-arg value="com.epam.brest.courses.dao.UserDao"/>
+    </bean>
 
     <bean id="userService" class="org.easymock.EasyMock" factory-method="createMock">
         <constructor-arg value="com.epam.brest.courses.service.UserService"/>
