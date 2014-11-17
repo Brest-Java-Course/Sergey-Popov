@@ -1,5 +1,6 @@
 package com.epam.brest.courses.client;
 
+import com.epam.brest.courses.domain.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -46,6 +47,27 @@ public class RestClient {
         LOGGER.debug("getRestVersion {}", host);
 
         return restTemplate.getForObject(host + "/version", String.class);
+
+    }
+
+    public long addUser(User user) {
+
+        LOGGER.debug("addUser {}", user);
+        return restTemplate.postForObject(host + "/users", user, Long.class);
+
+    }
+
+    public User getUserById(long id) {
+
+        LOGGER.debug("getUserById {}", id);
+        return restTemplate.getForObject(host + "/users/" + id, User.class);
+
+    }
+
+    public User[] getUsers() {
+
+        LOGGER.debug("getUsers {}", host);
+        return restTemplate.getForObject(host + "/users", User[].class);
 
     }
 

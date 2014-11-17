@@ -1,5 +1,5 @@
 // The root URL for the RESTful services
-var REST_URL = "http://localhost:8080/users";
+var REST_URL = "http://localhost:8080/app-web-1.0.0-SNAPSHOT/users";
 var currentUser;
 
 findAll();
@@ -20,13 +20,8 @@ $('#btnAdd').click(function() {
     return false;
 });
 
-$('#userList').on('click', 'a', function() {
-    if ($("a").hasClass("get")) {
-        findById($(this).data('identity'));
-    } else if ($("a").hasClass("delete")) {
-        deleteUser($(this).data('identity'));
-    }
-
+$('#userList').on('click', 'a', function () {
+findById($(this).data('identity'));
 });
 
 $('#btnSave').click(function() {
@@ -35,6 +30,11 @@ $('#btnSave').click(function() {
     else
         updateUser();
     return false;
+});
+
+$('#btnRemove').click(function () {
+removeUser();
+return false;
 });
 
 function addUser() {
@@ -61,10 +61,10 @@ function updateUser() {
         type: 'PUT',
         contentType: 'application/json',
         url: REST_URL,
-        dataType: "json",
         data: formToJSON(),
         success: function (data, textStatus, jqXHR) {
             alert('User updated successfully');
+            findAll();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert('updateUser error: ' + textStatus);
@@ -72,19 +72,19 @@ function updateUser() {
     });
 }
 
-function deleteUser(id) {
-    console.log('deleteUser');
+function removeUser() {
+    console.log('removeUser');
     $.ajax({
         type: 'DELETE',
-        url: REST_URL + '/' + id,
-        dataType: "json",
-        data: formToJSON(),
+        url: REST_URL + '/' + $('#userId').val(),
         success: function (data, textStatus, jqXHR) {
-            alert('User deleted successfully');
+            alert('User removed successfully');
             findAll();
+            currentUser = {};
+            renderDetails(currentUser);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert('deleteUser error: ' + textStatus);
+            alert('removeUser error: ' + textStatus);
         }
     });
 }
@@ -122,12 +122,11 @@ function findById(id) {
 }
 
 function renderList(data) {
-// JAX-RS serializes an empty list as null, and a 'collection of one' as an object (not an 'array of one')
+    // JAX-RS serializes an empty list as null, and a 'collection of one' as an object (not an 'array of one')
     var list = data == null ? [] : (data instanceof Array ? data : [data]);
     $('#userList li').remove();
     $.each(list, function (index, user) {
-        $('#userList').append('<a href="#" class="get" data-identity="' + user.userId + '">' + user.login + " "+ user.name + '</a>'
-        + ' ' + '<a href="#" class="delete" data-identity="' + user.userId + '"> DeleteUser </a><br>');
+        $('#userList').append('<li><a href="#" data-identity="' + user.userId + '">' + user.login + " "+ user.name + '</a></li>');
     });
 }
 
@@ -140,6 +139,11 @@ function renderDetails(user) {
     $('#userId').val(user.userId);
     $('#login').val(user.login);
     $('#name').val(user.name);
+    if (user.userId == undefined) {
+        $('#btnRemove').hide();
+    } else {
+        $('#btnRemove').show();
+    }
 }
 
 function search(searchKey) {
