@@ -1,4 +1,4 @@
-com.epam.brest.courses.domain.Task Manager by Sergey Popov
+Task Manager by Sergey Popov
 ====================================
 
 Task Manager is a simple sql-based application. Contains list of modules:
