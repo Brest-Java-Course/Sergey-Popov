@@ -1,7 +1,7 @@
 com.epam.brest.courses.domain.Task Manager by Sergey Popov
 ====================================
 
-com.epam.brest.courses.domain.Task Manager is a simple sql-based application. Contains list of modules:
+Task Manager is a simple sql-based application. Contains list of modules:
   - Domain module
 
 Prerequisites:
