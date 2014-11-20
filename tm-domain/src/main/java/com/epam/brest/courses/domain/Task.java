@@ -1,31 +1,55 @@
 package com.epam.brest.courses.domain;
 
-import java.util.Date;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by beast on 17.11.14. At 15.51
  */
+@Entity
+@Table(name = "task")
+@NamedQueries({
+        @NamedQuery(name = "Task.findAll", query = "SELECT t FROM Task t")
+})
 public class Task {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "task_id")
     private Long taskId;
 
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "task_name")
     private String taskName;
 
+    @NotNull
+    @Column(name = "task_state")
     private Boolean taskState;
 
-    private Date startDate;
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    @Column(name = "task_startdate", columnDefinition = "datetime NULL")
+    private DateTime startDate;
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    @Column(name = "task_enddate", columnDefinition = "datetime NULL")
+    private DateTime endDate;
 
-    private Date endDate;
+    @Column(name = "task_elapsedtime")
+    private Integer elapsedTime;
 
-    private Long elapsedTime;
-
-    private Person personId;
+    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    @ManyToOne(optional = false)
+    private Person person;
 
     public Task() {
 
     }
 
-    public Task(String taskName, Boolean taskState, Date startDate, Date endDate, Long elapsedTime) {
+    public Task(String taskName, Boolean taskState, DateTime startDate, DateTime endDate, Integer elapsedTime) {
 
         this.taskName = taskName;
         this.taskState = taskState;
@@ -35,7 +59,7 @@ public class Task {
 
     }
 
-    public Task(Long taskId, String taskName, Boolean taskState, Date startDate, Date endDate, Long elapsedTime) {
+    public Task(Long taskId, String taskName, Boolean taskState, DateTime startDate, DateTime endDate, Integer elapsedTime) {
 
         this.taskId = taskId;
         this.taskName = taskName;
@@ -70,36 +94,36 @@ public class Task {
         this.taskState = taskState;
     }
 
-    public Date getStartDate() {
+    public DateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(DateTime startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public DateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(DateTime endDate) {
         this.endDate = endDate;
     }
 
-    public Long getElapsedTime() {
+    public Integer getElapsedTime() {
         return elapsedTime;
     }
 
-    public void setElapsedTime(Long elapsedTime) {
+    public void setElapsedTime(Integer elapsedTime) {
         this.elapsedTime = elapsedTime;
     }
 
-    public Person getPersonId() {
-        return personId;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPersonId(Person personId) {
-        this.personId = personId;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     @Override
@@ -148,7 +172,7 @@ public class Task {
         sb.append(", startDate=").append(startDate);
         sb.append(", endDate=").append(endDate);
         sb.append(", elapsedTime=").append(elapsedTime);
-        sb.append(", personId=").append(personId);
+        sb.append(", personId=").append(person);
         sb.append('}');
         return sb.toString();
 

@@ -1,18 +1,39 @@
 package com.epam.brest.courses.domain;
 
+
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 /**
  * Created by beast on 17.11.14. At 15.42
  */
+@Entity
+@Table(name = "person")
+@NamedQueries({
+        @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
+})
 public class Person {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
+    @Column(name = "person_id")
     private Long personId;
 
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "person_fname")
     private String personFirstName;
 
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "person_lname")
     private String personLastName;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "person")
     private Set<Task> taskSet;
 
     public Person() {
