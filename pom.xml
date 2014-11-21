@@ -6,7 +6,7 @@
 
     <groupId>com.epam.brest.courses</groupId>
     <artifactId>task-manager</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.3.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>task-manager</name>
@@ -40,6 +40,7 @@
     <modules>
         <module>tm-domain</module>
         <module>tm-dao</module>
+        <module>tm-service</module>
     </modules>
 
     <scm>
@@ -69,6 +70,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>tm-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>tm-dao</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -179,6 +185,12 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>4.11</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.easymock</groupId>
+                <artifactId>easymock</artifactId>
+                <version>3.2</version>
                 <scope>test</scope>
             </dependency>
 
