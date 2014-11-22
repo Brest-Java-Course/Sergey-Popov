@@ -25,7 +25,7 @@ git clone https://github.com/Brest-Java-Course/Sergey-Popov.git
 
 Version
 -------
-0.3.0
+0.4.0
 
 License
 -------
