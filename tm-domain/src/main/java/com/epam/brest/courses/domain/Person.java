@@ -1,7 +1,5 @@
 package com.epam.brest.courses.domain;
 
-
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

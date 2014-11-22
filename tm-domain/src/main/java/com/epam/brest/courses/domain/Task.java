@@ -34,6 +34,7 @@ public class Task {
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     @Column(name = "task_startdate", columnDefinition = "datetime NULL")
     private DateTime startDate;
+
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     @Column(name = "task_enddate", columnDefinition = "datetime NULL")
     private DateTime endDate;

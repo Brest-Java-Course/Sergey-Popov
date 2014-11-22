@@ -25,7 +25,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person addPerson(Person person) {
 
-        LOGGER.debug("addPerson({})", person);
+        LOGGER.debug("PersonServiceImpl.addPerson({})", person);
 
         Assert.notNull(person);
         Assert.isNull(person.getPersonId(), "Person Id should not be specified!");
@@ -33,7 +33,7 @@ public class PersonServiceImpl implements PersonService {
         Assert.notNull(person.getPersonLastName(), "Person Last Name should be specified!");
 
         Person personFromDb = personDao.addPerson(person);
-        LOGGER.debug("addPerson() : id = {}", personFromDb.getPersonId());
+        LOGGER.debug("PersonServiceImpl.addPerson() : id = {}", personFromDb.getPersonId());
 
         return personFromDb;
 
@@ -42,12 +42,12 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public List<Person> getPersons() {
 
-        LOGGER.debug("getPersons()");
+        LOGGER.debug("PersonServiceImpl.getPersons()");
 
         List<Person> persons;
         persons = personDao.getPersons();
 
-        LOGGER.debug("getPersons() : list.size = {}", persons.size());
+        LOGGER.debug("PersonServiceImpl.getPersons() : list.size = {}", persons.size());
 
         return persons;
 
@@ -56,12 +56,12 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person getPersonById(Long personId) {
 
-        LOGGER.debug("getPersonById(personId = {})", personId);
+        LOGGER.debug("PersonServiceImpl.getPersonById(personId = {})", personId);
 
         Assert.notNull(personId, "Person Id should be specified!");
         Person personFromDb = personDao.getPersonById(personId);
 
-        LOGGER.debug("getPersonById() : person = {}", personFromDb);
+        LOGGER.debug("PersonServiceImpl.getPersonById() : person = {}", personFromDb);
         return personFromDb;
 
     }
@@ -69,25 +69,25 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public void updatePerson(Person person) {
 
-        LOGGER.debug("updatePerson({})", person);
+        LOGGER.debug("PersonServiceImpl.updatePerson({})", person);
 
         Assert.notNull(person);
 
         personDao.updatePerson(person);
 
-        LOGGER.debug("updatePerson() : personUpdated = {}", person);
+        LOGGER.debug("PersonServiceImpl.updatePerson() : personUpdated = {}", person);
 
     }
 
     @Override
     public void removePerson(Long personId) {
 
-        LOGGER.debug("removePerson(personId = {})", personId);
+        LOGGER.debug("PersonServiceImpl.removePerson(personId = {})", personId);
 
         Assert.notNull(personId, "Person Id should be specified!");
         personDao.removePerson(personId);
 
-        LOGGER.debug("removePerson() : id personRemoved = {}", personId);
+        LOGGER.debug("PersonServiceImpl.removePerson() : id personRemoved = {}", personId);
 
     }
 

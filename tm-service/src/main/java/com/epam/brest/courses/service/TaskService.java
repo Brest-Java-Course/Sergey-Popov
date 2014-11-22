@@ -5,7 +5,7 @@ import com.epam.brest.courses.domain.Task;
 import java.util.List;
 
 /**
- * A simple PersonService interface to handle the operation required to manipulate a Person entity.
+ * A simple TaskService interface to handle the operation required to manipulate a Task entity.
  * Created by beast on 21.11.14. At 11.22
  * @author Sergey Popov
  * @version 1.0, November 2014
@@ -49,7 +49,7 @@ public interface TaskService {
     /**
      * Replaces the task in the database with the specified task.
      *
-     * @param task task to be stored in the database     *
+     * @param task task to be stored in the database
      */
     public void updateTask(Task task);
 

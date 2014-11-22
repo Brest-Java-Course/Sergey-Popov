@@ -25,7 +25,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Task addTask(Task task, Long personId) {
 
-        LOGGER.debug("addTask({})", task);
+        LOGGER.debug("TaskServiceImpl.addTask({})", task);
 
         Assert.notNull(task);
         Assert.notNull(personId, "Person Id should be specified!");
@@ -38,7 +38,7 @@ public class TaskServiceImpl implements TaskService {
 
         Task taskFromDb = taskDao.addTask(task, personId);
 
-        LOGGER.debug("addTask() : id = {}", taskFromDb.getTaskId());
+        LOGGER.debug("TaskServiceImpl.addTask() : id = {}", taskFromDb.getTaskId());
         return taskFromDb;
 
     }
@@ -46,12 +46,12 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> getTasks() {
 
-        LOGGER.debug("getTasks()");
+        LOGGER.debug("TaskServiceImpl.getTasks()");
 
         List<Task> tasks;
         tasks = taskDao.getTasks();
 
-        LOGGER.debug("getTasks() : list.size = {}", tasks.size());
+        LOGGER.debug("TaskServiceImpl.getTasks() : list.size = {}", tasks.size());
         return tasks;
 
     }
@@ -59,14 +59,14 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> getTasksById(Long personId) {
 
-        LOGGER.debug("getTasksById(personId = {})", personId);
+        LOGGER.debug("TaskServiceImpl.getTasksById(personId = {})", personId);
 
         Assert.notNull(personId, "Person Id should be specified!");
 
         List<Task> tasks;
         tasks = taskDao.getTasksById(personId);
 
-        LOGGER.debug("getTasksById() : list.size = {}", tasks.size());
+        LOGGER.debug("TaskServiceImpl.getTasksById() : list.size = {}", tasks.size());
         return tasks;
 
     }
@@ -74,13 +74,13 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Task getTaskById(Long taskId) {
 
-        LOGGER.debug("getTaskById(taskId = {})", taskId);
+        LOGGER.debug("TaskServiceImpl.getTaskById(taskId = {})", taskId);
 
         Assert.notNull(taskId, "Task Id should be specified!");
 
         Task taskFromDb = taskDao.getTaskById(taskId);
 
-        LOGGER.debug("getTaskById() : task = {}", taskFromDb);
+        LOGGER.debug("TaskServiceImpl.getTaskById() : task = {}", taskFromDb);
         return taskFromDb;
 
     }
@@ -88,26 +88,26 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void updateTask(Task task) {
 
-        LOGGER.debug("updateTask({})", task);
+        LOGGER.debug("TaskServiceImpl.updateTask({})", task);
 
         Assert.notNull(task);
 
         taskDao.updateTask(task);
 
-        LOGGER.debug("updateTask() : taskUpdated = {}", task);
+        LOGGER.debug("TaskServiceImpl.updateTask() : taskUpdated = {}", task);
 
     }
 
     @Override
     public void removeTask(Long taskId) {
 
-        LOGGER.debug("removeTask(taskId = {})", taskId);
+        LOGGER.debug("TaskServiceImpl.removeTask(taskId = {})", taskId);
 
         Assert.notNull(taskId, "Task Id should be specified!");
 
         taskDao.removeTask(taskId);
 
-        LOGGER.debug("removeTask() : id taskRemoved = {}", taskId);
+        LOGGER.debug("TaskServiceImpl.removeTask() : id taskRemoved = {}", taskId);
 
     }
 

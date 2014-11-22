@@ -1,4 +1,4 @@
-package com.epam.brest.courses.service.impl.DataFixture;
+package com.epam.brest.courses.rest.DataFixture;
 
 import com.epam.brest.courses.domain.Person;
 

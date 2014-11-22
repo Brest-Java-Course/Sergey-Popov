@@ -58,7 +58,6 @@ public class PersonTest {
         assertEquals(PERSON_FIRST_NAME, person.getPersonFirstName());
         assertEquals(PERSON_LAST_NAME, person.getPersonLastName());
 
-
     }
 
     @Test

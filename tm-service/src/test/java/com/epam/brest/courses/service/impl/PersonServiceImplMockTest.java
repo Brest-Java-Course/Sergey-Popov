@@ -17,19 +17,19 @@ import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/spring-service-test.xml"})
-public class PersonServiceImplTest {
+@ContextConfiguration(locations = {"classpath:/spring-service-mock-test.xml"})
+public class PersonServiceImplMockTest {
 
     @Autowired
     private PersonService personService;
 
     @Autowired
-    private PersonDao personDao;
+    private PersonDao personDaoMock;
 
     @After
     public void tearDown() throws Exception {
 
-        reset(personDao);
+        reset(personDaoMock);
 
     }
 
@@ -43,8 +43,8 @@ public class PersonServiceImplTest {
         Person person = PersonDataFixture.getNewPerson();
         Person person2 = PersonDataFixture.getExistPersonSame(1l);
 
-        expect(personDao.addPerson(person)).andReturn(person2);
-        replay(personDao);
+        expect(personDaoMock.addPerson(person)).andReturn(person2);
+        replay(personDaoMock);
 
         Person personFromDb = personService.addPerson(person);
 
@@ -60,8 +60,8 @@ public class PersonServiceImplTest {
     @Test
     public void testGetPersons() throws Exception {
 
-        expect(personDao.getPersons()).andReturn(PersonDataFixture.getSamplePersonList());
-        replay(personDao);
+        expect(personDaoMock.getPersons()).andReturn(PersonDataFixture.getSamplePersonList());
+        replay(personDaoMock);
 
         List<Person> persons = personService.getPersons();
 
@@ -78,8 +78,8 @@ public class PersonServiceImplTest {
     public void testGetPersonById() throws Exception {
 
         Person person = PersonDataFixture.getExistPerson(1l);
-        expect(personDao.getPersonById(person.getPersonId())).andReturn(person);
-        replay(personDao);
+        expect(personDaoMock.getPersonById(person.getPersonId())).andReturn(person);
+        replay(personDaoMock);
 
         Person personFromDb = personService.getPersonById(person.getPersonId());
 
@@ -95,8 +95,8 @@ public class PersonServiceImplTest {
     @Test
     public void testUpdatePerson() throws Exception {
 
-        personDao.updatePerson(anyObject(Person.class));
-        replay(personDao);
+        personDaoMock.updatePerson(anyObject(Person.class));
+        replay(personDaoMock);
         Person person = PersonDataFixture.getExistPerson(1l);
         person.setPersonFirstName("TestMockUpdate");
         personService.updatePerson(person);
@@ -110,8 +110,8 @@ public class PersonServiceImplTest {
     @Test
     public void testRemovePerson() throws Exception {
 
-        personDao.removePerson(1l);
-        replay(personDao);
+        personDaoMock.removePerson(1l);
+        replay(personDaoMock);
         personService.removePerson(1l);
 
     }

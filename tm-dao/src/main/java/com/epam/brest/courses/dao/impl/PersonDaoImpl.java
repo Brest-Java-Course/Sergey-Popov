@@ -36,7 +36,7 @@ public class PersonDaoImpl implements PersonDao {
     @Transactional
     public Person addPerson(Person person) {
 
-        LOGGER.debug("addPerson({})", person);
+        LOGGER.debug("PersonDaoImpl.addPerson({})", person);
 
         Assert.notNull(person);
         Assert.isNull(person.getPersonId(), "Person Id should not be specified!");
@@ -44,7 +44,7 @@ public class PersonDaoImpl implements PersonDao {
         Assert.notNull(person.getPersonLastName(), "Person Last Name should be specified!");
 
         Person personFromDb = emf.merge(person);
-        LOGGER.debug("addPerson() : id = {}", personFromDb.getPersonId());
+        LOGGER.debug("PersonDaoImpl.addPerson() : id = {}", personFromDb.getPersonId());
 
         return personFromDb;
 
@@ -54,13 +54,13 @@ public class PersonDaoImpl implements PersonDao {
     @Transactional
     public List<Person> getPersons() {
 
-        LOGGER.debug("getPersons()");
+        LOGGER.debug("PersonDaoImpl.getPersons()");
 
         List<Person> persons;
         TypedQuery<Person> query = emf.createNamedQuery("Person.findAll", Person.class);
         persons = query.getResultList();
 
-        LOGGER.debug("getPersons() : list.size = {}", persons.size());
+        LOGGER.debug("PersonDaoImpl.getPersons() : list.size = {}", persons.size());
         return persons;
 
     }
@@ -69,12 +69,12 @@ public class PersonDaoImpl implements PersonDao {
     @Transactional
     public Person getPersonById(Long personId) {
 
-        LOGGER.debug("getPersonById(personId = {})", personId);
+        LOGGER.debug("PersonDaoImpl.getPersonById(personId = {})", personId);
 
         Assert.notNull(personId, "Person Id should be specified!");
         Person personFromDb = emf.find(Person.class, personId);
 
-        LOGGER.debug("getPersonById() : person = {}", personFromDb);
+        LOGGER.debug("PersonDaoImpl.getPersonById() : person = {}", personFromDb);
         return personFromDb;
 
     }
@@ -83,7 +83,7 @@ public class PersonDaoImpl implements PersonDao {
     @Transactional
     public void updatePerson(Person person) {
 
-        LOGGER.debug("updatePerson({})", person);
+        LOGGER.debug("PersonDaoImpl.updatePerson({})", person);
 
         Assert.notNull(person);
 
@@ -91,7 +91,7 @@ public class PersonDaoImpl implements PersonDao {
         personUpdate.setPersonFirstName(person.getPersonFirstName());
         personUpdate.setPersonLastName(person.getPersonLastName());
 
-        LOGGER.debug("updatePerson() : personUpdated = {}", personUpdate);
+        LOGGER.debug("PersonDaoImpl.updatePerson() : personUpdated = {}", personUpdate);
 
     }
 
@@ -99,12 +99,12 @@ public class PersonDaoImpl implements PersonDao {
     @Transactional
     public void removePerson(Long personId) {
 
-        LOGGER.debug("removePerson(personId = {})", personId);
+        LOGGER.debug("PersonDaoImpl.removePerson(personId = {})", personId);
 
         Person personFromDb = emf.find(Person.class, personId);
         emf.remove(emf.contains(personFromDb) ? personFromDb : emf.merge(personFromDb));
 
-        LOGGER.debug("removePerson() : personRemoved = {}", personFromDb);
+        LOGGER.debug("PersonDaoImpl.removePerson() : personRemoved = {}", personFromDb);
 
     }
 

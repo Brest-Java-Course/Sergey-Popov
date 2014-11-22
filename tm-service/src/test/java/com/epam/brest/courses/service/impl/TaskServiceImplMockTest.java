@@ -17,8 +17,8 @@ import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/spring-service-test.xml"})
-public class TaskServiceImplTest {
+@ContextConfiguration(locations = {"classpath:/spring-service-mock-test.xml"})
+public class TaskServiceImplMockTest {
 
     @Autowired
     private TaskService taskService;
@@ -51,7 +51,7 @@ public class TaskServiceImplTest {
         assertEquals(task.getTaskName(), taskFromDb.getTaskName());
         assertEquals(task.getStartDate(), taskFromDb.getStartDate());
         assertEquals(task.getEndDate(), taskFromDb.getEndDate());
-        assertEquals(task.getElapsedTime(), taskFromDb.getEndDate());
+        assertEquals(task.getElapsedTime(), taskFromDb.getElapsedTime());
         assertEquals(task.isTaskState(), taskFromDb.isTaskState());
 
     }
@@ -106,7 +106,7 @@ public class TaskServiceImplTest {
         assertEquals(task.getTaskName(), taskFromDb.getTaskName());
         assertEquals(task.getStartDate(), taskFromDb.getStartDate());
         assertEquals(task.getEndDate(), taskFromDb.getEndDate());
-        assertEquals(task.getElapsedTime(), taskFromDb.getEndDate());
+        assertEquals(task.getElapsedTime(), taskFromDb.getElapsedTime());
         assertEquals(task.isTaskState(), taskFromDb.isTaskState());
 
     }

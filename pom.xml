@@ -6,7 +6,7 @@
 
     <groupId>com.epam.brest.courses</groupId>
     <artifactId>task-manager</artifactId>
-    <version>0.3.0-SNAPSHOT</version>
+    <version>0.4.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>task-manager</name>
@@ -41,6 +41,7 @@
         <module>tm-domain</module>
         <module>tm-dao</module>
         <module>tm-service</module>
+        <module>tm-rest</module>
     </modules>
 
     <scm>
@@ -56,10 +57,13 @@
     </issueManagement>
 
     <properties>
+        <!-- UTF-8 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Version control -->
         <org.springframework.version>4.1.2.RELEASE</org.springframework.version>
         <hibernate.version>4.3.7.Final</hibernate.version>
         <log4j2.version>2.1</log4j2.version>
+        <!-- Tests -->
         <skip.unit.tests>false</skip.unit.tests>
         <runIntegrationTests>false</runIntegrationTests>
     </properties>
@@ -77,21 +81,16 @@
                 <artifactId>tm-dao</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>tm-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- Spring -->
             <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-core</artifactId>
-                <version>${org.springframework.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>${org.springframework.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-beans</artifactId>
                 <version>${org.springframework.version}</version>
             </dependency>
             <dependency>
@@ -106,22 +105,12 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-test</artifactId>
-                <version>${org.springframework.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-jdbc</artifactId>
-                <version>${org.springframework.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
                 <artifactId>spring-orm</artifactId>
                 <version>${org.springframework.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-tx</artifactId>
+                <artifactId>spring-test</artifactId>
                 <version>${org.springframework.version}</version>
             </dependency>
 
@@ -131,15 +120,12 @@
                 <artifactId>hibernate-core</artifactId>
                 <version>${hibernate.version}</version>
             </dependency>
+
+            <!-- MySQL -->
             <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-entitymanager</artifactId>
-                <version>${hibernate.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-annotations</artifactId>
-                <version>3.5.6-Final</version>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.34</version>
             </dependency>
 
             <!-- Validation -->
@@ -149,6 +135,13 @@
                 <version>1.1.0.Final</version>
             </dependency>
 
+            <!-- Java Servlet API -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
+            </dependency>
+
             <!-- Joda-Time -->
             <dependency>
                 <groupId>joda-time</groupId>
@@ -156,21 +149,9 @@
                 <version>2.5</version>
             </dependency>
             <dependency>
-                <groupId>joda-time</groupId>
-                <artifactId>joda-time-hibernate</artifactId>
-                <version>1.3</version>
-            </dependency>
-            <dependency>
                 <groupId>org.jadira.usertype</groupId>
                 <artifactId>usertype.core</artifactId>
                 <version>3.2.0.GA</version>
-            </dependency>
-
-            <!-- MySQL -->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.34</version>
             </dependency>
 
             <!-- IO -->
@@ -178,6 +159,13 @@
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>2.4</version>
+            </dependency>
+
+            <!-- Jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.4.3</version>
             </dependency>
 
             <!-- Tests -->
@@ -197,12 +185,12 @@
             <!-- Logging -->
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-api</artifactId>
+                <artifactId>log4j-core</artifactId>
                 <version>${log4j2.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-core</artifactId>
+                <artifactId>log4j-api</artifactId>
                 <version>${log4j2.version}</version>
             </dependency>
             <dependency>

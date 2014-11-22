@@ -35,7 +35,7 @@ public class TaskDaoImpl implements TaskDao {
     @Transactional
     public Task addTask(Task task, Long personId) {
 
-        LOGGER.debug("addTask({})", task);
+        LOGGER.debug("TaskDaoImpl.addTask({})", task);
 
         Assert.notNull(task);
         Assert.notNull(personId, "Person Id should be specified!");
@@ -50,7 +50,7 @@ public class TaskDaoImpl implements TaskDao {
         task.setPerson(personFromDb);
         Task taskFromDb = emf.merge(task);
 
-        LOGGER.debug("addTask() : id = {}", taskFromDb.getTaskId());
+        LOGGER.debug("TaskDaoImpl.addTask() : id = {}", taskFromDb.getTaskId());
         return taskFromDb;
 
     }
@@ -59,13 +59,13 @@ public class TaskDaoImpl implements TaskDao {
     @Transactional
     public List<Task> getTasks() {
 
-        LOGGER.debug("getTasks()");
+        LOGGER.debug("TaskDaoImpl.getTasks()");
 
         List<Task> tasks;
         TypedQuery<Task> query = emf.createNamedQuery("Task.findAll", Task.class);
         tasks = query.getResultList();
 
-        LOGGER.debug("getTasks() : list.size = {}", tasks.size());
+        LOGGER.debug("TaskDaoImpl.getTasks() : list.size = {}", tasks.size());
         return tasks;
 
     }
@@ -74,7 +74,7 @@ public class TaskDaoImpl implements TaskDao {
     @Transactional
     public List<Task> getTasksById(Long personId) {
 
-        LOGGER.debug("getTasksById(personId = {})", personId);
+        LOGGER.debug("TaskDaoImpl.getTasksById(personId = {})", personId);
 
         Assert.notNull(personId, "Person Id should be specified!");
 
@@ -82,7 +82,7 @@ public class TaskDaoImpl implements TaskDao {
         Query query = emf.createQuery("SELECT t FROM Task t WHERE t.person.personId = :personId").setParameter("personId", personId);
         tasks = query.getResultList();
 
-        LOGGER.debug("getTasksById() : list.size = {}", tasks.size());
+        LOGGER.debug("TaskDaoImpl.getTasksById() : list.size = {}", tasks.size());
         return tasks;
 
     }
@@ -91,13 +91,13 @@ public class TaskDaoImpl implements TaskDao {
     @Transactional
     public Task getTaskById(Long taskId) {
 
-        LOGGER.debug("getTaskById(taskId = {})", taskId);
+        LOGGER.debug("TaskDaoImpl.getTaskById(taskId = {})", taskId);
 
         Assert.notNull(taskId, "Task Id should be specified!");
 
         Task taskFromDb = emf.find(Task.class, taskId);
 
-        LOGGER.debug("getTaskById() : task = {}", taskFromDb);
+        LOGGER.debug("TaskDaoImpl.getTaskById() : task = {}", taskFromDb);
         return taskFromDb;
 
     }
@@ -106,7 +106,7 @@ public class TaskDaoImpl implements TaskDao {
     @Transactional
     public void updateTask(Task task) {
 
-        LOGGER.debug("updateTask({})", task);
+        LOGGER.debug("TaskDaoImpl.dateTask({})", task);
 
         Assert.notNull(task);
 
@@ -117,7 +117,7 @@ public class TaskDaoImpl implements TaskDao {
         taskUpdate.setElapsedTime(task.getElapsedTime());
         taskUpdate.setTaskState(task.isTaskState());
 
-        LOGGER.debug("updateTask() : taskUpdated = {}", taskUpdate);
+        LOGGER.debug("TaskDaoImpl.updateTask() : taskUpdated = {}", taskUpdate);
 
     }
 
@@ -125,14 +125,14 @@ public class TaskDaoImpl implements TaskDao {
     @Transactional
     public void removeTask(Long taskId) {
 
-        LOGGER.debug("removeTask(taskId = {})", taskId);
+        LOGGER.debug("TaskDaoImpl.removeTask(taskId = {})", taskId);
 
         Assert.notNull(taskId, "Task Id should be specified!");
 
         Task taskFromDb = emf.find(Task.class, taskId);
         emf.remove(emf.contains(taskFromDb) ? taskFromDb : emf.merge(taskFromDb));
 
-        LOGGER.debug("removeTask() : taskRemoved = {}", taskFromDb);
+        LOGGER.debug("TaskDaoImpl.removeTask() : taskRemoved = {}", taskFromDb);
 
     }
 

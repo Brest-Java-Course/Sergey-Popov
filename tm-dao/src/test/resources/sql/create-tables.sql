@@ -1,6 +1,7 @@
 SET foreign_key_checks = 0;
 DROP TABLE IF EXISTS `person`;
 SET foreign_key_checks = 1;
+
 CREATE TABLE `person` (
 `person_id` int(11) NOT NULL AUTO_INCREMENT,
 `person_fname` varchar(45) NOT NULL,
@@ -9,6 +10,7 @@ PRIMARY KEY (`person_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `task`;
+
 CREATE TABLE `task` (
   `task_id` int(11) NOT NULL AUTO_INCREMENT,
   `task_name` varchar(45) NOT NULL,

@@ -5,6 +5,7 @@ Task Manager is a simple sql-based application. Contains list of modules:
   - Domain module
   - DAO module
   - Service module
+  - Rest module
 
 Prerequisites:
 --------------

@@ -1,7 +1,6 @@
-package com.epam.brest.courses.service.impl.DataFixture;
+package com.epam.brest.courses.rest.DataFixture;
 
 import com.epam.brest.courses.domain.Task;
-import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,7 @@ public class TaskDataFixture {
 
         Task task = new Task();
         task.setTaskName("MockTaskName");
-        task.setStartDate(new DateTime());
+        task.setStartDate(null);
         task.setEndDate(null);
         task.setElapsedTime(null);
         task.setTaskState(true);
@@ -29,7 +28,7 @@ public class TaskDataFixture {
         Task task = new Task();
         task.setTaskId(taskId);
         task.setTaskName("MockTaskName" + taskId);
-        task.setStartDate(new DateTime());
+        task.setStartDate(null);
         task.setEndDate(null);
         task.setElapsedTime(null);
         task.setTaskState(true);
@@ -42,7 +41,7 @@ public class TaskDataFixture {
         Task task = new Task();
         task.setTaskId(taskId);
         task.setTaskName("MockTaskName");
-        task.setStartDate(new DateTime());
+        task.setStartDate(null);
         task.setEndDate(null);
         task.setElapsedTime(null);
         task.setTaskState(true);
@@ -56,7 +55,7 @@ public class TaskDataFixture {
         Task task = new Task();
         task.setTaskId(taskId);
         task.setTaskName("MockTaskName" + taskId);
-        task.setStartDate(new DateTime());
+        task.setStartDate(null);
         task.setEndDate(null);
         task.setElapsedTime(null);
         task.setTaskState(true);
@@ -66,6 +65,7 @@ public class TaskDataFixture {
     }
 
     public static List<Task> getSampleTaskList() {
+
         List<Task> list = new ArrayList<>(3);
         list.add(TaskDataFixture.getNewTask(1L));
         list.add(TaskDataFixture.getNewTask(2L));

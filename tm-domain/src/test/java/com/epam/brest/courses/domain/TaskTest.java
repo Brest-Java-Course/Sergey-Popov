@@ -91,7 +91,6 @@ public class TaskTest {
         assertEquals(TASK_END_DATE, task.getEndDate());
         assertEquals(TASK_ELAPSED_TIME, task.getElapsedTime());
 
-
     }
 
     @Test
