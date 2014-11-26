@@ -11,7 +11,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import java.util.List;
 
@@ -19,6 +24,14 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring-dao-test.xml"})
+@TestExecutionListeners(
+        listeners = {
+                DependencyInjectionTestExecutionListener.class,
+                DirtiesContextTestExecutionListener.class,
+                TransactionalTestExecutionListener.class,
+                SqlScriptsTestExecutionListener.class
+        }
+)
 public class TaskDaoImplTest {
 
     @Autowired
@@ -116,12 +129,12 @@ public class TaskDaoImplTest {
         assertNotNull(testTaskGet.getStartDate());
         assertNull(testTaskGet.getEndDate());
         assertNull(testTaskGet.getElapsedTime());
-        assertTrue(testTaskGet.isTaskState());
+        assertTrue(testTaskGet.getTaskState());
         assertEquals(testTaskAdd.getTaskName(), testTaskGet.getTaskName());
         assertEquals(testTaskAdd.getStartDate(), testTaskGet.getStartDate());
         assertEquals(testTaskAdd.getEndDate(), testTaskGet.getEndDate());
         assertEquals(testTaskAdd.getElapsedTime(), testTaskGet.getElapsedTime());
-        assertEquals(testTaskAdd.isTaskState(), testTaskGet.isTaskState());
+        assertEquals(testTaskAdd.getTaskState(), testTaskGet.getTaskState());
 
     }
 
@@ -167,13 +180,13 @@ public class TaskDaoImplTest {
         assertNotNull(testTaskGet.getStartDate());
         assertNotNull(testTaskGet.getEndDate());
         assertNotNull(testTaskGet.getElapsedTime());
-        assertFalse(testTaskGet.isTaskState());
+        assertFalse(testTaskGet.getTaskState());
         assertEquals(testTaskUpdate.getTaskId(), testTaskGet.getTaskId());
         assertEquals(testTaskUpdate.getTaskName(), testTaskGet.getTaskName());
         assertEquals(testTaskUpdate.getStartDate(), testTaskGet.getStartDate());
         assertEquals(testTaskUpdate.getEndDate(), testTaskGet.getEndDate());
         assertEquals(testTaskUpdate.getElapsedTime(), testTaskGet.getElapsedTime());
-        assertEquals(testTaskUpdate.isTaskState(), testTaskGet.isTaskState());
+        assertEquals(testTaskUpdate.getTaskState(), testTaskGet.getTaskState());
 
     }
 

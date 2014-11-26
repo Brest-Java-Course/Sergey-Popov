@@ -6,6 +6,7 @@ Task Manager is a simple sql-based application. Contains list of modules:
   - DAO module
   - Service module
   - Rest module
+  - Web module
 
 Prerequisites:
 --------------
@@ -25,7 +26,7 @@ git clone https://github.com/Brest-Java-Course/Sergey-Popov.git
 
 Version
 -------
-0.4.0
+0.5.0
 
 License
 -------

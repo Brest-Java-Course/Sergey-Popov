@@ -32,7 +32,7 @@ public class TaskTest {
         task = new Task();
         assertNull(task.getTaskId());
         assertNull(task.getTaskName());
-        assertNull(task.isTaskState());
+        assertNull(task.getTaskState());
         assertNull(task.getStartDate());
         assertNull(task.getEndDate());
         assertNull(task.getElapsedTime());
@@ -40,13 +40,13 @@ public class TaskTest {
         task = new Task(TASK_NAME, TASK_STATE, TASK_START_DATE, TASK_END_DATE, TASK_ELAPSED_TIME);
         assertNull(task.getTaskId());
         assertNotNull(task.getTaskName());
-        assertTrue(task.isTaskState());
+        assertTrue(task.getTaskState());
         assertNotNull(task.getStartDate());
         assertNotNull(task.getEndDate());
         assertNotNull(task.getElapsedTime());
         assertEquals(null, task.getTaskId());
         assertEquals(TASK_NAME, task.getTaskName());
-        assertEquals(TASK_STATE, task.isTaskState());
+        assertEquals(TASK_STATE, task.getTaskState());
         assertEquals(TASK_START_DATE, task.getStartDate());
         assertEquals(TASK_END_DATE, task.getEndDate());
         assertEquals(TASK_ELAPSED_TIME, task.getElapsedTime());
@@ -54,13 +54,13 @@ public class TaskTest {
         task = new Task(TASK_ID, TASK_NAME, TASK_STATE, TASK_START_DATE, TASK_END_DATE, TASK_ELAPSED_TIME);
         assertNotNull(task.getTaskId());
         assertNotNull(task.getTaskName());
-        assertTrue(task.isTaskState());
+        assertTrue(task.getTaskState());
         assertNotNull(task.getStartDate());
         assertNotNull(task.getEndDate());
         assertNotNull(task.getElapsedTime());
         assertEquals(TASK_ID, task.getTaskId());
         assertEquals(TASK_NAME, task.getTaskName());
-        assertEquals(TASK_STATE, task.isTaskState());
+        assertEquals(TASK_STATE, task.getTaskState());
         assertEquals(TASK_START_DATE, task.getStartDate());
         assertEquals(TASK_END_DATE, task.getEndDate());
         assertEquals(TASK_ELAPSED_TIME, task.getElapsedTime());
@@ -80,13 +80,13 @@ public class TaskTest {
 
         assertNotNull(task.getTaskId());
         assertNotNull(task.getTaskName());
-        assertTrue(task.isTaskState());
+        assertTrue(task.getTaskState());
         assertNotNull(task.getStartDate());
         assertNotNull(task.getEndDate());
         assertNotNull(task.getElapsedTime());
         assertEquals(TASK_ID, task.getTaskId());
         assertEquals(TASK_NAME, task.getTaskName());
-        assertEquals(TASK_STATE, task.isTaskState());
+        assertEquals(TASK_STATE, task.getTaskState());
         assertEquals(TASK_START_DATE, task.getStartDate());
         assertEquals(TASK_END_DATE, task.getEndDate());
         assertEquals(TASK_ELAPSED_TIME, task.getElapsedTime());

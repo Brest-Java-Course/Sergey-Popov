@@ -71,7 +71,7 @@ public class PersonRestControllerMockTest {
         )
                 .andDo(print())
                 .andExpect(status().isCreated())
-                .andExpect(content().string("{\"personId\":1,\"personFirstName\":\"MockFirstName\",\"personLastName\":\"MockLastName\",\"taskSet\":null}"));
+                .andExpect(content().string("{\"personId\":1,\"personFirstName\":\"MockFirstName\",\"personLastName\":\"MockLastName\"}"));
 
         verify(personService);
 
@@ -89,7 +89,7 @@ public class PersonRestControllerMockTest {
         )
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string("[{\"personId\":1,\"personFirstName\":\"MockFirstName1\",\"personLastName\":\"MockLastName1\",\"taskSet\":null},{\"personId\":2,\"personFirstName\":\"MockFirstName2\",\"personLastName\":\"MockLastName2\",\"taskSet\":null},{\"personId\":3,\"personFirstName\":\"MockFirstName3\",\"personLastName\":\"MockLastName3\",\"taskSet\":null}]"));
+                .andExpect(content().string("[{\"personId\":1,\"personFirstName\":\"MockFirstName1\",\"personLastName\":\"MockLastName1\"},{\"personId\":2,\"personFirstName\":\"MockFirstName2\",\"personLastName\":\"MockLastName2\"},{\"personId\":3,\"personFirstName\":\"MockFirstName3\",\"personLastName\":\"MockLastName3\"}]"));
 
         verify(personService);
 
@@ -107,7 +107,7 @@ public class PersonRestControllerMockTest {
         )
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string("{\"personId\":1,\"personFirstName\":\"MockFirstName1\",\"personLastName\":\"MockLastName1\",\"taskSet\":null}"));
+                .andExpect(content().string("{\"personId\":1,\"personFirstName\":\"MockFirstName1\",\"personLastName\":\"MockLastName1\"}"));
 
         verify(personService);
 

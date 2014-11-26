@@ -6,7 +6,7 @@
 
     <groupId>com.epam.brest.courses</groupId>
     <artifactId>task-manager</artifactId>
-    <version>0.4.0-SNAPSHOT</version>
+    <version>0.5.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>task-manager</name>
@@ -42,6 +42,7 @@
         <module>tm-dao</module>
         <module>tm-service</module>
         <module>tm-rest</module>
+        <module>tm-web</module>
     </modules>
 
     <scm>
@@ -63,6 +64,7 @@
         <org.springframework.version>4.1.2.RELEASE</org.springframework.version>
         <hibernate.version>4.3.7.Final</hibernate.version>
         <log4j2.version>2.1</log4j2.version>
+        <compiler.version>1.7</compiler.version>
         <!-- Tests -->
         <skip.unit.tests>false</skip.unit.tests>
         <runIntegrationTests>false</runIntegrationTests>
@@ -84,6 +86,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>tm-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>tm-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -113,6 +120,18 @@
                 <artifactId>spring-test</artifactId>
                 <version>${org.springframework.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${org.springframework.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-instrument</artifactId>
+                <version>${org.springframework.version}</version>
+                <scope>test</scope>
+            </dependency>
 
             <!-- Hibernate -->
             <dependency>
@@ -120,12 +139,24 @@
                 <artifactId>hibernate-core</artifactId>
                 <version>${hibernate.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>5.1.2.Final</version>
+            </dependency>
 
             <!-- MySQL -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>5.1.34</version>
+            </dependency>
+
+            <!-- Datasource -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-dbcp2</artifactId>
+                <version>2.0.1</version>
             </dependency>
 
             <!-- Validation -->
@@ -141,6 +172,11 @@
                 <artifactId>javax.servlet-api</artifactId>
                 <version>3.1.0</version>
             </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.2</version>
+            </dependency>
 
             <!-- Joda-Time -->
             <dependency>
@@ -153,6 +189,12 @@
                 <artifactId>usertype.core</artifactId>
                 <version>3.2.0.GA</version>
             </dependency>
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time-jsptags</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+
 
             <!-- IO -->
             <dependency>
@@ -165,6 +207,11 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
+                <version>2.4.3</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
                 <version>2.4.3</version>
             </dependency>
 
@@ -203,6 +250,21 @@
                 <artifactId>log4j-web</artifactId>
                 <version>${log4j2.version}</version>
             </dependency>
+
+            <!-- AspectJ support -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>1.8.2</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <!-- Jetty -->
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-servlets</artifactId>
+                <version>9.2.5.v20141112</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -210,12 +272,19 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>aspectj-maven-plugin</artifactId>
+                    <version>1.7</version>
+                </plugin>
+
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.2</version>
                     <configuration>
-                        <source>1.7</source>
-                        <target>1.7</target>
+                        <source>${compiler.version}</source>
+                        <target>${compiler.version}</target>
+
                     </configuration>
                 </plugin>
 
@@ -270,6 +339,10 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.18</version>
                     <configuration>
+                        <forkMode>once</forkMode>
+                        <argLine>
+                            -javaagent:"${settings.localRepository}/org/springframework/spring-instrument/${org.springframework.version}/spring-instrument-${org.springframework.version}.jar"
+                        </argLine>
                         <excludes>
                             <exclude>**/*IntegrationTest*</exclude>
                         </excludes>
@@ -278,6 +351,36 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <!-- AspectJ support -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>1.7</version>
+                <configuration>
+                    <showWeaveInfo>true</showWeaveInfo>
+                    <source>${compiler.version}</source>
+                    <target>${compiler.version}</target>
+                    <Xlint>ignore</Xlint>
+                    <complianceLevel>${compiler.version}</complianceLevel>
+                    <encoding>UTF-8</encoding>
+                    <verbose>false</verbose>
+                    <aspectLibraries>
+                        <aspectLibrary>
+                            <groupId>org.springframework</groupId>
+                            <artifactId>spring-aspects</artifactId>
+                        </aspectLibrary>
+                    </aspectLibraries>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal> <!-- use this goal to weave all your main classes -->
+                            <goal>test-compile</goal> <!-- use this goal to weave all your test classes -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
@@ -352,6 +455,9 @@
                         <artifactId>jetty-maven-plugin</artifactId>
                         <version>8.1.16.v20140903</version>
                         <configuration>
+                            <jvmArgs>
+                                -javaagent:${settings.localRepository}/org/springframework/spring-instrument/${org.springframework.version}/spring-instrument-${org.springframework.version}.jar
+                            </jvmArgs>
                             <webApp>
                                 <contextPath>/</contextPath>
                             </webApp>

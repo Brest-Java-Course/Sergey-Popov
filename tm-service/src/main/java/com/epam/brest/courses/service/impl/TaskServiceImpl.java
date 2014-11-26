@@ -34,7 +34,7 @@ public class TaskServiceImpl implements TaskService {
         Assert.notNull(task.getStartDate(), "Task start date should be specified!");
         Assert.isNull(task.getEndDate(), "Task end date should not be specified!");
         Assert.isNull(task.getElapsedTime(), "Task elapsed time should not be specified!");
-        Assert.notNull(task.isTaskState(), "Task state should be specified");
+        Assert.notNull(task.getTaskState(), "Task state should be specified");
 
         Task taskFromDb = taskDao.addTask(task, personId);
 

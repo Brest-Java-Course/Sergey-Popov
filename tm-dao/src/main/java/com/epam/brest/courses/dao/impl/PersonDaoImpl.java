@@ -101,6 +101,7 @@ public class PersonDaoImpl implements PersonDao {
 
         LOGGER.debug("PersonDaoImpl.removePerson(personId = {})", personId);
 
+        Assert.notNull(personId, "Person Id should be specified!");
         Person personFromDb = emf.find(Person.class, personId);
         emf.remove(emf.contains(personFromDb) ? personFromDb : emf.merge(personFromDb));
 

@@ -44,7 +44,7 @@ public class Task {
 
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     @ManyToOne(optional = false)
-    private Person person;
+    private Person personId;
 
     public Task() {
 
@@ -87,7 +87,7 @@ public class Task {
         this.taskName = taskName;
     }
 
-    public Boolean isTaskState() {
+    public Boolean getTaskState() {
         return taskState;
     }
 
@@ -120,11 +120,11 @@ public class Task {
     }
 
     public Person getPerson() {
-        return person;
+        return personId;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPerson(Person personId) {
+        this.personId = personId;
     }
 
     @Override
@@ -157,8 +157,7 @@ public class Task {
         result = 31 * result + taskName.hashCode();
         result = 31 * result + taskState.hashCode();
         result = 31 * result + startDate.hashCode();
-        result = 31 * result + endDate.hashCode();
-        result = 31 * result + elapsedTime.hashCode();
+
         return result;
 
     }
@@ -173,8 +172,9 @@ public class Task {
         sb.append(", startDate=").append(startDate);
         sb.append(", endDate=").append(endDate);
         sb.append(", elapsedTime=").append(elapsedTime);
-        sb.append(", personId=").append(person);
+        sb.append(", personId=").append(personId);
         sb.append('}');
+
         return sb.toString();
 
     }

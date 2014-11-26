@@ -44,7 +44,7 @@ public class TaskDaoImpl implements TaskDao {
         Assert.notNull(task.getStartDate(), "Task start date should be specified!");
         Assert.isNull(task.getEndDate(), "Task end date should not be specified!");
         Assert.isNull(task.getElapsedTime(), "Task elapsed time should not be specified!");
-        Assert.notNull(task.isTaskState(), "Task state should be specified");
+        Assert.notNull(task.getTaskState(), "Task state should be specified");
 
         Person personFromDb = emf.find(Person.class, personId);
         task.setPerson(personFromDb);
@@ -79,7 +79,7 @@ public class TaskDaoImpl implements TaskDao {
         Assert.notNull(personId, "Person Id should be specified!");
 
         List<Task> tasks;
-        Query query = emf.createQuery("SELECT t FROM Task t WHERE t.person.personId = :personId").setParameter("personId", personId);
+        Query query = emf.createQuery("SELECT t FROM Task t WHERE t.personId.personId = :personId").setParameter("personId", personId);
         tasks = query.getResultList();
 
         LOGGER.debug("TaskDaoImpl.getTasksById() : list.size = {}", tasks.size());
@@ -115,7 +115,7 @@ public class TaskDaoImpl implements TaskDao {
         taskUpdate.setStartDate(task.getStartDate());
         taskUpdate.setEndDate(task.getEndDate());
         taskUpdate.setElapsedTime(task.getElapsedTime());
-        taskUpdate.setTaskState(task.isTaskState());
+        taskUpdate.setTaskState(task.getTaskState());
 
         LOGGER.debug("TaskDaoImpl.updateTask() : taskUpdated = {}", taskUpdate);
 
