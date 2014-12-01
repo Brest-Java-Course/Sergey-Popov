@@ -6,7 +6,7 @@
 
     <groupId>com.epam.brest.courses</groupId>
     <artifactId>task-manager</artifactId>
-    <version>0.5.0-SNAPSHOT</version>
+    <version>0.7.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>task-manager</name>
@@ -43,6 +43,8 @@
         <module>tm-service</module>
         <module>tm-rest</module>
         <module>tm-web</module>
+        <module>tm-service-rest</module>
+        <module>tm-web-rest</module>
     </modules>
 
     <scm>
@@ -64,6 +66,7 @@
         <org.springframework.version>4.1.2.RELEASE</org.springframework.version>
         <hibernate.version>4.3.7.Final</hibernate.version>
         <log4j2.version>2.1</log4j2.version>
+        <jackson.version>2.4.3</jackson.version>
         <compiler.version>1.7</compiler.version>
         <!-- Tests -->
         <skip.unit.tests>false</skip.unit.tests>
@@ -91,6 +94,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>tm-rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>tm-service-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -207,12 +215,17 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.4.3</version>
+                <version>${jackson.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
-                <version>2.4.3</version>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-joda</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
 
             <!-- Tests -->

@@ -1,7 +1,7 @@
-package com.epam.brest.courses.web;
+package com.epam.brest.courses.webrest;
 
 import com.epam.brest.courses.domain.Person;
-import com.epam.brest.courses.service.PersonService;
+import com.epam.brest.courses.servicerest.PersonServiceRest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +18,17 @@ import java.util.List;
  * Created by beast on 24.11.14. At 12.17
  */
 @Controller
-@RequestMapping("/mvc/person")
+@RequestMapping("/client/person")
 public class PersonController {
 
-    private static final String PERSON_LIST = "redirect:/mvc/person/getPersons";
+    private static final String PERSON_LIST = "redirect:/client/person/getPersons";
 
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Autowired
-    private PersonService personService;
+    private PersonServiceRest personService;
 
-    @RequestMapping(value = "/mvc/person")
+    @RequestMapping(value = "/client/person")
     public String init() {
 
         return PERSON_LIST;

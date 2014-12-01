@@ -1,5 +1,9 @@
 package com.epam.brest.courses.domain;
 
+import com.epam.brest.courses.domain.JsonJodaDate.CustomDateDeSerializer;
+import com.epam.brest.courses.domain.JsonJodaDate.CustomDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -32,10 +36,14 @@ public class Task {
     private Boolean taskState;
 
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    @JsonSerialize(using = CustomDateSerializer.class)
+    @JsonDeserialize(using = CustomDateDeSerializer.class)
     @Column(name = "task_startdate", columnDefinition = "datetime NULL")
     private DateTime startDate;
 
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    @JsonSerialize(using = CustomDateSerializer.class)
+    @JsonDeserialize(using = CustomDateDeSerializer.class)
     @Column(name = "task_enddate", columnDefinition = "datetime NULL")
     private DateTime endDate;
 

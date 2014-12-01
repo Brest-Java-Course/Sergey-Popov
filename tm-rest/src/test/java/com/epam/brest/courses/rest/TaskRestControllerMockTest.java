@@ -72,7 +72,7 @@ public class TaskRestControllerMockTest {
         )
                 .andDo(print())
                 .andExpect(status().isCreated())
-                .andExpect(content().string("{\"taskId\":1,\"taskName\":\"MockTaskName\",\"taskState\":true,\"startDate\":null,\"endDate\":null,\"elapsedTime\":null,\"person\":null}"));
+                .andExpect(content().string("{\"taskId\":1,\"taskName\":\"MockTaskName\",\"taskState\":true,\"startDate\":\"2014-11-22T17:26:00.000+03:00\",\"endDate\":null,\"elapsedTime\":null,\"person\":null}"));
 
         verify(taskService);
 
@@ -90,9 +90,9 @@ public class TaskRestControllerMockTest {
         )
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string("[{\"taskId\":1,\"taskName\":\"MockTaskName1\",\"taskState\":true,\"startDate\":null,\"endDate\":null,\"elapsedTime\":null,\"person\":null}" +
-                        ",{\"taskId\":2,\"taskName\":\"MockTaskName2\",\"taskState\":true,\"startDate\":null,\"endDate\":null,\"elapsedTime\":null,\"person\":null}" +
-                        ",{\"taskId\":3,\"taskName\":\"MockTaskName3\",\"taskState\":true,\"startDate\":null,\"endDate\":null,\"elapsedTime\":null,\"person\":null}]"));
+                .andExpect(content().string("[{\"taskId\":1,\"taskName\":\"MockTaskName1\",\"taskState\":true,\"startDate\":\"2014-11-22T17:26:00.000+03:00\",\"endDate\":null,\"elapsedTime\":null,\"person\":null}," +
+                        "{\"taskId\":2,\"taskName\":\"MockTaskName2\",\"taskState\":true,\"startDate\":\"2014-11-22T17:26:00.000+03:00\",\"endDate\":null,\"elapsedTime\":null,\"person\":null}," +
+                        "{\"taskId\":3,\"taskName\":\"MockTaskName3\",\"taskState\":true,\"startDate\":\"2014-11-22T17:26:00.000+03:00\",\"endDate\":null,\"elapsedTime\":null,\"person\":null}]"));
 
         verify(taskService);
 
@@ -110,9 +110,9 @@ public class TaskRestControllerMockTest {
         )
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string("[{\"taskId\":1,\"taskName\":\"MockTaskName1\",\"taskState\":true,\"startDate\":null,\"endDate\":null,\"elapsedTime\":null,\"person\":null}" +
-                        ",{\"taskId\":2,\"taskName\":\"MockTaskName2\",\"taskState\":true,\"startDate\":null,\"endDate\":null,\"elapsedTime\":null,\"person\":null}" +
-                        ",{\"taskId\":3,\"taskName\":\"MockTaskName3\",\"taskState\":true,\"startDate\":null,\"endDate\":null,\"elapsedTime\":null,\"person\":null}]"));
+                .andExpect(content().string("[{\"taskId\":1,\"taskName\":\"MockTaskName1\",\"taskState\":true,\"startDate\":\"2014-11-22T17:26:00.000+03:00\",\"endDate\":null,\"elapsedTime\":null,\"person\":null}," +
+                        "{\"taskId\":2,\"taskName\":\"MockTaskName2\",\"taskState\":true,\"startDate\":\"2014-11-22T17:26:00.000+03:00\",\"endDate\":null,\"elapsedTime\":null,\"person\":null}," +
+                        "{\"taskId\":3,\"taskName\":\"MockTaskName3\",\"taskState\":true,\"startDate\":\"2014-11-22T17:26:00.000+03:00\",\"endDate\":null,\"elapsedTime\":null,\"person\":null}]"));
 
         verify(taskService);
 
@@ -130,7 +130,7 @@ public class TaskRestControllerMockTest {
         )
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string("{\"taskId\":1,\"taskName\":\"MockTaskName1\",\"taskState\":true,\"startDate\":null,\"endDate\":null,\"elapsedTime\":null,\"person\":null}"));
+                .andExpect(content().string("{\"taskId\":1,\"taskName\":\"MockTaskName1\",\"taskState\":true,\"startDate\":\"2014-11-22T17:26:00.000+03:00\",\"endDate\":null,\"elapsedTime\":null,\"person\":null}"));
 
         verify(taskService);
 

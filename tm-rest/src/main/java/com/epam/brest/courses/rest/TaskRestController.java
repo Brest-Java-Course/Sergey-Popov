@@ -2,6 +2,8 @@ package com.epam.brest.courses.rest;
 
 import com.epam.brest.courses.domain.Task;
 import com.epam.brest.courses.service.TaskService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +22,14 @@ public class TaskRestController {
     @Autowired
     private TaskService taskService;
 
+    private static final Logger LOGGER = LogManager.getLogger();
+
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Task> addTask(@RequestBody Task task, Long id) {
+    public ResponseEntity<Task> addTask(@RequestBody TaskHolder taskHolder) {
 
-        Task taskFromDb = taskService.addTask(task, id);
+        LOGGER.debug("TaskRestController.addTask({})", taskHolder);
+        Task taskFromDb = taskService.addTask(taskHolder.getTask(), taskHolder.getPersonId());
         return new ResponseEntity<>(taskFromDb, HttpStatus.CREATED);
 
     }

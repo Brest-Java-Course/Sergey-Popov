@@ -1,7 +1,7 @@
-package com.epam.brest.courses.web;
+package com.epam.brest.courses.webrest;
 
 import com.epam.brest.courses.domain.Task;
-import com.epam.brest.courses.service.TaskService;
+import com.epam.brest.courses.servicerest.TaskServiceRest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
@@ -23,17 +23,17 @@ import java.util.List;
  * Created by beast on 25.11.14. At 18.56
  */
 @Controller
-@RequestMapping("/mvc/task")
+@RequestMapping("/client/task")
 public class TaskController {
 
-    private static final String TASK_LIST = "redirect:/mvc/task/getTasks";
+    private static final String TASK_LIST = "redirect:/client/task/getTasks";
 
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Autowired
-    private TaskService taskService;
+    private TaskServiceRest taskService;
 
-    @RequestMapping(value = "/mvc/task")
+    @RequestMapping(value = "/client/task")
     public String init() {
 
         return TASK_LIST;
