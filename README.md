@@ -17,6 +17,8 @@ Prerequisites:
   -  [Java jdk-1.7 or higher] (http://www.oracle.com/technetwork/java/javase/downloads/index.html "Download JDK")
   -  [Apache Maven 3.2.3 or higher] (http://maven.apache.org/download.cgi "Download Maven")
   -  [Please refer guide] (http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html "Maven in five minutes") for any help in Maven.
+  -  [Apache Ant 1.9.4 or higher] (http://ant.apache.org/bindownload.cgi "Download Ant")
+  -  [Gradle 2.2.1 or higher] (https://gradle.org/downloads "Download Gradle")
 
 
 Installation
@@ -31,6 +33,13 @@ Ant Usage
 
 ```
 ant build
+```
+
+Gradle Usage
+------------
+
+```
+gradle build
 ```
 
 Version

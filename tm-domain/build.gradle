@@ -1,0 +1,39 @@
+apply plugin: 'java'
+
+description = 'Domain module'
+
+repositories {
+	jcenter()
+}
+
+dependencies {
+	compile(group: 'joda-time', name: 'joda-time', version: '2.7', ext: 'jar')
+	compile(group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.5.0', ext: 'jar')
+	compile(group: 'org.hibernate', name: 'hibernate-core', version: '4.3.8.Final', ext: 'jar') {
+		transitive = true	
+	}
+	compile(group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.0.Final', ext: 'jar')
+	compile(group: 'javax.validation', name: 'validation-api', version: '1.1.0.Final', ext: 'jar')
+	compile(group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.5.0', ext: 'jar')
+	compile(group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.5.0', ext: 'jar')
+	testCompile(group: 'junit', name: 'junit', version: '4.12', ext: 'jar') {
+		transitive = true	
+	}
+}
+
+test {
+	testLogging.showStandardStreams = true
+	testLogging {
+		afterSuite { desc, result ->
+			if (!desc.parent) { // will match the outermost suite
+				println "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+			}
+		}
+	} 
+}
+
+task info {
+    doLast {
+        println 'TM-Domain 0.7.0 module.'
+    }
+}
