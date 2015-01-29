@@ -1,0 +1,66 @@
+<project>
+    <!-- =================================
+        Sourcepath for main Java source.
+     ================================= -->
+    <path id="src.main.path">
+        <fileset dir="${src.main.java.dir}">
+            <include name="**.*java"/>
+        </fileset>
+    </path>
+
+    <!-- =================================
+        Sourcepath for test Java source.
+     ================================= -->
+    <path id="src.test.path">
+        <fileset dir="${src.test.java.dir}">
+            <include name="**.*java"/>
+        </fileset>
+    </path>
+
+    <!-- =================================
+        Path for main Java dependencies.
+     ================================= -->
+    <path id="lib.main.path">
+        <fileset dir="${lib.main.dir}">
+            <include name="**.*jar"/>
+        </fileset>
+    </path>
+
+    <!-- =================================
+        Path for test Java dependencies.
+     ================================= -->
+    <path id="lib.test.path">
+        <fileset dir="${lib.test.dir}">
+            <include name="**.*jar"/>
+        </fileset>
+    </path>
+
+    <!-- =================================
+            Main compile path.
+     ================================= -->
+    <path id="main.compile.path">
+        <path refid="src.main.path"/>
+        <path refid="lib.main.path"/>
+    </path>
+
+    <!-- =================================
+            Test compile path.
+     ================================= -->
+    <path id="test.compile.path">
+        <path refid="src.test.path"/>
+        <path refid="src.main.path"/>
+        <path refid="lib.test.path"/>
+        <path refid="lib.main.path"/>
+    </path>
+
+    <!-- =================================
+        Junit classpath
+     ================================= -->
+    <path id="junit.class.path">
+        <pathelement location="${lib.test.dir}/junit-4.12.jar"/>
+        <pathelement location="${lib.test.dir}/hamcrest-core-1.3.jar"/>
+        <pathelement location="${lib.main.dir}/joda-time-2.7.jar"/>
+        <pathelement location="${classes.dir}"/>
+        <pathelement location="${testclasses.dir}"/>
+    </path>
+</project>

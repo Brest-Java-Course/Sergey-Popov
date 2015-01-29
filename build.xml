@@ -1,0 +1,75 @@
+<project name="Task Manager is a simple sql-based application" default="info">
+    <!-- =================================
+              Property file
+    ================================= -->
+    <property file="build.properties"/>
+
+    <!-- =================================
+                target: info
+     ================================= -->
+    <target name="info" description="--> project description">
+        <echo>List of the modules:</echo>
+        <ant dir="tm-domain" target="info"/>
+        <ant dir="tm-dao" target="info"/>
+        <ant dir="tm-service" target="info"/>
+        <ant dir="tm-rest" target="info"/>
+        <ant dir="tm-web" target="info"/>
+        <!--<ant dir="tm-service-rest" target="info"/>
+        <ant dir="tm-web-rest" target="info"/>-->
+    </target>
+
+    <!-- =================================
+                target: clean
+     ================================= -->
+    <target name="clean" description="--> clean the project build files">
+        <ant dir="tm-domain" target="clean"/>
+        <ant dir="tm-dao" target="clean"/>
+        <ant dir="tm-service" target="clean"/>
+        <ant dir="tm-rest" target="clean"/>
+        <ant dir="tm-web" target="clean"/>
+    </target>
+
+    <!-- =================================
+            target: compile
+     ================================= -->
+    <target name="compile" description="--> compile main Java sources">
+        <ant dir="tm-domain" target="compile"/>
+        <ant dir="tm-dao" target="compile"/>
+        <ant dir="tm-service" target="compile"/>
+        <ant dir="tm-rest" target="compile"/>
+        <ant dir="tm-web" target="compile"/>
+    </target>
+
+    <!-- =================================
+            target: testCompile
+     ================================= -->
+    <target name="testCompile" depends="compile" description="--> compile test Java sources">
+        <ant dir="tm-domain" target="testCompile"/>
+        <ant dir="tm-dao" target="testCompile"/>
+        <ant dir="tm-service" target="testCompile"/>
+        <ant dir="tm-rest" target="testCompile"/>
+        <!--<ant dir="tm-web" target="testCompile"/>-->
+    </target>
+
+    <!-- =================================
+            target: test
+     ================================= -->
+    <target name="test" depends="testCompile" description="--> running the tests">
+        <ant dir="tm-domain" target="test"/>
+        <!--<ant dir="tm-dao" target="test"/>-->
+        <!--<ant dir="tm-service" target="test"/>-->
+        <ant dir="tm-rest" target="test"/>
+        <ant dir="tm-web" target="test"/>
+    </target>
+
+    <!-- =================================
+            target: build
+     ================================= -->
+    <target name="build" depends="test" description="--> make jar(war) for this project">
+        <ant dir="tm-domain" target="build"/>
+        <ant dir="tm-dao" target="build"/>
+        <ant dir="tm-service" target="build"/>
+        <ant dir="tm-rest" target="build"/>
+        <ant dir="tm-web" target="war"/>
+    </target>
+</project>

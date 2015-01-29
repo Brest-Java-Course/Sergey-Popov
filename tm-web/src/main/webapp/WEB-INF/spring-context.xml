@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- Serving of Resources -->
+    <mvc:resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>
+
+    <!-- Registers a DefaultAnnotationHandlerMapping
+    and AnnotationMethodHandlerAdapter. It also sets up type converters
+    and a Bean Validation (JSR-303) validator (if JSR-303 library is present
+    on the classpath). -->
+    <mvc:annotation-driven/>
+
+    <!--Activates various annotations to be detected in bean classes: Spring's
+    @Required and @Autowired, as well as JSR 250's @PostConstruct,
+    @PreDestroy and @Resource (if available) and JPA's @PersistenceContext
+    and @PersistenceUnit (if available).-->
+    <context:annotation-config />
+
+    <!-- Activates auto components scan annotation types @Repository,@Service or @Controller as well as
+    @Component (not a good practice)-->
+    <context:component-scan base-package="com.epam.brest.courses"/>
+
+    <!-- Activates a load-time weaver for the context. Any bean within the
+    context that implements LoadTimeWeaverAware (such as
+    LocalContainerEntityManagerFactoryBean) will receive a reference to
+    the autodetected load-time weaver. -->
+    <!--<context:load-time-weaver weaver-class="org.springframework.instrument.classloading.SimpleLoadTimeWeaver" aspectj-weaving="on" />
+    -->
+    <!-- Use @Transaction annotations for managing transactions -->
+    <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/>
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+    <!-- Add Transaction support -->
+    <bean id="transactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emf"/>
+    </bean>
+
+    <!-- Configurer that replaces ${...} placeholders with values from a properties file -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:database.properties</value>
+                <value>classpath:/sql-properties/person-sql-scripts.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- DriverManagerDataSource is a local DataSource that works in any environment. -->
+    <!-- Note that DriverManagerDataSource does not pool connections and is therefore not intended for production. -->
+    <bean id="dataSource"
+          class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!-- Add JPA support -->
+    <bean id="emf"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="com.epam.brest.courses.domain"/>
+        <property name="persistenceUnitName" value="tmPersistenceUnit" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <!--<property name="showSql" value="true"/>-->
+                <property name="generateDdl" value="false"/>
+                <property name="database" value="MYSQL"/>
+            </bean>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.use_sql_comments">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="javax.persistence.validation.mode">none</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--Post-processor to perform exception translation on @Repository classes (from native
+    exceptions such as JPA PersistenceExceptions to Spring's DataAccessException hierarchy).-->
+    <!--<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>-->
+
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:messages" />
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
+
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="exceptionResolver"
+          class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="com.epam.brest.courses.rest.exception.NotFoundException">error/404</prop>
+                <prop key="java.lang.Exception">error/error</prop>
+                <prop key="java.lang.RuntimeException">error/error</prop>
+            </props>
+        </property>
+        <property name="statusCodes">
+            <props>
+                <prop key="error/404">404</prop>
+                <prop key="error/error">500</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>

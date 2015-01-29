@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console"
+                 target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%-5p] [%30c{3}] [%-4.4t] - %m%n"/>
+        </Console>
+        <RollingRandomAccessFile name="File"
+                                 fileName="/tmp/TaskManager/tm-service/tm-service.log"
+                                 filePattern="/tmp/TaskManager/tm-service/$${date:yyyy-MM}/tm-service-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="%d [%-5p] [%30c{3}] [%-4.4t] - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.epam.brest.courses"
+                level="trace"
+                additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

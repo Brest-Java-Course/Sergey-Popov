@@ -26,6 +26,13 @@ Installation
 git clone https://github.com/Brest-Java-Course/Sergey-Popov.git
 ```
 
+Ant Usage
+------------
+
+```
+ant build
+```
+
 Version
 -------
 0.7.0

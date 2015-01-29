@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="tm-service" default="info">
+
+	 <!-- ================================= 
+          	Property file              
+         ================================= -->
+	<property file="build.properies"/>
+
+	 <!-- ================================= 
+          	import: common build file             
+         ================================= -->
+	<import file="${common.dir}/common.xml"/>
+
+    	<!-- =================================
+	    Path for main Java dependencies.
+	 ================================= -->
+    	<path id="lib.main.path">
+        	<fileset dir="${lib.main.dir}">
+            		<include name="**.*jar"/>
+        	</fileset>
+		<pathelement location="${domainlib.dir}/tm-domain.jar"/>
+		<pathelement location="${daolib.dir}/tm-dao.jar"/>
+    	</path>
+
+	<!-- =================================
+		Junit classpath 
+	 ================================= -->
+	<path id="junit.class.path">
+		<pathelement location="${lib.test.dir}/junit-4.11.jar"/>
+		<pathelement location="${lib.test.dir}/hamcrest-core-1.3.jar"/>
+		<pathelement location="${lib.main.dir}/joda-time-2.5.jar"/>
+		<pathelement location="${lib.test.dir}/spring-test-4.1.2.RELEASE.jar"/>
+		<pathelement location="${classes.dir}"/>
+		<pathelement location="${testclasses.dir}"/>			
+	</path>
+
+	 <!-- ================================= 
+          	target: info              
+         ================================= -->
+	<target name="info" description="--> project description">
+		<echo>TM-Service-REST ${version} module.</echo>
+	</target>
+
+</project>

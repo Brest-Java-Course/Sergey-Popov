@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="tm-rest" default="info">
+
+	 <!-- ================================= 
+          	Property file              
+         ================================= -->
+	<property file="build.properties"/>
+
+	 <!-- ================================= 
+          	import: common build file             
+         ================================= -->
+	<import file="${common.dir}/common.xml"/>
+
+    	<!-- =================================
+	    Path for main Java dependencies.
+	 ================================= -->
+    	<path id="lib.main.path">
+        	<fileset dir="${lib.main.dir}">
+            		<include name="**.*jar"/>
+        	</fileset>
+		<pathelement location="${domainlib.dir}/tm-domain.jar"/>
+		<pathelement location="${daolib.dir}/tm-dao.jar"/>
+		<pathelement location="${servicelib.dir}/tm-service.jar"/>
+    	</path>
+
+	<!-- =================================
+		Junit classpath 
+	 ================================= -->
+	<path id="junit.class.path">
+		<pathelement location="${lib.test.dir}/junit-4.11.jar"/>
+		<pathelement location="${lib.test.dir}/hamcrest-core-1.3.jar"/>
+		<pathelement location="${lib.main.dir}/joda-time-2.5.jar"/>
+		<pathelement location="${lib.main.dir}/commons-logging-1.2.jar"/>
+		<pathelement location="${lib.main.dir}/spring-core-4.1.2.RELEASE.jar"/>
+		<pathelement location="${lib.main.dir}/spring-beans-4.1.2.RELEASE.jar"/>
+		<pathelement location="${lib.main.dir}/spring-context-4.1.2.RELEASE.jar"/>
+		<pathelement location="${lib.main.dir}/spring-aop-4.1.2.RELEASE.jar"/>
+		<pathelement location="${lib.main.dir}/spring-expression-4.1.2.RELEASE.jar"/>
+		<pathelement location="${lib.test.dir}/spring-test-4.1.2.RELEASE.jar"/>
+		<pathelement location="${lib.test.dir}/easymock-3.3.1.jar"/>
+		<pathelement location="${domainlib.dir}/tm-domain.jar"/>		
+		<pathelement location="${daolib.dir}/tm-dao.jar"/>
+		<pathelement location="${servicelib.dir}/tm-service.jar"/>
+		<pathelement location="${classes.dir}"/>
+		<pathelement location="${testclasses.dir}"/>			
+	</path>
+
+	 <!-- ================================= 
+          	target: info              
+         ================================= -->
+	<target name="info" description="--> project description">
+		<echo>TM-WEB-REST ${version} module.</echo>
+	</target>
+
+    	<!-- ================================= 
+          	target: war              
+         ================================= -->
+    	<target name="war" depends="compile-main" description="--> make a war file for this project">
+        	<war destfile="${war.file}" webxml="${webapp.webinf.dir}/web.xml">
+			<fileset dir="${webapp.dir}"> 
+				<exclude name="web.xml"/>			
+			</fileset>
+			<lib dir="${lib.dir}"/>							
+			<classes dir="${classes.dir}"/>			
+        	</war>
+    	</target>
+
+</project>
