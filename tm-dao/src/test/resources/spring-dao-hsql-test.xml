@@ -46,7 +46,7 @@
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:database.properties</value>
+                <value>classpath:database-hsql.properties</value>
                 <value>classpath:/sql-properties/person-sql-scripts.properties</value>
             </list>
         </property>
@@ -63,10 +63,10 @@
         <property name="password" value="${jdbc.password}"/>
     </bean>
 
-    <jdbc:initialize-database data-source="dataSource">
-        <jdbc:script location="/sql/create-tables.sql"/>
-        <jdbc:script location="/sql/data-script.sql"/>
-    </jdbc:initialize-database>
+    <!--<jdbc:initialize-database data-source="dataSource">-->
+        <!--<jdbc:script location="/sql/create-tables-hsql.sql"/>-->
+        <!--<jdbc:script location="/sql/data-script-hsql.sql"/>-->
+    <!--</jdbc:initialize-database>-->
 
     <!-- Add JPA support -->
     <bean id="emf"
@@ -77,8 +77,8 @@
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="showSql" value="true"/>
-                <property name="generateDdl" value="false"/>
-                <property name="database" value="MYSQL"/>
+                <property name="generateDdl" value="true"/>
+                <property name="database" value="HSQL"/>
                 <property name="databasePlatform" value=""/>
             </bean>
         </property>

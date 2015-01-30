@@ -20,6 +20,7 @@ dependencies {
 	compile(group: 'org.springframework', name: 'spring-tx', version: '4.1.4.RELEASE')
 	compile(group: 'org.springframework', name: 'spring-jdbc', version: '4.1.4.RELEASE')
 	compile(group: 'org.springframework', name: 'spring-orm', version: '4.1.4.RELEASE')
+    testCompile(group: 'org.hsqldb', name: 'hsqldb', version: '2.3.2', ext: 'jar')
 	testCompile(group: 'org.springframework', name: 'spring-test', version: '4.1.4.RELEASE')
 	testCompile(group: 'junit', name: 'junit', version: '4.12', ext: 'jar') {
 		transitive = true	
