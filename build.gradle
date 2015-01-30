@@ -4,5 +4,10 @@ description = 'Task Manager is a simple sql-based application'
 version = '0.7.0'
 
 subprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
 
+    version = '0.7.0'
 }
