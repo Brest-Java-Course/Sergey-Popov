@@ -1,6 +1,7 @@
 apply plugin: 'java'
 
 description = 'Domain module'
+version = '0.7.0'
 
 repositories {
 	jcenter()
@@ -34,6 +35,6 @@ test {
 
 task info {
     doLast {
-        println 'TM-Domain 0.7.0 module.'
+        println "TM-Domain ${version} module."
     }
 }

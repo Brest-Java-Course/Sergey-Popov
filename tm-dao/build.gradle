@@ -1,6 +1,7 @@
 apply plugin: 'java'
 
 description = 'DAO module'
+version = '0.7.0'
 
 repositories {
 	jcenter()
@@ -44,6 +45,6 @@ test {
 
 task info {
     doLast {
-        println 'TM-DAO 0.7.0 module.'
+        println "TM-DAO ${version} module."
     }
 }

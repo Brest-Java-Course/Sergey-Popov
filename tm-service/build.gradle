@@ -1,6 +1,7 @@
 apply plugin: 'java'
 
 description = 'Service module'
+version = '0.7.0'
 
 repositories {
 	jcenter()
@@ -29,6 +30,6 @@ test {
 
 task info {
     doLast {
-        println 'TM-Service 0.7.0 module.'
+        println "TM-Service ${version} module."
     }
 }
