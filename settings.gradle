@@ -1,0 +1,1 @@
+include 'tm-domain', 'tm-dao', 'tm-service', 'tm-web', 'tm-rest'
