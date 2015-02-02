@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/spring-service-mysql-test.xml"})
+@ContextConfiguration(locations = {"classpath:/spring-service-hsql-test.xml"})
 @TestExecutionListeners(
         listeners = {
                 DependencyInjectionTestExecutionListener.class,

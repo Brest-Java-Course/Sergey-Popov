@@ -82,7 +82,7 @@ public class PersonDaoImplTest {
         List<Report> persons = personDao.getPersonsWithTasksBetweenDate(new DateTime(2013,1,1,1,1,1,0), new DateTime(2015,1,1,1,1,1,0));
 
         assertNotNull(persons);
-        //assertFalse(persons.isEmpty());
+        assertFalse(persons.isEmpty());
 
     }
 

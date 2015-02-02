@@ -83,7 +83,7 @@ public class TaskDaoImplTest {
         List<Task> tasks = taskDao.getTasks();
 
         assertNotNull(tasks);
-        //assertFalse(tasks.isEmpty());
+        assertFalse(tasks.isEmpty());
 
     }
 
@@ -97,7 +97,7 @@ public class TaskDaoImplTest {
         List<Task> tasks = taskDao.getTasksById(1l);
 
         assertNotNull(tasks);
-    //    assertFalse(tasks.isEmpty());
+        assertFalse(tasks.isEmpty());
 
     }
 
