@@ -4,8 +4,8 @@ import com.epam.brest.courses.dao.PersonDao;
 import com.epam.brest.courses.domain.Person;
 import com.epam.brest.courses.domain.Report;
 import com.epam.brest.courses.service.PersonService;
-import com.epam.brest.courses.service.impl.DataFixture.PersonDataFixture;
-import com.epam.brest.courses.service.impl.DataFixture.ReportDataFixture;
+import com.epam.brest.courses.service.impl.datafixture.PersonDataFixture;
+import com.epam.brest.courses.service.impl.datafixture.ReportDataFixture;
 import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Test;
@@ -24,6 +24,9 @@ import java.util.List;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
+/**
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring-service-mock-test.xml"})
 @TestExecutionListeners(
@@ -36,12 +39,22 @@ import static org.junit.Assert.*;
 )
 public class PersonServiceImplMockTest {
 
+    /**
+     *
+     */
     @Autowired
     private PersonService personService;
 
+    /**
+     *
+     */
     @Autowired
     private PersonDao personDaoMock;
 
+    /**
+     *
+     * @throws Exception
+     */
     @After
     public void tearDown() throws Exception {
 
@@ -86,13 +99,17 @@ public class PersonServiceImplMockTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testGetPersonsWithTasksBetweenDate() throws Exception {
 
         expect(personDaoMock.getPersonsWithTasksBetweenDate(anyObject(DateTime.class), anyObject(DateTime.class))).andReturn(ReportDataFixture.getSampleReportList());
         replay(personDaoMock);
 
-        List<Report> persons = personService.getPersonsWithTasksBetweenDate(new DateTime(2013,1,1,1,1,1,1), new DateTime(2015,1,1,1,1,1,1));
+        List<Report> persons = personService.getPersonsWithTasksBetweenDate(new DateTime(2013, 1, 1, 1, 1, 1, 1), new DateTime(2015, 1, 1, 1, 1, 1, 1));
 
         assertNotNull(persons);
         assertFalse(persons.isEmpty());

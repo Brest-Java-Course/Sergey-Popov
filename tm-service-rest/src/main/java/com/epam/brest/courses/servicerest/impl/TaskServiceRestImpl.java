@@ -31,18 +31,24 @@ public class TaskServiceRestImpl implements TaskServiceRest {
     /**
      *
      */
-    private static final String REST_GET_TASKS_BY_ID_URL = "/person/{id}";
+    private static final String REST_GET_TASKS_BY_ID = "/person/{id}";
 
     /**
      *
      */
-    private static final String REST_GET_TASK_BY_ID_URL = "/{id}";
+    private static final String REST_GET_TASK_BY_ID = "/{id}";
 
     /**
      *
      */
-    private static final String REST_REMOVE_TASK_BY_ID_URL = "/{id}";
+    private static final String REST_REMOVE_TASK_BY_ID = "/{id}";
 
+    /**
+     *
+     * @param task task to be inserted to the database
+     * @param personId id of the person
+     * @return taskFromDb
+     */
     @Override
     public final Task addTask(final Task task, final Long personId) {
 
@@ -77,6 +83,10 @@ public class TaskServiceRestImpl implements TaskServiceRest {
 
     }
 
+    /**
+     *
+     * @return tasks
+     */
     @Override
     public final List<Task> getTasks() {
 
@@ -91,6 +101,11 @@ public class TaskServiceRestImpl implements TaskServiceRest {
 
     }
 
+    /**
+     *
+     * @param personId id of the person
+     * @return tasks
+     */
     @Override
     public final List<Task> getTasksById(final Long personId) {
 
@@ -101,7 +116,7 @@ public class TaskServiceRestImpl implements TaskServiceRest {
 
         RestTemplate restTemplate = new RestTemplate();
         Task[] taskList = restTemplate.getForObject(
-                REST_URL + REST_GET_TASKS_BY_ID_URL,
+                REST_URL + REST_GET_TASKS_BY_ID,
                 Task[].class,
                 personId);
         List<Task> tasks = Arrays.asList(taskList);
@@ -112,6 +127,11 @@ public class TaskServiceRestImpl implements TaskServiceRest {
 
     }
 
+    /**
+     *
+     * @param taskId id of the task to return
+     * @return taskFromDb
+     */
     @Override
     public final Task getTaskById(final Long taskId) {
 
@@ -120,7 +140,7 @@ public class TaskServiceRestImpl implements TaskServiceRest {
         Assert.notNull(taskId, "Task Id should be specified!");
         RestTemplate restTemplate = new RestTemplate();
         Task taskFromDb = restTemplate.getForObject(
-                REST_URL + REST_GET_TASK_BY_ID_URL,
+                REST_URL + REST_GET_TASK_BY_ID,
                 Task.class,
                 taskId);
 
@@ -130,6 +150,10 @@ public class TaskServiceRestImpl implements TaskServiceRest {
 
     }
 
+    /**
+     *
+     * @param task task to be stored in the database
+     */
     @Override
     public final void updateTask(final Task task) {
 
@@ -144,6 +168,10 @@ public class TaskServiceRestImpl implements TaskServiceRest {
 
     }
 
+    /**
+     *
+     * @param taskId id of the task to be removed
+     */
     @Override
     public final void removeTask(final Long taskId) {
 
@@ -151,7 +179,7 @@ public class TaskServiceRestImpl implements TaskServiceRest {
 
         Assert.notNull(taskId, "Task Id should be specified!");
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete(REST_URL + REST_REMOVE_TASK_BY_ID_URL, taskId);
+        restTemplate.delete(REST_URL + REST_REMOVE_TASK_BY_ID, taskId);
 
         LOGGER.debug("TaskServiceRestImpl.removeTask() : id taskRemoved = {}",
                 taskId);

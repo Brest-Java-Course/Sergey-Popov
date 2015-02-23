@@ -34,12 +34,13 @@ public class PersonDaoImpl implements PersonDao {
      *
      */
     @PersistenceContext
-    private EntityManager emf;
+    transient private EntityManager emf;
 
     /**
      *
      */
     private static final Logger LOGGER = LogManager.getLogger();
+
 
     /**
      *
@@ -47,6 +48,11 @@ public class PersonDaoImpl implements PersonDao {
     @Autowired
     private DataSource dataSource;
 
+    /**
+     *
+     * @param person person to be inserted to the database
+     * @return personFromDb
+     */
     @Override
     @Transactional
     public final Person addPerson(final Person person) {
@@ -69,6 +75,10 @@ public class PersonDaoImpl implements PersonDao {
 
     }
 
+    /**
+     *
+     * @return persons
+     */
     @Override
     @Transactional
     public final List<Person> getPersons() {
@@ -86,13 +96,22 @@ public class PersonDaoImpl implements PersonDao {
 
     }
 
+    /**
+     *
+     * @param startDate start date
+     * @param endDate end date
+     * @return reportList
+     */
     @Override
     public final List<Report> getPersonsWithTasksBetweenDate(
             final DateTime startDate,
             final DateTime endDate) {
 
         LOGGER.debug("PersonDaoImpl.getPersonsWithTasksBetweenDate()");
-        LOGGER.debug("startDate : " + startDate + ", endDate : " + endDate);
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("startDate : " + startDate + ", endDate : " + endDate);
+        }
 
         List<Object[]> persons;
         Query query = emf.createQuery(
@@ -109,10 +128,12 @@ public class PersonDaoImpl implements PersonDao {
         query.setParameter("endDate", endDate);
         persons = query.getResultList();
 
-        LOGGER.debug(
-                "PersonDaoImpl.getPersonsWithTasksBetweenDate() : "
-                        + "personsList.size = {}",
-                persons.size());
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(
+                    "PersonDaoImpl.getPersonsWithTasksBetweenDate() : "
+                            + "personsList.size = {}",
+                    persons.size());
+        }
 
         List<Report> reportList = new ArrayList<>();
         Report report;
@@ -126,15 +147,22 @@ public class PersonDaoImpl implements PersonDao {
             reportList.add(report);
         }
 
-        LOGGER.debug(
-                "PersonDaoImpl.getPersonsWithTasksBetweenDate() : "
-                        + "reportList.size = {}",
-                reportList.size());
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(
+                    "PersonDaoImpl.getPersonsWithTasksBetweenDate() : "
+                            + "reportList.size = {}",
+                    reportList.size());
+        }
 
         return reportList;
 
     }
 
+    /**
+     *
+     * @param personId id of the person
+     * @return personFromDb
+     */
     @Override
     @Transactional
     public final Person getPersonById(final Long personId) {
@@ -150,6 +178,10 @@ public class PersonDaoImpl implements PersonDao {
 
     }
 
+    /**
+     *
+     * @param person person to be stored in the database
+     */
     @Override
     @Transactional
     public final void updatePerson(final Person person) {
@@ -167,6 +199,10 @@ public class PersonDaoImpl implements PersonDao {
 
     }
 
+    /**
+     *
+     * @param personId id of the person to be removed
+     */
     @Override
     @Transactional
     public final void removePerson(final Long personId) {

@@ -21,8 +21,10 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
+/**
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring-service-hsql-test.xml"})
 @TestExecutionListeners(
@@ -35,9 +37,15 @@ import static org.junit.Assert.assertEquals;
 )
 public class TaskServiceImplMySQLTest {
 
+    /**
+     *
+     */
     @Autowired
     private PersonService personService;
 
+    /**
+     *
+     */
     @Autowired
     private TaskService taskService;
 
@@ -160,10 +168,10 @@ public class TaskServiceImplMySQLTest {
         testTaskAdd.setTaskState(true);
 
         Task taskFromDb = taskService.addTask(testTaskAdd, personId);
-        Long id = taskFromDb.getTaskId();
+        Long taskId = taskFromDb.getTaskId();
 
         Task testTaskUpdate = new Task();
-        testTaskUpdate.setTaskId(id);
+        testTaskUpdate.setTaskId(taskId);
         testTaskUpdate.setTaskName("testTaskNameUTUpdated");
         testTaskUpdate.setStartDate(taskFromDb.getStartDate());
         DateTime currentDateTime = new DateTime();
@@ -173,7 +181,7 @@ public class TaskServiceImplMySQLTest {
 
         taskService.updateTask(testTaskUpdate);
 
-        Task testTaskGet = taskService.getTaskById(id);
+        Task testTaskGet = taskService.getTaskById(taskId);
 
         assertNotNull(testTaskGet);
         assertNotNull(testTaskGet.getTaskId());

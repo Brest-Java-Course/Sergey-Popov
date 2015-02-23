@@ -1,4 +1,4 @@
-package com.epam.brest.courses.service.impl.DataFixture;
+package com.epam.brest.courses.rest.datafixture;
 
 import com.epam.brest.courses.domain.Task;
 import org.joda.time.DateTime;
@@ -11,11 +11,25 @@ import java.util.List;
  */
 public class TaskDataFixture {
 
+    /**
+     *
+     */
+    private static final DateTime DATE_TIME = new DateTime(2014, 11, 22, 17, 26, 0);
+
+    /**
+     *
+     */
+    private static final String MOCK_TASK_NAME = "MockTaskName";
+
+    /**
+     *
+     * @return task
+     */
     public static Task getNewTask() {
 
         Task task = new Task();
-        task.setTaskName("MockTaskName");
-        task.setStartDate(new DateTime());
+        task.setTaskName(MOCK_TASK_NAME);
+        task.setStartDate(DATE_TIME);
         task.setEndDate(null);
         task.setElapsedTime(null);
         task.setTaskState(true);
@@ -24,12 +38,17 @@ public class TaskDataFixture {
 
     }
 
-    public static Task getNewTask(Long taskId) {
+    /**
+     *
+     * @param taskId taskId
+     * @return task
+     */
+    public static Task getNewTask(final Long taskId) {
 
         Task task = new Task();
         task.setTaskId(taskId);
-        task.setTaskName("MockTaskName" + taskId);
-        task.setStartDate(new DateTime());
+        task.setTaskName(MOCK_TASK_NAME + taskId);
+        task.setStartDate(DATE_TIME);
         task.setEndDate(null);
         task.setElapsedTime(null);
         task.setTaskState(true);
@@ -37,12 +56,17 @@ public class TaskDataFixture {
         return task;
     }
 
-    public static Task getExistTaskSame(Long taskId) {
+    /**
+     *
+     * @param taskId taskId
+     * @return task
+     */
+    public static Task getExistTaskSame(final Long taskId) {
 
         Task task = new Task();
         task.setTaskId(taskId);
-        task.setTaskName("MockTaskName");
-        task.setStartDate(new DateTime());
+        task.setTaskName(MOCK_TASK_NAME);
+        task.setStartDate(DATE_TIME);
         task.setEndDate(null);
         task.setElapsedTime(null);
         task.setTaskState(true);
@@ -51,12 +75,17 @@ public class TaskDataFixture {
 
     }
 
-    public static Task getExistTask(Long taskId) {
+    /**
+     *
+     * @param taskId taskId
+     * @return task
+     */
+    public static Task getExistTask(final Long taskId) {
 
         Task task = new Task();
         task.setTaskId(taskId);
-        task.setTaskName("MockTaskName" + taskId);
-        task.setStartDate(new DateTime());
+        task.setTaskName(MOCK_TASK_NAME + taskId);
+        task.setStartDate(DATE_TIME);
         task.setEndDate(null);
         task.setElapsedTime(null);
         task.setTaskState(true);
@@ -65,6 +94,10 @@ public class TaskDataFixture {
 
     }
 
+    /**
+     *
+     * @return list
+     */
     public static List<Task> getSampleTaskList() {
         List<Task> list = new ArrayList<>(3);
         list.add(TaskDataFixture.getNewTask(1L));

@@ -1,4 +1,4 @@
-package com.epam.brest.courses.domain.JsonJodaDate;
+package com.epam.brest.courses.domain.jsonjodadate;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -19,9 +19,16 @@ public class CustomDateDeSerializer extends JsonDeserializer<DateTime> {
      */
     private static DateTimeFormatter formatter = ISODateTimeFormat.dateTime();
 
+    /**
+     *
+     * @param jsonParser jsonParser
+     * @param deserialContext deserializationContext
+     * @return formatter.parseDateTime
+     * @throws IOException
+     */
     @Override
     public final DateTime deserialize(final JsonParser jsonParser,
-                          final DeserializationContext deserializationContext)
+                          final DeserializationContext deserialContext)
             throws IOException {
 
         String dateTimeAsString = jsonParser.getText().trim();

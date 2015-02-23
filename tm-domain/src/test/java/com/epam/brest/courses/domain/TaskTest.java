@@ -7,25 +7,85 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ *
+ */
 public class TaskTest {
 
+    /**
+     *
+     */
     private static final Long TASK_ID = 1l;
+
+    /**
+     *
+     */
     private static final String TASK_NAME = "doTest";
+
+    /**
+     *
+     */
     private static final Boolean TASK_STATE = true;
+
+    /**
+     *
+     */
     private static final DateTime TASK_START_DATE = new DateTime(2014, 11, 15, 0, 0, 0);
+
+    /**
+     *
+     */
     private static final DateTime TASK_END_DATE = new DateTime(2014, 11, 18, 0, 0, 0);
+
+    /**
+     *
+     */
     private static final Integer TASK_ELAPSED_TIME = new Period(TASK_START_DATE, TASK_END_DATE, PeriodType.minutes()).getMinutes();
 
+    /**
+     *
+     */
     private static final Long TASK_ID2 = 2l;
-    private static final String TASK_NAME2 = "doTest2";
-    private static final Boolean TASK_STATE2 = false;
-    private static final DateTime TASK_START_DATE2 = new DateTime(2014, 11, 10, 0, 0, 0);
-    private static final DateTime TASK_END_DATE2 = new DateTime(2014, 11, 18, 0, 0, 0);
-    private static final Integer TASK_ELAPSED_TIME2 = new Period(TASK_START_DATE, TASK_END_DATE, PeriodType.minutes()).getMinutes();
 
+    /**
+     *
+     */
+    private static final String TASK_NAME2 = "doTest2";
+
+    /**
+     *
+     */
+    private static final Boolean TASK_STATE2 = false;
+
+    /**
+     *
+     */
+    private static final DateTime TASK_START_DATE2 = new DateTime(2014, 11, 10, 0, 0, 0);
+
+    /**
+     *
+     */
+    private static final DateTime TASK_END_DATE2 = new DateTime(2014, 11, 18, 0, 0, 0);
+
+    /**
+     *
+     */
+    private static final Integer TASK_ELAPS_TIME2 = new Period(TASK_START_DATE, TASK_END_DATE, PeriodType.minutes()).getMinutes();
+
+    /**
+     *
+     */
     private Task task;
+
+    /**
+     *
+     */
     private Task task2;
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testConstructors() throws Exception {
 
@@ -67,6 +127,10 @@ public class TaskTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testGettersSetters() throws Exception {
 
@@ -93,11 +157,15 @@ public class TaskTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testEquals() throws Exception {
 
         task = new Task(TASK_ID, TASK_NAME, TASK_STATE, TASK_START_DATE, TASK_END_DATE, TASK_ELAPSED_TIME);
-        task2 = new Task(TASK_ID2, TASK_NAME2, TASK_STATE2, TASK_START_DATE2, TASK_END_DATE2, TASK_ELAPSED_TIME2);
+        task2 = new Task(TASK_ID2, TASK_NAME2, TASK_STATE2, TASK_START_DATE2, TASK_END_DATE2, TASK_ELAPS_TIME2);
 
         assertNotNull(task);
         assertNotNull(task2);
@@ -105,6 +173,10 @@ public class TaskTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testEqualsSame() throws Exception {
 
@@ -115,11 +187,15 @@ public class TaskTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testHashCode() throws Exception {
 
         task = new Task(TASK_ID, TASK_NAME, TASK_STATE, TASK_START_DATE, TASK_END_DATE, TASK_ELAPSED_TIME);
-        task2 = new Task(TASK_ID2, TASK_NAME2, TASK_STATE2, TASK_START_DATE2, TASK_END_DATE2, TASK_ELAPSED_TIME2);
+        task2 = new Task(TASK_ID2, TASK_NAME2, TASK_STATE2, TASK_START_DATE2, TASK_END_DATE2, TASK_ELAPS_TIME2);
 
         assertNotNull(task);
         assertNotNull(task2);
@@ -127,6 +203,10 @@ public class TaskTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testHashCodeSame() throws Exception {
 
@@ -137,6 +217,10 @@ public class TaskTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testToString() throws Exception {
 

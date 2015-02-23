@@ -82,14 +82,17 @@ public class TaskController {
             @RequestParam("startDate") final String startDate,
             @RequestParam("personId") final Long personId) {
 
-        LOGGER.debug("Inserting task with Name : " + taskName
-                + ", StartDate : " + startDate + ", PersonId : " + personId);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Inserting task with Name : " + taskName
+                    + ", StartDate : " + startDate
+                    + ", PersonId : " + personId);
+        }
 
         DateTimeFormatter formatter = ISODateTimeFormat.dateTime();
-        DateTime dt = formatter.parseDateTime(startDate);
+        DateTime dateTime = formatter.parseDateTime(startDate);
         Task task = new Task();
         task.setTaskName(taskName);
-        task.setStartDate(dt);
+        task.setStartDate(dateTime);
         task.setTaskState(true);
         taskService.addTask(task, personId);
 
@@ -106,7 +109,9 @@ public class TaskController {
 
         List<Task> tasks = taskService.getTasks();
 
-        LOGGER.debug("taskList.size = " + tasks.size());
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("taskList.size = " + tasks.size());
+        }
 
         return new ModelAndView("taskList", "tasks", tasks);
 
@@ -121,7 +126,9 @@ public class TaskController {
     public final ModelAndView getTaskListByIdView(
             @RequestParam("id") final Long personId) {
 
-        LOGGER.debug("personId = " + personId);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("personId = " + personId);
+        }
 
         List<Task> tasks;
         try {
@@ -130,7 +137,9 @@ public class TaskController {
             tasks = taskService.getTasks();
         }
 
-        LOGGER.debug("taskList.size = " + tasks.size());
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("taskList.size = " + tasks.size());
+        }
 
         return new ModelAndView("taskList", "tasks", tasks);
 
@@ -145,7 +154,9 @@ public class TaskController {
     public final ModelAndView getTaskByIdView(
             @RequestParam("id") final Long taskId) {
 
-        LOGGER.debug("taskId: " + taskId);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("taskId: " + taskId);
+        }
 
         List<Task> tasks;
         try {
@@ -176,9 +187,11 @@ public class TaskController {
             @RequestParam("taskName") final String taskName,
             @RequestParam("startDate") final String startDate) {
 
-        LOGGER.debug("TaskId : " + taskId
-                + ", TaskName : " + taskName
-                + ", StartDate : " + startDate);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("TaskId : " + taskId
+                    + ", TaskName : " + taskName
+                    + ", StartDate : " + startDate);
+        }
 
         DateTimeFormatter formatter = ISODateTimeFormat.dateTime();
         DateTime dtStart = formatter.parseDateTime(startDate);
@@ -208,7 +221,9 @@ public class TaskController {
     })
     public final String removeTask(@RequestParam("id") final Long taskId) {
 
-        LOGGER.debug("Removing task with id = " + taskId);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Removing task with id = " + taskId);
+        }
 
         taskService.removeTask(taskId);
 

@@ -1,7 +1,7 @@
 package com.epam.brest.courses.domain;
 
-import com.epam.brest.courses.domain.JsonJodaDate.CustomDateDeSerializer;
-import com.epam.brest.courses.domain.JsonJodaDate.CustomDateSerializer;
+import com.epam.brest.courses.domain.jsonjodadate.CustomDateDeSerializer;
+import com.epam.brest.courses.domain.jsonjodadate.CustomDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Type;
@@ -260,22 +260,27 @@ public class Task {
         this.personId = persId;
     }
 
+    /**
+     *
+     * @param object object
+     * @return equals
+     */
     @Override
-    public final boolean equals(final Object o) {
+    public final boolean equals(final Object object) {
 
-        if (this == o) {
+        if (this == object) {
 
             return true;
 
         }
 
-        if (!(o instanceof Task)) {
+        if (!(object instanceof Task)) {
 
             return false;
 
         }
 
-        Task task = (Task) o;
+        Task task = (Task) object;
 
         return elapsedTime.equals(task.elapsedTime)
                 && endDate.equals(task.endDate)
@@ -286,6 +291,10 @@ public class Task {
 
     }
 
+    /**
+     *
+     * @return hashCode
+     */
     @Override
     public final int hashCode() {
 
@@ -298,20 +307,24 @@ public class Task {
 
     }
 
+    /**
+     *
+     * @return toString
+     */
     @Override
     public final String toString() {
 
-        final StringBuffer sb = new StringBuffer("Task{");
-        sb.append("taskId=").append(taskId);
-        sb.append(", taskName='").append(taskName).append('\'');
-        sb.append(", taskState=").append(taskState);
-        sb.append(", startDate=").append(startDate);
-        sb.append(", endDate=").append(endDate);
-        sb.append(", elapsedTime=").append(elapsedTime);
-        sb.append(", personId=").append(personId);
-        sb.append('}');
+        final StringBuffer stringBuffer = new StringBuffer("Task{");
+        stringBuffer.append("taskId=").append(taskId);
+        stringBuffer.append(", taskName='").append(taskName).append('\'');
+        stringBuffer.append(", taskState=").append(taskState);
+        stringBuffer.append(", startDate=").append(startDate);
+        stringBuffer.append(", endDate=").append(endDate);
+        stringBuffer.append(", elapsedTime=").append(elapsedTime);
+        stringBuffer.append(", personId=").append(personId);
+        stringBuffer.append('}');
 
-        return sb.toString();
+        return stringBuffer.toString();
 
     }
 }

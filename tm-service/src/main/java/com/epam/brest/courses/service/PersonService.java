@@ -33,7 +33,6 @@ public interface PersonService {
 
     /**
      * Returns a list containing all of the persons in the database.
-     *
      * @param startDate start date
      * @param endDate end date
      * @return a list containing all of the persons in the database with

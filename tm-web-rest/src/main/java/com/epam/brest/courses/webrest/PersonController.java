@@ -75,8 +75,10 @@ public class PersonController {
             @RequestParam("firstName") final String firstName,
             @RequestParam("lastName") final String lastName) {
 
-        LOGGER.debug("Inserting person with FirstName : "
-                + firstName + ", LastName : " + lastName);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Inserting person with FirstName : "
+                    + firstName + ", LastName : " + lastName);
+        }
 
         Person person = new Person();
         person.setPersonFirstName(firstName);
@@ -96,7 +98,9 @@ public class PersonController {
 
         List<Person> persons = personService.getPersons();
 
-        LOGGER.debug("personList.size = " + persons.size());
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("personList.size = " + persons.size());
+        }
 
         return new ModelAndView("personList", "persons", persons);
 
@@ -114,8 +118,10 @@ public class PersonController {
             @RequestParam("startDate") final String startDate,
             @RequestParam("endDate") final String endDate) {
 
-        LOGGER.debug("StartDate : " + startDate
-                + ", EndDate : " + endDate);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("StartDate : " + startDate
+                    + ", EndDate : " + endDate);
+        }
 
         DateTimeFormatter formatter = ISODateTimeFormat.dateTimeNoMillis();
         DateTime dtStart = formatter.parseDateTime(startDate);
@@ -123,7 +129,9 @@ public class PersonController {
         List<Report> persons = personService.getPersonsWithTasksBetweenDate(
                 dtStart, dtEnd);
 
-        LOGGER.debug("personList.size = " + persons.size());
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("personList.size = " + persons.size());
+        }
 
         return new ModelAndView("report", "persons", persons);
 
@@ -138,7 +146,9 @@ public class PersonController {
     public final ModelAndView getPersonByIdView(
             @RequestParam("id") final Long personId) {
 
-        LOGGER.debug("personId: " + personId);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("personId: " + personId);
+        }
 
         List<Person> persons;
         try {
@@ -166,9 +176,11 @@ public class PersonController {
             @RequestParam("firstName") final String firstName,
             @RequestParam("lastName") final String lastName) {
 
-        LOGGER.debug("PersonId : " + personId
-                + ", FirstName : " + firstName
-                + ", LastName : " + lastName);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("PersonId : " + personId
+                    + ", FirstName : " + firstName
+                    + ", LastName : " + lastName);
+        }
 
         Person person = new Person();
         person.setPersonId(personId);
@@ -195,9 +207,11 @@ public class PersonController {
             @RequestParam("firstName") final String firstName,
             @RequestParam("lastName") final String lastName) {
 
-        LOGGER.debug("Updating person with PersonId : " + personId
-                + ", FirstName : " + firstName
-                + ", LastName : " + lastName);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Updating person with PersonId : " + personId
+                    + ", FirstName : " + firstName
+                    + ", LastName : " + lastName);
+        }
 
         Person person = new Person();
         person.setPersonId(personId);
@@ -220,7 +234,9 @@ public class PersonController {
     })
     public final String removePerson(@RequestParam("id") final Long personId) {
 
-        LOGGER.debug("Removing person with id = " + personId);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Removing person with id = " + personId);
+        }
 
         personService.removePerson(personId);
 

@@ -20,6 +20,9 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring-dao-hsql-test.xml"})
 @TransactionConfiguration(transactionManager = "transactionManager")
@@ -33,8 +36,11 @@ import static org.junit.Assert.*;
 )
 public class PersonDaoImplTest {
 
+    /**
+     *
+     */
     @Autowired
-    private PersonDao personDao;
+    transient private PersonDao personDao;
 
     /**
      * AddPerson test
@@ -97,9 +103,9 @@ public class PersonDaoImplTest {
         testPersonAdd.setPersonFirstName("testGetPersonByIdF");
         testPersonAdd.setPersonLastName("testGetPersonByIdL");
 
-        Long id = personDao.addPerson(testPersonAdd).getPersonId();
+        Long personId = personDao.addPerson(testPersonAdd).getPersonId();
 
-        Person testPersonGet = personDao.getPersonById(id);
+        Person testPersonGet = personDao.getPersonById(personId);
 
         assertNotNull(testPersonGet);
         assertNotNull(testPersonGet.getPersonId());
@@ -121,16 +127,16 @@ public class PersonDaoImplTest {
         testPersonAdd.setPersonFirstName("testUpdatePersonF");
         testPersonAdd.setPersonLastName("testUpdatePersonL");
 
-        Long id = personDao.addPerson(testPersonAdd).getPersonId();
+        Long personId = personDao.addPerson(testPersonAdd).getPersonId();
 
         Person testPersonUpdate = new Person();
-        testPersonUpdate.setPersonId(id);
+        testPersonUpdate.setPersonId(personId);
         testPersonUpdate.setPersonFirstName("testUpdatePersonFUpdated");
         testPersonUpdate.setPersonLastName("testUpdatePersonLUpdated");
 
         personDao.updatePerson(testPersonUpdate);
 
-        Person testPersonGet = personDao.getPersonById(id);
+        Person testPersonGet = personDao.getPersonById(personId);
 
         assertNotNull(testPersonGet);
         assertNotNull(testPersonGet.getPersonId());

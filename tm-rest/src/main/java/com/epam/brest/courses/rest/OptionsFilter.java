@@ -17,39 +17,52 @@ import java.io.IOException;
  */
 public class OptionsFilter implements Filter {
 
+    /**
+     *
+     * @param filterConfig filterConfig
+     * @throws ServletException
+     */
     @Override
     public void init(final FilterConfig filterConfig) throws ServletException {
 
     }
 
+    /**
+     *
+     * @param servletRequest servletRequest
+     * @param servletResponse servletResponse
+     * @param filterChain filterChain
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public final void doFilter(final ServletRequest servletRequest,
                                final ServletResponse servletResponse,
                                final FilterChain filterChain)
             throws IOException, ServletException {
 
-        HttpServletRequest httpServletRequest = (HttpServletRequest)
+        HttpServletRequest httpServRequest = (HttpServletRequest)
                 servletRequest;
-        HttpServletResponse httpServletResponse = (HttpServletResponse)
+        HttpServletResponse httpServResponse = (HttpServletResponse)
                 servletResponse;
 
-        if (httpServletResponse.getHeader(
+        if (httpServResponse.getHeader(
                 "Access-Control-Allow-Origin") == null) {
 
-            httpServletResponse.addHeader("Access-Control-Allow-Origin",
-                    httpServletRequest.getHeader("Origin"));
+            httpServResponse.addHeader("Access-Control-Allow-Origin",
+                    httpServRequest.getHeader("Origin"));
 
         }
 
-        httpServletResponse.addHeader("Access-Control-Allow-Methods",
+        httpServResponse.addHeader("Access-Control-Allow-Methods",
                 "GET, POST, PUT, DELETE, OPTIONS");
-        httpServletResponse.addHeader("Access-Control-Allow-Headers",
+        httpServResponse.addHeader("Access-Control-Allow-Headers",
                 "Content-Type");
 
         if (HttpMethod.OPTIONS.toString().equals(
-                httpServletRequest.getMethod())) {
+                httpServRequest.getMethod())) {
 
-            httpServletResponse.addHeader(
+            httpServResponse.addHeader(
                     "Allow", "GET, POST, PUT, DELETE, OPTIONS");
 
         } else {
@@ -60,6 +73,9 @@ public class OptionsFilter implements Filter {
 
     }
 
+    /**
+     *
+     */
     @Override
     public void destroy() {
 

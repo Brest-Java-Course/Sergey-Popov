@@ -1,8 +1,8 @@
 package com.epam.brest.courses.rest;
 
 import com.epam.brest.courses.domain.Person;
-import com.epam.brest.courses.rest.DataFixture.PersonDataFixture;
-import com.epam.brest.courses.rest.DataFixture.ReportDataFixture;
+import com.epam.brest.courses.rest.datafixture.PersonDataFixture;
+import com.epam.brest.courses.rest.datafixture.ReportDataFixture;
 import com.epam.brest.courses.service.PersonService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.joda.time.DateTime;
@@ -27,18 +27,33 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
+/**
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring-rest-mock-test.xml"})
 public class PersonRestControllerMockTest {
 
+    /**
+     *
+     */
     private MockMvc mockMvc;
 
+    /**
+     *
+     */
     @Resource
     private PersonRestController personRestController;
 
+    /**
+     *
+     */
     @Autowired
     private PersonService personService;
 
+    /**
+     *
+     */
     @Before
     public void setUp() {
 
@@ -47,6 +62,10 @@ public class PersonRestControllerMockTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @After
     public void tearDown() throws Exception {
 
@@ -54,6 +73,10 @@ public class PersonRestControllerMockTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testAddPerson() throws Exception {
 
@@ -79,6 +102,10 @@ public class PersonRestControllerMockTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testGetPersons() throws Exception {
 
@@ -97,6 +124,10 @@ public class PersonRestControllerMockTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testGetPersonsWithTasksBetweenDate() throws Exception {
 
@@ -117,6 +148,10 @@ public class PersonRestControllerMockTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testGetPersonById() throws Exception {
 
@@ -135,6 +170,10 @@ public class PersonRestControllerMockTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testUpdatePerson() throws Exception {
 
@@ -159,6 +198,10 @@ public class PersonRestControllerMockTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testRemovePerson() throws Exception {
 

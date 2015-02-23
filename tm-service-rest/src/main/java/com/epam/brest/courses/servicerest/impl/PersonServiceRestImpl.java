@@ -32,19 +32,24 @@ public class PersonServiceRestImpl implements PersonServiceRest {
     /**
      *
      */
-    private static final String REST_GET_PERSONS_BY_DATE =
+    private static final String REST_GET_PERS_BY_DATE =
             "/tasksBetween/{startDate}/{endDate}/";
 
     /**
      *
      */
-    private static final String REST_GET_PERSON_BY_ID = "/{id}";
+    private static final String REST_GET_PERS_BY_ID = "/{id}";
 
     /**
      *
      */
-    private static final String REST_REMOVE_PERSON_BY_ID = "/{id}";
+    private static final String REST_REMOVE_PERS_BY_ID = "/{id}";
 
+    /**
+     *
+     * @param person person to be inserted to the database
+     * @return personFromDb
+     */
     @Override
     public final Person addPerson(final Person person) {
 
@@ -70,6 +75,10 @@ public class PersonServiceRestImpl implements PersonServiceRest {
 
     }
 
+    /**
+     *
+     * @return persons
+     */
     @Override
     public final List<Person> getPersons() {
 
@@ -88,6 +97,12 @@ public class PersonServiceRestImpl implements PersonServiceRest {
 
     }
 
+    /**
+     *
+     * @param startDate start date
+     * @param endDate end date
+     * @return persons
+     */
     @Override
     public final List<Report> getPersonsWithTasksBetweenDate(
             final DateTime startDate,
@@ -98,7 +113,7 @@ public class PersonServiceRestImpl implements PersonServiceRest {
         RestTemplate restTemplate = new RestTemplate();
 
         Report[] personList = restTemplate.getForObject(
-                REST_URL + REST_GET_PERSONS_BY_DATE,
+                REST_URL + REST_GET_PERS_BY_DATE,
                 Report[].class,
                 startDate,
                 endDate);
@@ -111,6 +126,11 @@ public class PersonServiceRestImpl implements PersonServiceRest {
 
     }
 
+    /**
+     *
+     * @param personId id of the person to return
+     * @return personFromDb
+     */
     @Override
     public final Person getPersonById(final Long personId) {
 
@@ -120,7 +140,7 @@ public class PersonServiceRestImpl implements PersonServiceRest {
         Assert.notNull(personId, "Person Id should be specified!");
         RestTemplate restTemplate = new RestTemplate();
         Person personFromDb = restTemplate.getForObject(
-                REST_URL + REST_GET_PERSON_BY_ID,
+                REST_URL + REST_GET_PERS_BY_ID,
                 Person.class,
                 personId);
 
@@ -130,6 +150,10 @@ public class PersonServiceRestImpl implements PersonServiceRest {
 
     }
 
+    /**
+     *
+     * @param person person to be stored in the database
+     */
     @Override
     public final void updatePerson(final Person person) {
 
@@ -145,6 +169,10 @@ public class PersonServiceRestImpl implements PersonServiceRest {
 
     }
 
+    /**
+     *
+     * @param personId id of the person to be removed
+     */
     @Override
     public final void removePerson(final Long personId) {
 
@@ -153,7 +181,7 @@ public class PersonServiceRestImpl implements PersonServiceRest {
 
         Assert.notNull(personId, "Person Id should be specified!");
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete(REST_URL + REST_REMOVE_PERSON_BY_ID, personId);
+        restTemplate.delete(REST_URL + REST_REMOVE_PERS_BY_ID, personId);
 
         LOGGER.debug(
                 "PersonServiceRestImpl.removePerson() : id personRemoved = {}",

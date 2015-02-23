@@ -172,22 +172,27 @@ public class Person {
         this.taskSet = tSet;
     }
 
+    /**
+     *
+     * @param object object
+     * @return equals
+     */
     @Override
-    public final boolean equals(final Object o) {
+    public final boolean equals(final Object object) {
 
-        if (this == o) {
+        if (this == object) {
 
             return true;
 
         }
 
-        if (!(o instanceof Person)) {
+        if (!(object instanceof Person)) {
 
             return false;
 
         }
 
-        Person person = (Person) o;
+        Person person = (Person) object;
 
         return personFirstName.equals(person.personFirstName)
                 && personId.equals(person.personId)
@@ -195,6 +200,10 @@ public class Person {
 
     }
 
+    /**
+     *
+     * @return hashCode
+     */
     @Override
     public final int hashCode() {
 
@@ -203,10 +212,10 @@ public class Person {
         result = HNUMBER * result + personFirstName.hashCode();
         result = HNUMBER * result + personLastName.hashCode();
 
-        if (taskSet != null) {
-            taskSetHashCode = taskSet.hashCode();
-        } else {
+        if (taskSet == null) {
             taskSetHashCode = 0;
+        } else {
+            taskSetHashCode = taskSet.hashCode();
         }
 
         result = HNUMBER * result + taskSetHashCode;
@@ -214,15 +223,19 @@ public class Person {
 
     }
 
+    /**
+     *
+     * @return toString
+     */
     @Override
     public final String toString() {
 
-        final StringBuffer sb = new StringBuffer("Person{");
-        sb.append("personId=").append(personId);
-        sb.append(", personFirstName='").append(personFirstName).append('\'');
-        sb.append(", personLastName='").append(personLastName).append('\'');
-        sb.append('}');
-        return sb.toString();
+        final StringBuffer stringBuffer = new StringBuffer("Person{");
+        stringBuffer.append("personId=").append(personId);
+        stringBuffer.append(", personFirstName='").append(personFirstName).append('\'');
+        stringBuffer.append(", personLastName='").append(personLastName).append('\'');
+        stringBuffer.append('}');
+        return stringBuffer.toString();
 
     }
 

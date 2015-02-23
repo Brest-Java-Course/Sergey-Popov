@@ -33,7 +33,6 @@ public interface TaskDao {
     /**
      * Returns a list containing the tasks with the specified personId
      * from the database.
-     *
      * @param personId id of the person
      * @return a list containing the tasks with the specified personId
      * from the database

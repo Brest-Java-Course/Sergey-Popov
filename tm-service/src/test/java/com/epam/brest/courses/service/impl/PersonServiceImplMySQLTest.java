@@ -18,8 +18,10 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
+/**
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring-service-hsql-test.xml"})
 @TestExecutionListeners(
@@ -32,6 +34,9 @@ import static org.junit.Assert.assertEquals;
 )
 public class PersonServiceImplMySQLTest {
 
+    /**
+     *
+     */
     @Autowired
     private PersonService personService;
 
@@ -71,6 +76,10 @@ public class PersonServiceImplMySQLTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testGetPersonsWithTasksBetweenDate() throws Exception {
 
@@ -92,9 +101,9 @@ public class PersonServiceImplMySQLTest {
         testPersonAdd.setPersonFirstName("testGetPersonByIdF");
         testPersonAdd.setPersonLastName("testGetPersonByIdL");
 
-        Long id = personService.addPerson(testPersonAdd).getPersonId();
+        Long personId = personService.addPerson(testPersonAdd).getPersonId();
 
-        Person testPersonGet = personService.getPersonById(id);
+        Person testPersonGet = personService.getPersonById(personId);
 
         assertNotNull(testPersonGet);
         assertNotNull(testPersonGet.getPersonId());
@@ -116,16 +125,16 @@ public class PersonServiceImplMySQLTest {
         testPersonAdd.setPersonFirstName("testUpdatePersonF");
         testPersonAdd.setPersonLastName("testUpdatePersonL");
 
-        Long id = personService.addPerson(testPersonAdd).getPersonId();
+        Long personId = personService.addPerson(testPersonAdd).getPersonId();
 
         Person testPersonUpdate = new Person();
-        testPersonUpdate.setPersonId(id);
+        testPersonUpdate.setPersonId(personId);
         testPersonUpdate.setPersonFirstName("testUpdatePersonFUpdated");
         testPersonUpdate.setPersonLastName("testUpdatePersonLUpdated");
 
         personService.updatePerson(testPersonUpdate);
 
-        Person testPersonGet = personService.getPersonById(id);
+        Person testPersonGet = personService.getPersonById(personId);
 
         assertNotNull(testPersonGet);
         assertNotNull(testPersonGet.getPersonId());

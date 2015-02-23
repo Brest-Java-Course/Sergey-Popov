@@ -19,8 +19,11 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
+
+/**
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring-service-rest-test.xml"})
 @TestExecutionListeners(
@@ -31,9 +34,15 @@ import static org.junit.Assert.assertEquals;
 )
 public class TaskServiceRestImplTest {
 
+    /**
+     *
+     */
     @Autowired
     private PersonServiceRest personServiceRest;
 
+    /**
+     *
+     */
     @Autowired
     private TaskServiceRest taskServiceRest;
 
@@ -156,10 +165,10 @@ public class TaskServiceRestImplTest {
         testTaskAdd.setTaskState(true);
 
         Task taskFromDb = taskServiceRest.addTask(testTaskAdd, personId);
-        Long id = taskFromDb.getTaskId();
+        Long taskId = taskFromDb.getTaskId();
 
         Task testTaskUpdate = new Task();
-        testTaskUpdate.setTaskId(id);
+        testTaskUpdate.setTaskId(taskId);
         testTaskUpdate.setTaskName("testTaskNameUTUpdated");
         testTaskUpdate.setStartDate(taskFromDb.getStartDate());
         DateTime currentDateTime = new DateTime();
@@ -169,7 +178,7 @@ public class TaskServiceRestImplTest {
 
         taskServiceRest.updateTask(testTaskUpdate);
 
-        Task testTaskGet = taskServiceRest.getTaskById(id);
+        Task testTaskGet = taskServiceRest.getTaskById(taskId);
 
         assertNotNull(testTaskGet);
         assertNotNull(testTaskGet.getTaskId());

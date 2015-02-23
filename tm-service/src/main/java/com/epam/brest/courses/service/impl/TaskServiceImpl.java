@@ -28,6 +28,12 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskDao taskDao;
 
+    /**
+     *
+     * @param task task to be inserted to the database
+     * @param personId id of the person
+     * @return taskFromDb
+     */
     @Override
     public final Task addTask(final Task task, final Long personId) {
 
@@ -53,6 +59,10 @@ public class TaskServiceImpl implements TaskService {
 
     }
 
+    /**
+     *
+     * @return tasks
+     */
     @Override
     public final List<Task> getTasks() {
 
@@ -67,6 +77,11 @@ public class TaskServiceImpl implements TaskService {
 
     }
 
+    /**
+     *
+     * @param personId id of the person
+     * @return tasks
+     */
     @Override
     public final List<Task> getTasksById(final Long personId) {
 
@@ -83,6 +98,11 @@ public class TaskServiceImpl implements TaskService {
 
     }
 
+    /**
+     *
+     * @param taskId id of the task to return
+     * @return taskFromDb
+     */
     @Override
     public final Task getTaskById(final Long taskId) {
 
@@ -97,6 +117,10 @@ public class TaskServiceImpl implements TaskService {
 
     }
 
+    /**
+     *
+     * @param task task to be stored in the database
+     */
     @Override
     public final void updateTask(final Task task) {
 
@@ -110,6 +134,10 @@ public class TaskServiceImpl implements TaskService {
 
     }
 
+    /**
+     *
+     * @param taskId id of the task to be removed
+     */
     @Override
     public final void removeTask(final Long taskId) {
 

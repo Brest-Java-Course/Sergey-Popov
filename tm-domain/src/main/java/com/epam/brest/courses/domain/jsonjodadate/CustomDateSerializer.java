@@ -1,4 +1,4 @@
-package com.epam.brest.courses.domain.JsonJodaDate;
+package com.epam.brest.courses.domain.jsonjodadate;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -19,10 +19,17 @@ public class CustomDateSerializer extends JsonSerializer<DateTime> {
      */
     private static DateTimeFormatter formatter = ISODateTimeFormat.dateTime();
 
+    /**
+     *
+     * @param dateTime dateTime
+     * @param jsonGenerator jsonGenerator
+     * @param serialProvider serializerProvider
+     * @throws IOException
+     */
     @Override
     public final void serialize(final DateTime dateTime,
                                 final JsonGenerator jsonGenerator,
-                                final SerializerProvider serializerProvider)
+                                final SerializerProvider serialProvider)
             throws IOException {
         jsonGenerator.writeString(formatter.print(dateTime));
     }

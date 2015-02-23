@@ -1,7 +1,7 @@
 package com.epam.brest.courses.rest;
 
 import com.epam.brest.courses.domain.Task;
-import com.epam.brest.courses.rest.DataFixture.TaskDataFixture;
+import com.epam.brest.courses.rest.datafixture.TaskDataFixture;
 import com.epam.brest.courses.service.TaskService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
@@ -19,26 +19,39 @@ import org.springframework.test.web.servlet.ResultActions;
 import javax.annotation.Resource;
 
 import static org.easymock.EasyMock.*;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
+/**
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring-rest-mock-test.xml"})
 public class TaskRestControllerMockTest {
 
+    /**
+     *
+     */
     private MockMvc mockMvc;
 
+    /**
+     *
+     */
     @Resource
     private TaskRestController taskRestController;
 
+    /**
+     *
+     */
     @Autowired
     private TaskService taskService;
 
+    /**
+     *
+     */
     @Before
     public void setUp() {
 
@@ -47,6 +60,10 @@ public class TaskRestControllerMockTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @After
     public void tearDown() throws Exception {
 
@@ -54,6 +71,10 @@ public class TaskRestControllerMockTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testAddTask() throws Exception {
 
@@ -78,6 +99,10 @@ public class TaskRestControllerMockTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testGetTasks() throws Exception {
 
@@ -98,6 +123,10 @@ public class TaskRestControllerMockTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testGetTasksById() throws Exception {
 
@@ -118,6 +147,10 @@ public class TaskRestControllerMockTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testGetTaskById() throws Exception {
 
@@ -136,6 +169,10 @@ public class TaskRestControllerMockTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testUpdateTask() throws Exception {
 
@@ -160,6 +197,10 @@ public class TaskRestControllerMockTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testRemovePerson() throws Exception {
 

@@ -49,12 +49,16 @@ public class TaskHolder {
         this.personId = persId;
     }
 
+    /**
+     *
+     * @return toString
+     */
     @Override
     public final String toString() {
-        final StringBuffer sb = new StringBuffer("TaskHolder{");
-        sb.append("task=").append(task);
-        sb.append(", personId=").append(personId);
-        sb.append('}');
-        return sb.toString();
+        final StringBuffer stringBuffer = new StringBuffer("TaskHolder{");
+        stringBuffer.append("task=").append(task);
+        stringBuffer.append(", personId=").append(personId);
+        stringBuffer.append('}');
+        return stringBuffer.toString();
     }
 }

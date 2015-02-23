@@ -1,4 +1,4 @@
-package com.epam.brest.courses.domain.JsonJodaDate;
+package com.epam.brest.courses.domain.jsonjodadate;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
 

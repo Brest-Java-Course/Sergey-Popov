@@ -17,15 +17,28 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
+/**
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring-rest-mock-test.xml"})
 public class HelloRestControllerMockTest {
 
+    /**
+     *
+     */
     private MockMvc mockMvc;
 
+    /**
+     *
+     */
     @Resource
     private HelloRestController helloRestController;
 
+    /**
+     *
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
 
@@ -34,6 +47,10 @@ public class HelloRestControllerMockTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testGetDescription() throws Exception {
 

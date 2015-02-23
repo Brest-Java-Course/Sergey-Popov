@@ -75,8 +75,10 @@ public class PersonRestController {
             @PathVariable final String startDate,
             @PathVariable final String endDate) {
 
-        LOGGER.debug("StartDate : " + startDate
-                + ", EndDate : " + endDate);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("StartDate : " + startDate
+                    + ", EndDate : " + endDate);
+        }
         DateTimeFormatter formatter = ISODateTimeFormat.dateTime();
         DateTime dtStart = formatter.parseDateTime(startDate);
         DateTime dtEnd = formatter.parseDateTime(endDate);

@@ -3,7 +3,7 @@ package com.epam.brest.courses.service.impl;
 import com.epam.brest.courses.dao.TaskDao;
 import com.epam.brest.courses.domain.Task;
 import com.epam.brest.courses.service.TaskService;
-import com.epam.brest.courses.service.impl.DataFixture.TaskDataFixture;
+import com.epam.brest.courses.service.impl.datafixture.TaskDataFixture;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +21,9 @@ import java.util.List;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
+/**
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring-service-mock-test.xml"})
 @TestExecutionListeners(
@@ -33,12 +36,22 @@ import static org.junit.Assert.*;
 )
 public class TaskServiceImplMockTest {
 
+    /**
+     *
+     */
     @Autowired
     private TaskService taskService;
 
+    /**
+     *
+     */
     @Autowired
     private TaskDao taskDao;
 
+    /**
+     *
+     * @throws Exception
+     */
     @After
     public void tearDown() throws Exception {
 

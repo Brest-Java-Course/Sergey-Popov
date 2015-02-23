@@ -22,6 +22,9 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring-dao-hsql-test.xml"})
 @TestExecutionListeners(
@@ -34,11 +37,17 @@ import static org.junit.Assert.*;
 )
 public class TaskDaoImplTest {
 
+    /**
+     *
+     */
     @Autowired
-    private TaskDao taskDao;
+    transient private TaskDao taskDao;
 
+    /**
+     *
+     */
     @Autowired
-    private PersonDao personDao;
+    transient private PersonDao personDao;
 
     /**
      * AddTask test
@@ -159,10 +168,10 @@ public class TaskDaoImplTest {
         testTaskAdd.setTaskState(true);
 
         Task taskFromDb = taskDao.addTask(testTaskAdd, personId);
-        Long id = taskFromDb.getTaskId();
+        Long taskId = taskFromDb.getTaskId();
 
         Task testTaskUpdate = new Task();
-        testTaskUpdate.setTaskId(id);
+        testTaskUpdate.setTaskId(taskId);
         testTaskUpdate.setTaskName("testTaskNameUTUpdated");
         testTaskUpdate.setStartDate(taskFromDb.getStartDate());
         DateTime currentDateTime = new DateTime();
@@ -172,7 +181,7 @@ public class TaskDaoImplTest {
 
         taskDao.updateTask(testTaskUpdate);
 
-        Task testTaskGet = taskDao.getTaskById(id);
+        Task testTaskGet = taskDao.getTaskById(taskId);
 
         assertNotNull(testTaskGet);
         assertNotNull(testTaskGet.getTaskId());

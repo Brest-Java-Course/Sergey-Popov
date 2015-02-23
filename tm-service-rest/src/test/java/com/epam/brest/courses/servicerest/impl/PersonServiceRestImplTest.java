@@ -17,6 +17,9 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring-service-rest-test.xml"})
 @TestExecutionListeners(
@@ -27,6 +30,9 @@ import static org.junit.Assert.*;
 )
 public class PersonServiceRestImplTest {
 
+    /**
+     *
+     */
     @Autowired
     private PersonServiceRest personServiceRest;
 
@@ -66,10 +72,14 @@ public class PersonServiceRestImplTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testGetPersonsWithTasksBetweenDate() throws Exception {
 
-        List<Report> persons = personServiceRest.getPersonsWithTasksBetweenDate(new DateTime(2013,1,1,1,1,1,1), new DateTime(2015,1,1,1,1,1,1));
+        List<Report> persons = personServiceRest.getPersonsWithTasksBetweenDate(new DateTime(2013, 1, 1, 1, 1, 1, 1), new DateTime(2015, 1, 1, 1, 1, 1, 1));
 
         assertNotNull(persons);
         assertFalse(persons.isEmpty());
@@ -87,9 +97,9 @@ public class PersonServiceRestImplTest {
         testPersonAdd.setPersonFirstName("testGetPersonByIdF");
         testPersonAdd.setPersonLastName("testGetPersonByIdL");
 
-        Long id = personServiceRest.addPerson(testPersonAdd).getPersonId();
+        Long personId = personServiceRest.addPerson(testPersonAdd).getPersonId();
 
-        Person testPersonGet = personServiceRest.getPersonById(id);
+        Person testPersonGet = personServiceRest.getPersonById(personId);
 
         assertNotNull(testPersonGet);
         assertNotNull(testPersonGet.getPersonId());
@@ -111,16 +121,16 @@ public class PersonServiceRestImplTest {
         testPersonAdd.setPersonFirstName("testUpdatePersonF");
         testPersonAdd.setPersonLastName("testUpdatePersonL");
 
-        Long id = personServiceRest.addPerson(testPersonAdd).getPersonId();
+        Long personId = personServiceRest.addPerson(testPersonAdd).getPersonId();
 
         Person testPersonUpdate = new Person();
-        testPersonUpdate.setPersonId(id);
+        testPersonUpdate.setPersonId(personId);
         testPersonUpdate.setPersonFirstName("testUpdatePersonFUpdated");
         testPersonUpdate.setPersonLastName("testUpdatePersonLUpdated");
 
         personServiceRest.updatePerson(testPersonUpdate);
 
-        Person testPersonGet = personServiceRest.getPersonById(id);
+        Person testPersonGet = personServiceRest.getPersonById(personId);
 
         assertNotNull(testPersonGet);
         assertNotNull(testPersonGet.getPersonId());

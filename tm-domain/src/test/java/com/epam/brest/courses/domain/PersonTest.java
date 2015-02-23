@@ -4,19 +4,55 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * 
+ */
 public class PersonTest {
 
+    /**
+     *
+     */
     private static final Long PERSON_ID = 1l;
+
+    /**
+     *
+     */
     private static final String PERSON_FIRST_NAME = "Petr";
+
+    /**
+     *
+     */
     private static final String PERSON_LAST_NAME = "Petrov";
 
+    /**
+     *
+     */
     private static final Long PERSON_ID2 = 2l;
-    private static final String PERSON_FIRST_NAME2 = "Ivan";
+
+    /**
+     *
+     */
+    private static final String PERSON_F_NAME2 = "Ivan";
+
+    /**
+     *
+     */
     private static final String PERSON_LAST_NAME2 = "Ivanov";
 
+    /**
+     *
+     */
     private Person person;
+
+    /**
+     *
+     */
     private Person person2;
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testConstructors() throws Exception {
 
@@ -43,6 +79,10 @@ public class PersonTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testGettersSetters() throws Exception {
 
@@ -60,11 +100,15 @@ public class PersonTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testEquals() throws Exception {
 
         person = new Person(PERSON_ID, PERSON_FIRST_NAME, PERSON_LAST_NAME);
-        person2 = new Person(PERSON_ID2, PERSON_FIRST_NAME2, PERSON_LAST_NAME2);
+        person2 = new Person(PERSON_ID2, PERSON_F_NAME2, PERSON_LAST_NAME2);
 
         assertNotNull(person);
         assertNotNull(person2);
@@ -72,6 +116,10 @@ public class PersonTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testEqualsSame() throws Exception {
 
@@ -82,11 +130,15 @@ public class PersonTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testHashCode() throws Exception {
 
         person = new Person(PERSON_ID, PERSON_FIRST_NAME, PERSON_LAST_NAME);
-        person2 = new Person(PERSON_ID2, PERSON_FIRST_NAME2, PERSON_LAST_NAME2);
+        person2 = new Person(PERSON_ID2, PERSON_F_NAME2, PERSON_LAST_NAME2);
 
         assertNotNull(person);
         assertNotNull(person2);
@@ -94,6 +146,10 @@ public class PersonTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testHashCodeSame() throws Exception {
 
@@ -104,6 +160,10 @@ public class PersonTest {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testToString() throws Exception {
 

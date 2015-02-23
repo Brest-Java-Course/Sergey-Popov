@@ -27,7 +27,7 @@ public class TaskDaoImpl implements TaskDao {
      *
      */
     @PersistenceContext
-    private EntityManager emf;
+    transient private EntityManager emf;
 
     /**
      *
@@ -40,6 +40,12 @@ public class TaskDaoImpl implements TaskDao {
     @Autowired
     private DataSource dataSource;
 
+    /**
+     *
+     * @param task task to be inserted to the database
+     * @param personId id of the person
+     * @return taskFromDb
+     */
     @Override
     @Transactional
     public final Task addTask(final Task task, final Long personId) {
@@ -67,6 +73,10 @@ public class TaskDaoImpl implements TaskDao {
 
     }
 
+    /**
+     *
+     * @return tasks
+     */
     @Override
     @Transactional
     public final List<Task> getTasks() {
@@ -83,6 +93,11 @@ public class TaskDaoImpl implements TaskDao {
 
     }
 
+    /**
+     *
+     * @param personId id of the person
+     * @return tasks
+     */
     @Override
     @Transactional
     public final List<Task> getTasksById(final Long personId) {
@@ -103,6 +118,11 @@ public class TaskDaoImpl implements TaskDao {
 
     }
 
+    /**
+     *
+     * @param taskId id of the task to return
+     * @return taskFromDb
+     */
     @Override
     @Transactional
     public final Task getTaskById(final Long taskId) {
@@ -118,6 +138,10 @@ public class TaskDaoImpl implements TaskDao {
 
     }
 
+    /**
+     *
+     * @param task task to be stored in the database     *
+     */
     @Override
     @Transactional
     public final void updateTask(final Task task) {
@@ -137,6 +161,10 @@ public class TaskDaoImpl implements TaskDao {
 
     }
 
+    /**
+     *
+     * @param taskId id of the task to be removed
+     */
     @Override
     @Transactional
     public final void removeTask(final Long taskId) {

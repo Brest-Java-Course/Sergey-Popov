@@ -1,4 +1,4 @@
-package com.epam.brest.courses.service.impl.DataFixture;
+package com.epam.brest.courses.rest.datafixture;
 
 import com.epam.brest.courses.domain.Report;
 
@@ -10,7 +10,12 @@ import java.util.List;
  */
 public class ReportDataFixture {
 
-    public static Report getNewReport(Long personId) {
+    /**
+     *
+     * @param personId personId
+     * @return report
+     */
+    public static Report getNewReport(final Long personId) {
 
         Report report = new Report();
         report.setPersonId(personId);
@@ -21,6 +26,10 @@ public class ReportDataFixture {
         return report;
     }
 
+    /**
+     *
+     * @return list
+     */
     public static List<Report> getSampleReportList() {
         List<Report> list = new ArrayList<>(3);
         list.add(ReportDataFixture.getNewReport(1L));

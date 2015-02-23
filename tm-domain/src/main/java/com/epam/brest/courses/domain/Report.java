@@ -89,14 +89,18 @@ public class Report {
         this.timeTotal = tTotal;
     }
 
+    /**
+     *
+     * @return toString
+     */
     @Override
     public final String toString() {
-        final StringBuffer sb = new StringBuffer("Report{");
-        sb.append("personId=").append(personId);
-        sb.append(", personFirstName='").append(personFirstName).append('\'');
-        sb.append(", personLastName='").append(personLastName).append('\'');
-        sb.append(", timeTotal=").append(timeTotal);
-        sb.append('}');
-        return sb.toString();
+        final StringBuffer stringBuffer = new StringBuffer("Report{");
+        stringBuffer.append("personId=").append(personId);
+        stringBuffer.append(", personFirstName='").append(personFirstName).append('\'');
+        stringBuffer.append(", personLastName='").append(personLastName).append('\'');
+        stringBuffer.append(", timeTotal=").append(timeTotal);
+        stringBuffer.append('}');
+        return stringBuffer.toString();
     }
 }
