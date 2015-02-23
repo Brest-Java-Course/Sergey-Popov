@@ -2,7 +2,17 @@ package com.epam.brest.courses.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,6 +28,19 @@ import java.util.Set;
 })
 public class Person {
 
+    /**
+     *
+     */
+    public static final int MAX_NAME_SIZE = 45;
+
+    /**
+     *
+     */
+    public static final int HNUMBER = 31;
+
+    /**
+     *
+     */
     @Id
     @NotNull
     @Min(1)
@@ -25,73 +48,132 @@ public class Person {
     @Column(name = "person_id")
     private Long personId;
 
+    /**
+     *
+     */
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = MAX_NAME_SIZE)
     @Column(name = "person_fname")
     private String personFirstName;
 
+    /**
+     *
+     */
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = MAX_NAME_SIZE)
     @Column(name = "person_lname")
     private String personLastName;
 
+    /**
+     *
+     */
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "personId")
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            mappedBy = "personId")
     private Set<Task> taskSet;
 
+    /**
+     *
+     */
     public Person() {
 
     }
 
-    public Person(String personFirstName, String personLastName) {
+    /**
+     *
+     * @param personFName personFirstName
+     * @param personLName personLastName
+     */
+    public Person(final String personFName, final String personLName) {
 
-        this.personFirstName = personFirstName;
-        this.personLastName = personLastName;
-
-    }
-
-    public Person(Long personId, String personFirstName, String personLastName) {
-
-        this.personId = personId;
-        this.personFirstName = personFirstName;
-        this.personLastName = personLastName;
+        this.personFirstName = personFName;
+        this.personLastName = personLName;
 
     }
 
-    public Long getPersonId() {
+    /**
+     *
+     * @param persId personId
+     * @param personFName personFirstName
+     * @param personLName personLastName
+     */
+    public Person(final Long persId,
+                  final String personFName,
+                  final String personLName) {
+
+        this.personId = persId;
+        this.personFirstName = personFName;
+        this.personLastName = personLName;
+
+    }
+
+    /**
+     *
+     * @return personId
+     */
+    public final Long getPersonId() {
         return personId;
     }
 
-    public void setPersonId(Long personId) {
-        this.personId = personId;
+    /**
+     *
+     * @param persId personId
+     */
+    public final void setPersonId(final Long persId) {
+        this.personId = persId;
     }
 
-    public String getPersonFirstName() {
+    /**
+     *
+     * @return personFirstName
+     */
+    public final String getPersonFirstName() {
         return personFirstName;
     }
 
-    public void setPersonFirstName(String personFirstName) {
-        this.personFirstName = personFirstName;
+    /**
+     *
+     * @param personFName personFirstName
+     */
+    public final void setPersonFirstName(final String personFName) {
+        this.personFirstName = personFName;
     }
 
-    public String getPersonLastName() {
+    /**
+     *
+     * @return personLastName
+     */
+    public final String getPersonLastName() {
         return personLastName;
     }
 
-    public void setPersonLastName(String personLastName) {
-        this.personLastName = personLastName;
+    /**
+     *
+     * @param personLName personLastName
+     */
+    public final void setPersonLastName(final String personLName) {
+        this.personLastName = personLName;
     }
 
-    public Set<Task> getTaskSet() {
+    /**
+     *
+     * @return taskSet
+     */
+    public final Set<Task> getTaskSet() {
         return taskSet;
     }
 
-    public void setTaskSet(Set<Task> taskSet) {
-        this.taskSet = taskSet;
+    /**
+     *
+     * @param tSet taskSet
+     */
+    public final void setTaskSet(final Set<Task> tSet) {
+        this.taskSet = tSet;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(final Object o) {
 
         if (this == o) {
 
@@ -107,24 +189,33 @@ public class Person {
 
         Person person = (Person) o;
 
-        return personFirstName.equals(person.personFirstName) && personId.equals(person.personId)
+        return personFirstName.equals(person.personFirstName)
+                && personId.equals(person.personId)
                 && personLastName.equals(person.personLastName);
 
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
 
         int result = personId.hashCode();
-        result = 31 * result + personFirstName.hashCode();
-        result = 31 * result + personLastName.hashCode();
-        result = 31 * result + (taskSet != null ? taskSet.hashCode() : 0);
+        int taskSetHashCode;
+        result = HNUMBER * result + personFirstName.hashCode();
+        result = HNUMBER * result + personLastName.hashCode();
+
+        if (taskSet != null) {
+            taskSetHashCode = taskSet.hashCode();
+        } else {
+            taskSetHashCode = 0;
+        }
+
+        result = HNUMBER * result + taskSetHashCode;
         return result;
 
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
 
         final StringBuffer sb = new StringBuffer("Person{");
         sb.append("personId=").append(personId);

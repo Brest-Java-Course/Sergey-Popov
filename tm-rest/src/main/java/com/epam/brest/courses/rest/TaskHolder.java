@@ -7,28 +7,50 @@ import com.epam.brest.courses.domain.Task;
  */
 public class TaskHolder {
 
+    /**
+     *
+     */
     private Task task;
 
+    /**
+     *
+     */
     private Long personId;
 
-    public Task getTask() {
+    /**
+     *
+     * @return task
+     */
+    public final Task getTask() {
         return task;
     }
 
-    public void setTask(Task task) {
-        this.task = task;
+    /**
+     *
+     * @param tsk task
+     */
+    public final void setTask(final Task tsk) {
+        this.task = tsk;
     }
 
-    public Long getPersonId() {
+    /**
+     *
+     * @return personId
+     */
+    public final Long getPersonId() {
         return personId;
     }
 
-    public void setPersonId(Long personId) {
-        this.personId = personId;
+    /**
+     *
+     * @param persId personId
+     */
+    public final void setPersonId(final Long persId) {
+        this.personId = persId;
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         final StringBuffer sb = new StringBuffer("TaskHolder{");
         sb.append("task=").append(task);
         sb.append(", personId=").append(personId);

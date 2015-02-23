@@ -23,17 +23,26 @@ import java.util.List;
 @Repository
 public class TaskDaoImpl implements TaskDao {
 
+    /**
+     *
+     */
     @PersistenceContext
-    protected EntityManager emf;
+    private EntityManager emf;
 
+    /**
+     *
+     */
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     *
+     */
     @Autowired
     private DataSource dataSource;
 
     @Override
     @Transactional
-    public Task addTask(Task task, Long personId) {
+    public final Task addTask(final Task task, final Long personId) {
 
         LOGGER.debug("TaskDaoImpl.addTask({})", task);
 
@@ -41,9 +50,12 @@ public class TaskDaoImpl implements TaskDao {
         Assert.notNull(personId, "Person Id should be specified!");
         Assert.isNull(task.getTaskId(), "Task Id should not be specified!");
         Assert.notNull(task.getTaskName(), "Task Name should be specified!");
-        Assert.notNull(task.getStartDate(), "Task start date should be specified!");
-        Assert.isNull(task.getEndDate(), "Task end date should not be specified!");
-        Assert.isNull(task.getElapsedTime(), "Task elapsed time should not be specified!");
+        Assert.notNull(task.getStartDate(),
+                "Task start date should be specified!");
+        Assert.isNull(task.getEndDate(),
+                "Task end date should not be specified!");
+        Assert.isNull(task.getElapsedTime(),
+                "Task elapsed time should not be specified!");
         Assert.notNull(task.getTaskState(), "Task state should be specified");
 
         Person personFromDb = emf.find(Person.class, personId);
@@ -57,12 +69,13 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     @Transactional
-    public List<Task> getTasks() {
+    public final List<Task> getTasks() {
 
         LOGGER.debug("TaskDaoImpl.getTasks()");
 
         List<Task> tasks;
-        TypedQuery<Task> query = emf.createNamedQuery("Task.findAll", Task.class);
+        TypedQuery<Task> query = emf.createNamedQuery("Task.findAll",
+                Task.class);
         tasks = query.getResultList();
 
         LOGGER.debug("TaskDaoImpl.getTasks() : list.size = {}", tasks.size());
@@ -72,24 +85,27 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     @Transactional
-    public List<Task> getTasksById(Long personId) {
+    public final List<Task> getTasksById(final Long personId) {
 
         LOGGER.debug("TaskDaoImpl.getTasksById(personId = {})", personId);
 
         Assert.notNull(personId, "Person Id should be specified!");
 
         List<Task> tasks;
-        Query query = emf.createQuery("SELECT t FROM Task t WHERE t.personId.personId = :personId").setParameter("personId", personId);
+        Query query = emf.createQuery(
+                "SELECT t FROM Task t WHERE t.personId.personId = :personId")
+                .setParameter("personId", personId);
         tasks = query.getResultList();
 
-        LOGGER.debug("TaskDaoImpl.getTasksById() : list.size = {}", tasks.size());
+        LOGGER.debug("TaskDaoImpl.getTasksById() : list.size = {}",
+                tasks.size());
         return tasks;
 
     }
 
     @Override
     @Transactional
-    public Task getTaskById(Long taskId) {
+    public final Task getTaskById(final Long taskId) {
 
         LOGGER.debug("TaskDaoImpl.getTaskById(taskId = {})", taskId);
 
@@ -104,7 +120,7 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     @Transactional
-    public void updateTask(Task task) {
+    public final void updateTask(final Task task) {
 
         LOGGER.debug("TaskDaoImpl.dateTask({})", task);
 
@@ -123,14 +139,16 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     @Transactional
-    public void removeTask(Long taskId) {
+    public final void removeTask(final Long taskId) {
 
         LOGGER.debug("TaskDaoImpl.removeTask(taskId = {})", taskId);
 
         Assert.notNull(taskId, "Task Id should be specified!");
 
         Task taskFromDb = emf.find(Task.class, taskId);
-        emf.remove(emf.contains(taskFromDb) ? taskFromDb : emf.merge(taskFromDb));
+        emf.remove(
+                emf.contains(taskFromDb)
+                        ? taskFromDb : emf.merge(taskFromDb));
 
         LOGGER.debug("TaskDaoImpl.removeTask() : taskRemoved = {}", taskFromDb);
 

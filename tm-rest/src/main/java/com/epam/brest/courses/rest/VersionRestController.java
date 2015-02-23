@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/rest")
 public class VersionRestController {
 
+    /**
+     *
+     * @return ResponseEntity<>
+     */
     @RequestMapping(value = "/version", method = RequestMethod.GET)
-    public ResponseEntity<String> getVersion() {
+    public final ResponseEntity<String> getVersion() {
 
         return new ResponseEntity<>("1.0", HttpStatus.OK);
 

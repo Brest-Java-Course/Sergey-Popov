@@ -14,10 +14,16 @@ import java.io.IOException;
  */
 public class CustomDateSerializer extends JsonSerializer<DateTime> {
 
+    /**
+     *
+     */
     private static DateTimeFormatter formatter = ISODateTimeFormat.dateTime();
 
     @Override
-    public void serialize(DateTime dateTime, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+    public final void serialize(final DateTime dateTime,
+                                final JsonGenerator jsonGenerator,
+                                final SerializerProvider serializerProvider)
+            throws IOException {
         jsonGenerator.writeString(formatter.print(dateTime));
     }
 

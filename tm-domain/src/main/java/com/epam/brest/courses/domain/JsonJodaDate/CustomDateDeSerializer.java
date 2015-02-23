@@ -14,10 +14,15 @@ import java.io.IOException;
  */
 public class CustomDateDeSerializer extends JsonDeserializer<DateTime> {
 
+    /**
+     *
+     */
     private static DateTimeFormatter formatter = ISODateTimeFormat.dateTime();
 
     @Override
-    public DateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+    public final DateTime deserialize(final JsonParser jsonParser,
+                          final DeserializationContext deserializationContext)
+            throws IOException {
 
         String dateTimeAsString = jsonParser.getText().trim();
         return formatter.parseDateTime(dateTimeAsString);

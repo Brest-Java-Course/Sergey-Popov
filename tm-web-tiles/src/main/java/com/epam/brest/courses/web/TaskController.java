@@ -26,22 +26,41 @@ import java.util.List;
 @RequestMapping("/mvc/task")
 public class TaskController {
 
+    /**
+     *
+     */
     private static final String TASK_LIST = "redirect:/mvc/task/getTasks";
 
+    /**
+     *
+     */
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     *
+     */
     @Autowired
     private TaskService taskService;
 
+    /**
+     *
+     * @return TASK_LIST
+     */
     @RequestMapping
-    public String init() {
+    public final String init() {
 
         return TASK_LIST;
 
     }
 
-    @RequestMapping(value="/addTask", method= RequestMethod.GET)
-    public ModelAndView getAddFormView(@RequestParam("personId")Long personId) {
+    /**
+     *
+     * @param personId personId
+     * @return modelAndView
+     */
+    @RequestMapping(value = "/addTask", method = RequestMethod.GET)
+    public final ModelAndView getAddFormView(
+            @RequestParam("personId") final Long personId) {
 
         ModelAndView modelAndView = new ModelAndView("addTask");
         modelAndView.addObject("task", new Task());
@@ -50,13 +69,21 @@ public class TaskController {
 
     }
 
-    @RequestMapping(value="/addTask", method= RequestMethod.POST)
-    public String launchAddForm(@RequestParam("taskName")String taskName,
-                                @RequestParam("startDate")String startDate,
-                                @RequestParam("personId")Long personId) {
+    /**
+     *
+     * @param taskName taskName
+     * @param startDate startDate
+     * @param personId personId
+     * @return TASK_LIST
+     */
+    @RequestMapping(value = "/addTask", method = RequestMethod.POST)
+    public final String launchAddForm(
+            @RequestParam("taskName") final String taskName,
+            @RequestParam("startDate") final String startDate,
+            @RequestParam("personId") final Long personId) {
 
-        LOGGER.debug("Inserting task with Name : " + taskName +
-                ", StartDate : " + startDate + ", PersonId : " + personId);
+        LOGGER.debug("Inserting task with Name : " + taskName
+                + ", StartDate : " + startDate + ", PersonId : " + personId);
 
         DateTimeFormatter formatter = ISODateTimeFormat.dateTime();
         DateTime dt = formatter.parseDateTime(startDate);
@@ -70,8 +97,12 @@ public class TaskController {
 
     }
 
-    @RequestMapping(value="/getTasks", method= RequestMethod.GET)
-    public ModelAndView getTaskListView() {
+    /**
+     *
+     * @return ModelAndView
+     */
+    @RequestMapping(value = "/getTasks", method = RequestMethod.GET)
+    public final ModelAndView getTaskListView() {
 
         List<Task> tasks = taskService.getTasks();
 
@@ -81,8 +112,14 @@ public class TaskController {
 
     }
 
-    @RequestMapping(value="/getTasksById", method= RequestMethod.GET)
-    public ModelAndView getTaskListByIdView(@RequestParam("id")Long personId) {
+    /**
+     *
+     * @param personId personId
+     * @return ModelAndView
+     */
+    @RequestMapping(value = "/getTasksById", method = RequestMethod.GET)
+    public final ModelAndView getTaskListByIdView(
+            @RequestParam("id") final Long personId) {
 
         LOGGER.debug("personId = " + personId);
 
@@ -99,8 +136,14 @@ public class TaskController {
 
     }
 
+    /**
+     *
+     * @param taskId taskId
+     * @return ModelAndView
+     */
     @RequestMapping(value = "/getTaskById", method = RequestMethod.GET)
-    public ModelAndView getTaskByIdView(@RequestParam("id")Long taskId) {
+    public final ModelAndView getTaskByIdView(
+            @RequestParam("id") final Long taskId) {
 
         LOGGER.debug("taskId: " + taskId);
 
@@ -117,14 +160,25 @@ public class TaskController {
 
     }
 
-    @RequestMapping(value="/updateTask", method= {RequestMethod.PUT, RequestMethod.POST})
-    public String launchUpdateForm(@RequestParam("id")Long taskId,
-                                   @RequestParam("taskName")String taskName,
-                                   @RequestParam("startDate")String startDate) {
+    /**
+     *
+     * @param taskId taskId
+     * @param taskName taskName
+     * @param startDate startDate
+     * @return TASK_LIST
+     */
+    @RequestMapping(value = "/updateTask", method = {
+            RequestMethod.PUT,
+            RequestMethod.POST
+    })
+    public final String launchUpdateForm(
+            @RequestParam("id") final Long taskId,
+            @RequestParam("taskName") final String taskName,
+            @RequestParam("startDate") final String startDate) {
 
-        LOGGER.debug("TaskId : " + taskId +
-                ", TaskName : " + taskName +
-                ", StartDate : " + startDate);
+        LOGGER.debug("TaskId : " + taskId
+                + ", TaskName : " + taskName
+                + ", StartDate : " + startDate);
 
         DateTimeFormatter formatter = ISODateTimeFormat.dateTime();
         DateTime dtStart = formatter.parseDateTime(startDate);
@@ -134,7 +188,8 @@ public class TaskController {
         task.setTaskName(taskName);
         task.setStartDate(dtStart);
         task.setEndDate(dtEnd);
-        task.setElapsedTime(new Period(dtStart, dtEnd, PeriodType.minutes()).getMinutes());
+        task.setElapsedTime(new Period(
+                dtStart, dtEnd, PeriodType.minutes()).getMinutes());
         task.setTaskState(false);
         taskService.updateTask(task);
 
@@ -142,8 +197,16 @@ public class TaskController {
 
     }
 
-    @RequestMapping(value = "/deleteTask", method = {RequestMethod.DELETE, RequestMethod.POST})
-    public String removeTask(@RequestParam("id")Long taskId) {
+    /**
+     *
+     * @param taskId taskId
+     * @return TASK_LIST
+     */
+    @RequestMapping(value = "/deleteTask", method = {
+            RequestMethod.DELETE,
+            RequestMethod.POST
+    })
+    public final String removeTask(@RequestParam("id") final Long taskId) {
 
         LOGGER.debug("Removing task with id = " + taskId);
 

@@ -7,7 +7,16 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -21,122 +30,238 @@ import javax.validation.constraints.Size;
 })
 public class Task {
 
+    /**
+     *
+     */
+    public static final int MAX_NAME_SIZE = 45;
+
+    /**
+     *
+     */
+    public static final int H_NUMBER = 31;
+
+    /**
+     *
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
     private Long taskId;
 
+    /**
+     *
+     */
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = MAX_NAME_SIZE)
     @Column(name = "task_name")
     private String taskName;
 
+    /**
+     *
+     */
     @NotNull
     @Column(name = "task_state")
     private Boolean taskState;
 
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    /**
+     *
+     */
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     @JsonSerialize(using = CustomDateSerializer.class)
     @JsonDeserialize(using = CustomDateDeSerializer.class)
     @Column(name = "task_startdate", columnDefinition = "datetime NULL")
     private DateTime startDate;
 
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    /**
+     *
+     */
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     @JsonSerialize(using = CustomDateSerializer.class)
     @JsonDeserialize(using = CustomDateDeSerializer.class)
     @Column(name = "task_enddate", columnDefinition = "datetime NULL")
     private DateTime endDate;
 
+    /**
+     *
+     */
     @Column(name = "task_elapsedtime")
     private Integer elapsedTime;
 
+    /**
+     *
+     */
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     @ManyToOne(optional = false)
     private Person personId;
 
+    /**
+     *
+     */
     public Task() {
 
     }
 
-    public Task(String taskName, Boolean taskState, DateTime startDate, DateTime endDate, Integer elapsedTime) {
+    /**
+     *
+     * @param tName taskName
+     * @param tState taskState
+     * @param sDate startDate
+     * @param eDate endDate
+     * @param elapsTime elapsedTime
+     */
+    public Task(final String tName,
+                final Boolean tState,
+                final DateTime sDate,
+                final DateTime eDate,
+                final Integer elapsTime) {
 
-        this.taskName = taskName;
-        this.taskState = taskState;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.elapsedTime = elapsedTime;
+        this.taskName = tName;
+        this.taskState = tState;
+        this.startDate = sDate;
+        this.endDate = eDate;
+        this.elapsedTime = elapsTime;
 
     }
 
-    public Task(Long taskId, String taskName, Boolean taskState, DateTime startDate, DateTime endDate, Integer elapsedTime) {
+    /**
+     *
+     * @param tId taskId
+     * @param tName taskName
+     * @param tState taskState
+     * @param sDate startDate
+     * @param eDate endDate
+     * @param elapsTime elapsedTime
+     */
+    public Task(final Long tId,
+                final String tName,
+                final Boolean tState,
+                final DateTime sDate,
+                final DateTime eDate,
+                final Integer elapsTime) {
 
-        this.taskId = taskId;
-        this.taskName = taskName;
-        this.taskState = taskState;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.elapsedTime = elapsedTime;
+        this.taskId = tId;
+        this.taskName = tName;
+        this.taskState = tState;
+        this.startDate = sDate;
+        this.endDate = eDate;
+        this.elapsedTime = elapsTime;
 
     }
 
-    public Long getTaskId() {
+    /**
+     *
+     * @return taskId
+     */
+    public final Long getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(Long taskId) {
-        this.taskId = taskId;
+    /**
+     *
+     * @param tId taskId
+     */
+    public final void setTaskId(final Long tId) {
+        this.taskId = tId;
     }
 
-    public String getTaskName() {
+    /**
+     *
+     * @return taskName
+     */
+    public final String getTaskName() {
         return taskName;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
+    /**
+     *
+     * @param tName taskName
+     */
+    public final void setTaskName(final String tName) {
+        this.taskName = tName;
     }
 
-    public Boolean getTaskState() {
+    /**
+     *
+     * @return taskState
+     */
+    public final Boolean getTaskState() {
         return taskState;
     }
 
-    public void setTaskState(Boolean taskState) {
-        this.taskState = taskState;
+    /**
+     *
+     * @param tState taskState
+     */
+    public final void setTaskState(final Boolean tState) {
+        this.taskState = tState;
     }
 
-    public DateTime getStartDate() {
+    /**
+     *
+     * @return startDate
+     */
+    public final DateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(DateTime startDate) {
-        this.startDate = startDate;
+    /**
+     *
+     * @param sDate startDate
+     */
+    public final void setStartDate(final DateTime sDate) {
+        this.startDate = sDate;
     }
 
-    public DateTime getEndDate() {
+    /**
+     *
+     * @return endDate
+     */
+    public final DateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(DateTime endDate) {
-        this.endDate = endDate;
+    /**
+     *
+     * @param eDate endDate
+     */
+    public final void setEndDate(final DateTime eDate) {
+        this.endDate = eDate;
     }
 
-    public Integer getElapsedTime() {
+    /**
+     *
+     * @return elapsedTime
+     */
+    public final Integer getElapsedTime() {
         return elapsedTime;
     }
 
-    public void setElapsedTime(Integer elapsedTime) {
-        this.elapsedTime = elapsedTime;
+    /**
+     *
+     * @param elapsTime elapsedTime
+     */
+    public final void setElapsedTime(final Integer elapsTime) {
+        this.elapsedTime = elapsTime;
     }
 
-    public Person getPerson() {
+    /**
+     *
+     * @return personId
+     */
+    public final Person getPerson() {
         return personId;
     }
 
-    public void setPerson(Person personId) {
-        this.personId = personId;
+    /**
+     *
+     * @param persId personId
+     */
+    public final void setPerson(final Person persId) {
+        this.personId = persId;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(final Object o) {
 
         if (this == o) {
 
@@ -152,26 +277,29 @@ public class Task {
 
         Task task = (Task) o;
 
-        return elapsedTime.equals(task.elapsedTime) && endDate.equals(task.endDate)
-                && startDate.equals(task.startDate) && taskId.equals(task.taskId)
-                && taskName.equals(task.taskName) && taskState.equals(task.taskState);
+        return elapsedTime.equals(task.elapsedTime)
+                && endDate.equals(task.endDate)
+                && startDate.equals(task.startDate)
+                && taskId.equals(task.taskId)
+                && taskName.equals(task.taskName)
+                && taskState.equals(task.taskState);
 
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
 
         int result = taskId.hashCode();
-        result = 31 * result + taskName.hashCode();
-        result = 31 * result + taskState.hashCode();
-        result = 31 * result + startDate.hashCode();
+        result = H_NUMBER * result + taskName.hashCode();
+        result = H_NUMBER * result + taskState.hashCode();
+        result = H_NUMBER * result + startDate.hashCode();
 
         return result;
 
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
 
         final StringBuffer sb = new StringBuffer("Task{");
         sb.append("taskId=").append(taskId);

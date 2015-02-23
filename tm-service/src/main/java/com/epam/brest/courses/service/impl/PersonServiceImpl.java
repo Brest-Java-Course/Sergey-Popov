@@ -19,44 +19,57 @@ import java.util.List;
 @Service
 public class PersonServiceImpl implements PersonService {
 
+    /**
+     *
+     */
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     *
+     */
     @Autowired
     private PersonDao personDao;
 
     @Override
-    public Person addPerson(Person person) {
+    public final Person addPerson(final Person person) {
 
         LOGGER.debug("PersonServiceImpl.addPerson({})", person);
 
         Assert.notNull(person);
-        Assert.isNull(person.getPersonId(), "Person Id should not be specified!");
-        Assert.notNull(person.getPersonFirstName(), "Person First Name should be specified!");
-        Assert.notNull(person.getPersonLastName(), "Person Last Name should be specified!");
+        Assert.isNull(person.getPersonId(),
+                "Person Id should not be specified!");
+        Assert.notNull(person.getPersonFirstName(),
+                "Person First Name should be specified!");
+        Assert.notNull(person.getPersonLastName(),
+                "Person Last Name should be specified!");
 
         Person personFromDb = personDao.addPerson(person);
-        LOGGER.debug("PersonServiceImpl.addPerson() : id = {}", personFromDb.getPersonId());
+        LOGGER.debug("PersonServiceImpl.addPerson() : id = {}",
+                personFromDb.getPersonId());
 
         return personFromDb;
 
     }
 
     @Override
-    public List<Person> getPersons() {
+    public final List<Person> getPersons() {
 
         LOGGER.debug("PersonServiceImpl.getPersons()");
 
         List<Person> persons;
         persons = personDao.getPersons();
 
-        LOGGER.debug("PersonServiceImpl.getPersons() : list.size = {}", persons.size());
+        LOGGER.debug("PersonServiceImpl.getPersons() : list.size = {}",
+                persons.size());
 
         return persons;
 
     }
 
     @Override
-    public List<Report> getPersonsWithTasksBetweenDate(DateTime startDate, DateTime endDate) {
+    public final List<Report> getPersonsWithTasksBetweenDate(
+            final DateTime startDate,
+            final DateTime endDate) {
 
         LOGGER.debug("PersonServiceImpl.getPersonsWithTasksBetweenDate()");
         LOGGER.debug("startDate : " + startDate + ", endDate : " + endDate);
@@ -64,27 +77,32 @@ public class PersonServiceImpl implements PersonService {
         List<Report> persons;
         persons = personDao.getPersonsWithTasksBetweenDate(startDate, endDate);
 
-        LOGGER.debug("PersonServiceImpl.getPersonsWithTasksBetweenDate() : list.size = {}", persons.size());
+        LOGGER.debug(
+                "PersonServiceImpl.getPersonsWithTasksBetweenDate() : "
+                        + "list.size = {}",
+                persons.size());
 
         return persons;
 
     }
 
     @Override
-    public Person getPersonById(Long personId) {
+    public final Person getPersonById(final Long personId) {
 
-        LOGGER.debug("PersonServiceImpl.getPersonById(personId = {})", personId);
+        LOGGER.debug("PersonServiceImpl.getPersonById(personId = {})",
+                personId);
 
         Assert.notNull(personId, "Person Id should be specified!");
         Person personFromDb = personDao.getPersonById(personId);
 
-        LOGGER.debug("PersonServiceImpl.getPersonById() : person = {}", personFromDb);
+        LOGGER.debug("PersonServiceImpl.getPersonById() : person = {}",
+                personFromDb);
         return personFromDb;
 
     }
 
     @Override
-    public void updatePerson(Person person) {
+    public final void updatePerson(final Person person) {
 
         LOGGER.debug("PersonServiceImpl.updatePerson({})", person);
 
@@ -92,19 +110,21 @@ public class PersonServiceImpl implements PersonService {
 
         personDao.updatePerson(person);
 
-        LOGGER.debug("PersonServiceImpl.updatePerson() : personUpdated = {}", person);
+        LOGGER.debug("PersonServiceImpl.updatePerson() : personUpdated = {}",
+                person);
 
     }
 
     @Override
-    public void removePerson(Long personId) {
+    public final void removePerson(final Long personId) {
 
         LOGGER.debug("PersonServiceImpl.removePerson(personId = {})", personId);
 
         Assert.notNull(personId, "Person Id should be specified!");
         personDao.removePerson(personId);
 
-        LOGGER.debug("PersonServiceImpl.removePerson() : id personRemoved = {}", personId);
+        LOGGER.debug("PersonServiceImpl.removePerson() : id personRemoved = {}",
+                personId);
 
     }
 

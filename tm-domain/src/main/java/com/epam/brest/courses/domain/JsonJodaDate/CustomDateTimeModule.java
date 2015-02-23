@@ -9,6 +9,9 @@ import org.joda.time.DateTime;
  */
 public class CustomDateTimeModule extends SimpleModule {
 
+    /**
+     *
+     */
     public CustomDateTimeModule() {
         super();
         addSerializer(DateTime.class, new CustomDateSerializer());

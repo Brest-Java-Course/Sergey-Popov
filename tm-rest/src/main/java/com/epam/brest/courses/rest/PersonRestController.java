@@ -11,7 +11,11 @@ import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -22,43 +26,74 @@ import java.util.List;
 @RequestMapping(value = "/rest/persons")
 public class PersonRestController {
 
+    /**
+     *
+     */
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     *
+     */
     @Autowired
     private PersonService personService;
 
+    /**
+     *
+     * @param person person
+     * @return ResponseEntity<>
+     */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Person> addPerson(@RequestBody Person person) {
+    public final ResponseEntity<Person> addPerson(
+             @RequestBody final Person person) {
 
         Person personFromDb = personService.addPerson(person);
         return new ResponseEntity<>(personFromDb, HttpStatus.CREATED);
 
     }
 
+    /**
+     *
+     * @return ResponseEntity<>
+     */
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Person>> getPersons() {
+    public final ResponseEntity<List<Person>> getPersons() {
 
         List<Person> persons = personService.getPersons();
         return new ResponseEntity<>(persons, HttpStatus.OK);
 
     }
 
-    @RequestMapping(value = "/tasksBetween/{startDate}/{endDate}/",method = RequestMethod.GET)
-    public ResponseEntity<List<Report>> getPersonsWithTasksBetweenDate(@PathVariable String startDate,
-                                                                       @PathVariable String endDate) {
+    /**
+     *
+     * @param startDate startDate
+     * @param endDate endDate
+     * @return ResponseEntity<>
+     */
+    @RequestMapping(value = "/tasksBetween/{startDate}/{endDate}/",
+            method = RequestMethod.GET)
+    public final ResponseEntity<List<Report>> getPersonsWithTasksBetweenDate(
+            @PathVariable final String startDate,
+            @PathVariable final String endDate) {
 
-        LOGGER.debug("StartDate : " + startDate +
-                ", EndDate : " + endDate);
+        LOGGER.debug("StartDate : " + startDate
+                + ", EndDate : " + endDate);
         DateTimeFormatter formatter = ISODateTimeFormat.dateTime();
         DateTime dtStart = formatter.parseDateTime(startDate);
         DateTime dtEnd = formatter.parseDateTime(endDate);
-        List<Report> persons = personService.getPersonsWithTasksBetweenDate(dtStart, dtEnd);
+        List<Report> persons = personService.getPersonsWithTasksBetweenDate(
+                dtStart, dtEnd);
         return new ResponseEntity<>(persons, HttpStatus.OK);
 
     }
 
+    /**
+     *
+     * @param id id
+     * @return ResponseEntity
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Person> getPersonById(@PathVariable Long id) {
+    public final ResponseEntity<Person> getPersonById(
+            @PathVariable final Long id) {
 
         try {
 
@@ -67,23 +102,36 @@ public class PersonRestController {
 
         } catch (Exception e) {
 
-            return new ResponseEntity("Person not found for id = " + id + " error: "
+            return new ResponseEntity("Person not found for id = "
+                    + id + " error: "
                     + e.getMessage(), HttpStatus.NOT_FOUND);
 
         }
 
     }
 
+    /**
+     *
+     * @param person person
+     * @return ResponseEntity<>
+     */
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<String> updatePerson(@RequestBody Person person) {
+    public final ResponseEntity<String> updatePerson(
+            @RequestBody final Person person) {
 
         personService.updatePerson(person);
         return new ResponseEntity<>("", HttpStatus.OK);
 
     }
 
+    /**
+     *
+     * @param id id
+     * @return ResponseEntity<>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<String> removePerson(@PathVariable Long id) {
+    public final ResponseEntity<String> removePerson(
+            @PathVariable final Long id) {
 
         personService.removePerson(id);
         return new ResponseEntity<>("", HttpStatus.OK);

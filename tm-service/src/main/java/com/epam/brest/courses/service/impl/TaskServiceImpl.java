@@ -17,13 +17,19 @@ import java.util.List;
 @Service
 public class TaskServiceImpl implements TaskService {
 
+    /**
+     *
+     */
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     *
+     */
     @Autowired
     private TaskDao taskDao;
 
     @Override
-    public Task addTask(Task task, Long personId) {
+    public final Task addTask(final Task task, final Long personId) {
 
         LOGGER.debug("TaskServiceImpl.addTask({})", task);
 
@@ -31,33 +37,38 @@ public class TaskServiceImpl implements TaskService {
         Assert.notNull(personId, "Person Id should be specified!");
         Assert.isNull(task.getTaskId(), "Task Id should not be specified!");
         Assert.notNull(task.getTaskName(), "Task Name should be specified!");
-        Assert.notNull(task.getStartDate(), "Task start date should be specified!");
-        Assert.isNull(task.getEndDate(), "Task end date should not be specified!");
-        Assert.isNull(task.getElapsedTime(), "Task elapsed time should not be specified!");
+        Assert.notNull(task.getStartDate(),
+                "Task start date should be specified!");
+        Assert.isNull(task.getEndDate(),
+                "Task end date should not be specified!");
+        Assert.isNull(task.getElapsedTime(),
+                "Task elapsed time should not be specified!");
         Assert.notNull(task.getTaskState(), "Task state should be specified");
 
         Task taskFromDb = taskDao.addTask(task, personId);
 
-        LOGGER.debug("TaskServiceImpl.addTask() : id = {}", taskFromDb.getTaskId());
+        LOGGER.debug("TaskServiceImpl.addTask() : id = {}",
+                taskFromDb.getTaskId());
         return taskFromDb;
 
     }
 
     @Override
-    public List<Task> getTasks() {
+    public final List<Task> getTasks() {
 
         LOGGER.debug("TaskServiceImpl.getTasks()");
 
         List<Task> tasks;
         tasks = taskDao.getTasks();
 
-        LOGGER.debug("TaskServiceImpl.getTasks() : list.size = {}", tasks.size());
+        LOGGER.debug("TaskServiceImpl.getTasks() : list.size = {}",
+                tasks.size());
         return tasks;
 
     }
 
     @Override
-    public List<Task> getTasksById(Long personId) {
+    public final List<Task> getTasksById(final Long personId) {
 
         LOGGER.debug("TaskServiceImpl.getTasksById(personId = {})", personId);
 
@@ -66,13 +77,14 @@ public class TaskServiceImpl implements TaskService {
         List<Task> tasks;
         tasks = taskDao.getTasksById(personId);
 
-        LOGGER.debug("TaskServiceImpl.getTasksById() : list.size = {}", tasks.size());
+        LOGGER.debug("TaskServiceImpl.getTasksById() : list.size = {}",
+                tasks.size());
         return tasks;
 
     }
 
     @Override
-    public Task getTaskById(Long taskId) {
+    public final Task getTaskById(final Long taskId) {
 
         LOGGER.debug("TaskServiceImpl.getTaskById(taskId = {})", taskId);
 
@@ -86,7 +98,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void updateTask(Task task) {
+    public final void updateTask(final Task task) {
 
         LOGGER.debug("TaskServiceImpl.updateTask({})", task);
 
@@ -99,7 +111,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void removeTask(Long taskId) {
+    public final void removeTask(final Long taskId) {
 
         LOGGER.debug("TaskServiceImpl.removeTask(taskId = {})", taskId);
 
@@ -107,7 +119,8 @@ public class TaskServiceImpl implements TaskService {
 
         taskDao.removeTask(taskId);
 
-        LOGGER.debug("TaskServiceImpl.removeTask() : id taskRemoved = {}", taskId);
+        LOGGER.debug("TaskServiceImpl.removeTask() : id taskRemoved = {}",
+                taskId);
 
     }
 

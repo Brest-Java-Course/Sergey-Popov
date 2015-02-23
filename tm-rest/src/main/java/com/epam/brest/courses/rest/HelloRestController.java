@@ -13,10 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/rest")
 public class HelloRestController {
 
+    /**
+     *
+     * @return ResponseEntity<>
+     */
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public ResponseEntity<String> getDescription() {
+    public final ResponseEntity<String> getDescription() {
 
-        return new ResponseEntity<>("Task Manager is a simple sql-based application", HttpStatus.OK);
+        return new ResponseEntity<>(
+                "Task Manager is a simple sql-based application",
+                HttpStatus.OK);
 
     }
 

@@ -25,32 +25,57 @@ import java.util.List;
 @RequestMapping("/mvc/person")
 public class PersonController {
 
+    /**
+     *
+     */
     private static final String PERSON_LIST = "redirect:/mvc/person/getPersons";
 
+    /**
+     *
+     */
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     *
+     */
     @Autowired
     private PersonService personService;
 
+    /**
+     *
+     * @return PERSON_LIST
+     */
     @RequestMapping
-    public String init() {
+    public final String init() {
 
         return PERSON_LIST;
 
     }
 
-    @RequestMapping(value="/addPerson", method= RequestMethod.GET)
-    public ModelAndView getAddFormView() {
+    /**
+     *
+     * @return ModelAndView
+     */
+    @RequestMapping(value = "/addPerson", method = RequestMethod.GET)
+    public final ModelAndView getAddFormView() {
 
         return new ModelAndView("addPerson", "person", new Person());
 
     }
 
-    @RequestMapping(value="/addPerson", method= RequestMethod.POST)
-    public String launchAddForm(@RequestParam("firstName")String firstName,
-                                  @RequestParam("lastName")String lastName) {
+    /**
+     *
+     * @param firstName firstName
+     * @param lastName lastName
+     * @return PERSON_LIST
+     */
+    @RequestMapping(value = "/addPerson", method = RequestMethod.POST)
+    public final String launchAddForm(
+            @RequestParam("firstName") final String firstName,
+            @RequestParam("lastName") final String lastName) {
 
-        LOGGER.debug("Inserting person with FirstName : " + firstName + ", LastName : " + lastName);
+        LOGGER.debug("Inserting person with FirstName : "
+                + firstName + ", LastName : " + lastName);
 
         Person person = new Person();
         person.setPersonFirstName(firstName);
@@ -61,8 +86,12 @@ public class PersonController {
 
     }
 
-    @RequestMapping(value="/getPersons", method= RequestMethod.GET)
-    public ModelAndView getPersonListView() {
+    /**
+     *
+     * @return ModelAndView
+     */
+    @RequestMapping(value = "/getPersons", method = RequestMethod.GET)
+    public final ModelAndView getPersonListView() {
 
         List<Person> persons = personService.getPersons();
 
@@ -72,17 +101,26 @@ public class PersonController {
 
     }
 
-    @RequestMapping(value="/getPersonsWithTasksBetweenDate", method= RequestMethod.GET)
-    public ModelAndView getPersonsWithTasksBetweenDateListView(@RequestParam("startDate")String startDate,
-                                                               @RequestParam("endDate")String endDate) {
+    /**
+     *
+     * @param startDate startDate
+     * @param endDate endDate
+     * @return ModelAndView
+     */
+    @RequestMapping(value = "/getPersonsWithTasksBetweenDate",
+            method = RequestMethod.GET)
+    public final ModelAndView getPersonsWithTasksBetweenDateListView(
+            @RequestParam("startDate") final String startDate,
+            @RequestParam("endDate") final String endDate) {
 
-        LOGGER.debug("StartDate : " + startDate +
-                ", EndDate : " + endDate);
+        LOGGER.debug("StartDate : " + startDate
+                + ", EndDate : " + endDate);
 
         DateTimeFormatter formatter = ISODateTimeFormat.dateTimeNoMillis();
         DateTime dtStart = formatter.parseDateTime(startDate);
         DateTime dtEnd = formatter.parseDateTime(endDate);
-        List<Report> persons = personService.getPersonsWithTasksBetweenDate(dtStart, dtEnd);
+        List<Report> persons = personService.getPersonsWithTasksBetweenDate(
+                dtStart, dtEnd);
 
         LOGGER.debug("personList.size = " + persons.size());
 
@@ -90,8 +128,14 @@ public class PersonController {
 
     }
 
+    /**
+     *
+     * @param personId personId
+     * @return ModelAndView
+     */
     @RequestMapping(value = "/getPersonById", method = RequestMethod.GET)
-    public ModelAndView getPersonByIdView(@RequestParam("id")Long personId) {
+    public final ModelAndView getPersonByIdView(
+            @RequestParam("id") final Long personId) {
 
         LOGGER.debug("personId: " + personId);
 
@@ -108,14 +152,22 @@ public class PersonController {
 
     }
 
-    @RequestMapping(value="/updatePerson", method= RequestMethod.GET)
-    public ModelAndView getUpdateFormView(@RequestParam("id")Long personId,
-                                          @RequestParam("firstName")String firstName,
-                                          @RequestParam("lastName")String lastName) {
+    /**
+     *
+     * @param personId personId
+     * @param firstName firstName
+     * @param lastName lastName
+     * @return ModelAndView
+     */
+    @RequestMapping(value = "/updatePerson", method = RequestMethod.GET)
+    public final ModelAndView getUpdateFormView(
+            @RequestParam("id") final Long personId,
+            @RequestParam("firstName") final String firstName,
+            @RequestParam("lastName") final String lastName) {
 
-        LOGGER.debug("PersonId : " + personId +
-                ", FirstName : " + firstName +
-                ", LastName : " + lastName);
+        LOGGER.debug("PersonId : " + personId
+                + ", FirstName : " + firstName
+                + ", LastName : " + lastName);
 
         Person person = new Person();
         person.setPersonId(personId);
@@ -126,14 +178,25 @@ public class PersonController {
 
     }
 
-    @RequestMapping(value="/updatePerson", method= {RequestMethod.PUT, RequestMethod.POST})
-    public String launchUpdateForm(@RequestParam("id")Long personId,
-                                   @RequestParam("firstName")String firstName,
-                                   @RequestParam("lastName")String lastName) {
+    /**
+     *
+     * @param personId personId
+     * @param firstName firstName
+     * @param lastName lastName
+     * @return PERSON_LIST
+     */
+    @RequestMapping(value = "/updatePerson", method = {
+            RequestMethod.PUT,
+            RequestMethod.POST
+    })
+    public final String launchUpdateForm(
+            @RequestParam("id") final Long personId,
+            @RequestParam("firstName") final String firstName,
+            @RequestParam("lastName") final String lastName) {
 
-        LOGGER.debug("Updating person with PersonId : " + personId +
-                ", FirstName : " + firstName +
-                ", LastName : " + lastName);
+        LOGGER.debug("Updating person with PersonId : " + personId
+                + ", FirstName : " + firstName
+                + ", LastName : " + lastName);
 
         Person person = new Person();
         person.setPersonId(personId);
@@ -145,8 +208,16 @@ public class PersonController {
 
     }
 
-    @RequestMapping(value = "/deletePerson", method = {RequestMethod.DELETE, RequestMethod.POST})
-    public String removePerson(@RequestParam("id")Long personId) {
+    /**
+     *
+     * @param personId personId
+     * @return PERSON_LIST
+     */
+    @RequestMapping(value = "/deletePerson", method = {
+            RequestMethod.DELETE,
+            RequestMethod.POST
+    })
+    public final String removePerson(@RequestParam("id") final Long personId) {
 
         LOGGER.debug("Removing person with id = " + personId);
 

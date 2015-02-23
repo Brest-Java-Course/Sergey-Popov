@@ -5,48 +5,92 @@ package com.epam.brest.courses.domain;
  */
 public class Report {
 
+    /**
+     *
+     */
     private Long personId;
 
+    /**
+     *
+     */
     private String personFirstName;
 
+    /**
+     *
+     */
     private String personLastName;
 
+    /**
+     *
+     */
     private Long timeTotal;
 
-    public Long getPersonId() {
+    /**
+     *
+     * @return personId
+     */
+    public final Long getPersonId() {
         return personId;
     }
 
-    public void setPersonId(Long personId) {
-        this.personId = personId;
+    /**
+     *
+     * @param persId personId
+     */
+    public final void setPersonId(final Long persId) {
+        this.personId = persId;
     }
 
-    public String getPersonFirstName() {
+    /**
+     *
+     * @return personFirstName
+     */
+    public final String getPersonFirstName() {
         return personFirstName;
     }
 
-    public void setPersonFirstName(String personFirstName) {
-        this.personFirstName = personFirstName;
+    /**
+     *
+     * @param personFName personFirstName
+     */
+    public final void setPersonFirstName(final String personFName) {
+        this.personFirstName = personFName;
     }
 
-    public String getPersonLastName() {
+    /**
+     *
+     * @return personLastName
+     */
+    public final String getPersonLastName() {
         return personLastName;
     }
 
-    public void setPersonLastName(String personLastName) {
-        this.personLastName = personLastName;
+    /**
+     *
+     * @param personLName personLastName
+     */
+    public final void setPersonLastName(final String personLName) {
+        this.personLastName = personLName;
     }
 
-    public Long getTimeTotal() {
+    /**
+     *
+     * @return timeTotal
+     */
+    public final Long getTimeTotal() {
         return timeTotal;
     }
 
-    public void setTimeTotal(Long timeTotal) {
-        this.timeTotal = timeTotal;
+    /**
+     *
+     * @param tTotal timeTotal
+     */
+    public final void setTimeTotal(final Long tTotal) {
+        this.timeTotal = tTotal;
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         final StringBuffer sb = new StringBuffer("Report{");
         sb.append("personId=").append(personId);
         sb.append(", personFirstName='").append(personFirstName).append('\'');

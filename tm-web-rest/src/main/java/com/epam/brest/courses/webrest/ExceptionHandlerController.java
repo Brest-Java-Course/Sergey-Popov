@@ -15,12 +15,26 @@ import java.util.Date;
 @ControllerAdvice
 public class ExceptionHandlerController {
 
+    /**
+     *
+     */
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     *
+     */
     public static final String DEFAULT_ERROR_VIEW = "error/error";
 
+    /**
+     *
+     * @param request request
+     * @param e e
+     * @return mav
+     */
     @ExceptionHandler(value = {Exception.class, RuntimeException.class})
-    public ModelAndView defaultErrorHandler(HttpServletRequest request, Exception e) {
+    public final ModelAndView defaultErrorHandler(
+            final HttpServletRequest request,
+            final Exception e) {
 
         //LOGGER.error(e.fillInStackTrace());
 
