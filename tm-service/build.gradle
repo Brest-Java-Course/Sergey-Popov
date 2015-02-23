@@ -5,7 +5,7 @@ description = 'Service module'
 dependencies {
 	compile project(':tm-dao')
     testCompile(group: 'org.hsqldb', name: 'hsqldb', version: '2.3.2', ext: 'jar')
-	testCompile(group: 'org.springframework', name: 'spring-test', version: '4.1.4.RELEASE')
+	testCompile(group: 'org.springframework', name: 'spring-test', version: project.springVersion)
 	testCompile(group: 'junit', name: 'junit', version: '4.12', ext: 'jar') {
 		transitive = true	
 	}
@@ -27,4 +27,8 @@ task info {
     doLast {
         println "TM-Service ${version} module."
     }
+}
+
+info {
+    description = 'Displays info about module'
 }

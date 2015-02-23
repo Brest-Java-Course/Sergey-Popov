@@ -3,6 +3,10 @@ defaultTasks 'info'
 description = 'Task Manager is a simple sql-based application'
 version = '0.7.0'
 
+ext {
+        springVersion = '4.1.4.RELEASE'
+}
+
 subprojects {
     repositories {
         jcenter()

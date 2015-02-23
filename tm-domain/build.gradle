@@ -33,3 +33,7 @@ task info {
         println "TM-Domain ${version} module."
     }
 }
+
+info {
+    description = 'Displays info about module'
+}

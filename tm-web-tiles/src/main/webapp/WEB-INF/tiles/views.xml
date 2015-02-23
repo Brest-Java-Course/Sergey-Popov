@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <definition name="personList" extends="defaultTemplate">
+        <put-attribute name="body"
+                       value="/WEB-INF/views/personList.jsp" />
+    </definition>
+    
+    <definition name="taskList" extends="defaultTemplate">
+        <put-attribute name="body"
+                       value="/WEB-INF/views/taskList.jsp"/>
+    </definition>
+    
+    <definition name="addPerson" extends="defaultTemplate">
+        <put-attribute name="body"
+                       value="/WEB-INF/views/addPerson.jsp"/>
+    </definition>
+    
+    <definition name="addTask" extends="defaultTemplate">
+        <put-attribute name="body"
+                       value="/WEB-INF/views/addTask.jsp"/>
+    </definition>
+    
+    <definition name="report" extends="defaultTemplate">
+        <put-attribute name="body"
+                       value="/WEB-INF/views/report.jsp"/>
+    </definition>
+    
+    <definition name="updatePerson" extends="defaultTemplate">
+        <put-attribute name="body"
+                       value="/WEB-INF/views/updatePerson.jsp"/>
+    </definition>
+    
+    <definition name="404" extends="defaultTemplate">
+        <put-attribute name="body"
+                       value="/WEB-INF/views/404.jsp"/>
+    </definition>
+    
+    <definition name="error" extends="defaultTemplate">
+        <put-attribute name="body"
+                       value="/WEB-INF/views/error.jsp"/>
+    </definition>
+
+</tiles-definitions>
